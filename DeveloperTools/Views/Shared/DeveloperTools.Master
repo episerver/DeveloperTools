@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="System.Web.Mvc.Html" %>
+<%@ Import Namespace="EPiServer.Framework.Web.Mvc.Html"%>
+<%@ Import Namespace="EPiServer.Framework.Web.Resources"%>
+<%@ Import Namespace="EPiServer.Cms.Shell" %>
+<%@ Import Namespace="EPiServer.Shell" %>
+<%@ Import Namespace="EPiServer.Shell.Navigation" %>
+<%@ Import Namespace="EPiServer.Shell.Web.Mvc.Html"%>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+            
+        <script type="text/javascript" src="<%= Paths.ToShellClientResource("ClientResources/dtk/dojo/dojo.js") %>"></script>
+        <%= Page.ClientResources("ShellCore") %>
+        <%= Page.ClientResources("ShellWidgets") %>
+        <%= Page.ClientResources("ShellCoreLightTheme") %>
+        <%= Page.ClientResources("ShellWidgetsLightTheme")%>
+        <%= Page.ClientResources("Navigation") %>
+        <%= Page.ClientResources("DijitWidgets", new[] { ClientResourceType.Style })%>
+        <%= Html.CssLink(EPiServer.Web.PageExtensions.ThemeUtility.GetCssThemeUrl(Page, "system.css")) %>
+        <%= Html.CssLink(EPiServer.Web.PageExtensions.ThemeUtility.GetCssThemeUrl(Page, "ToolButton.css"))%>
+        <%= Html.CssLink(EPiServer.Shell.Paths.ToClientResource("CMS", "ClientResources/Epi/Base/CMS.css"))%>
+
+</head>
+ <body class="claro epi-visitorgroup-admin-ui">
+        <asp:ContentPlaceHolder ID="FullRegion" runat="server">
+            <%= Html.GlobalMenu() %>
+            <div class="epi-padding">
+                <asp:ContentPlaceHolder ID="MainRegion" runat="server"/>
+            </div>
+        </asp:ContentPlaceHolder>
+    </body>
+</html>
