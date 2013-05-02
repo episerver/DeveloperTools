@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>EPiServer.DeveloperTools</id>
-    <version>1.0</version>
+    <version>1.0.8</version>
     <title>EPiServer Developer Tools</title>
     <authors>EPiServer</authors>
     <owners />
@@ -24,5 +24,6 @@
     <file src="Views\RevertToDefault\Index.aspx" target="content\Views\RevertToDefault\Index.aspx" />
     <file src="Views\ContentTypeAnalyzer\Index.aspx" target="content\Views\ContentTypeAnalyzer\Index.aspx" />
     <file src="Views\LogViewer\Show.aspx" target="content\Views\LogViewer\Show.aspx" />
+    <file src="Views\Templates\Index.aspx" target="content\Views\Templates\Index.aspx" />
   </files>
 </package>
