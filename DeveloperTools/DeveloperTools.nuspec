@@ -20,10 +20,12 @@
     <file src="Views\Shared\DeveloperTools.master" target="content\Views\Shared\DeveloperTools.master" />
     <file src="Views\IOC\Index.aspx" target="content\Views\IOC\Index.aspx" />
     <file src="Views\TimeMeters\Index.aspx" target="content\Views\TimeMeters\Index.aspx" />
+    <file src="Views\RemoteEvent\Index.aspx" target="content\Views\RemoteEvent\Index.aspx" />
     <file src="Views\LoadedAssemblies\Index.aspx" target="content\Views\LoadedAssemblies\Index.aspx" />
     <file src="Views\RevertToDefault\Index.aspx" target="content\Views\RevertToDefault\Index.aspx" />
     <file src="Views\ContentTypeAnalyzer\Index.aspx" target="content\Views\ContentTypeAnalyzer\Index.aspx" />
     <file src="Views\LogViewer\Show.aspx" target="content\Views\LogViewer\Show.aspx" />
     <file src="Views\Templates\Index.aspx" target="content\Views\Templates\Index.aspx" />
+    <file src="Views\MemoryDump\Index.aspx" target="content\Views\MemoryDump\Index.aspx" />
   </files>
 </package>

@@ -212,6 +212,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ContentTypeAnalyzerController.cs" />
+    <Compile Include="Controllers\RemoteEventController.cs" />
+    <Compile Include="Controllers\MemoryDumpController.cs" />
     <Compile Include="Controllers\DeveloperToolsController.cs" />
     <Compile Include="Controllers\LogViewerController.cs" />
     <Compile Include="Controllers\RevertToDefaultController.cs" />
@@ -221,6 +223,8 @@
     <Compile Include="Controllers\TimeMetersController.cs" />
     <Compile Include="Core\DeveloperMenuProvider.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
+    <Compile Include="Models\RemoteEventModel.cs" />
+    <Compile Include="Models\MemoryDumpModel.cs" />
     <Compile Include="Models\IOCModel.cs" />
     <Compile Include="Models\LoggerSettings.cs" />
     <Compile Include="Models\LogSettingsAndEvents.cs" />
@@ -229,15 +233,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ContentTypeAnalyzer\Index.aspx" />
+    <Content Include="Views\RemoteEvent\Index.aspx" />
     <Content Include="Views\IOC\Index.aspx" />
     <Content Include="Views\LoadedAssemblies\Index.aspx" />
     <Content Include="Views\LogViewer\Show.aspx" />
+    <Content Include="Views\MemoryDump\Index.aspx" />
     <Content Include="Views\RevertToDefault\Index.aspx" />
     <Content Include="Views\Templates\Index.aspx" />
     <Content Include="Views\TimeMeters\Index.aspx" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup />
+
   <ItemGroup>
     <None Include="DeveloperTools.nuspec" />
     <Content Include="packages.config">

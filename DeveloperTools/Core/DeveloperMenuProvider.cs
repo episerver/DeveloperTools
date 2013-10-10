@@ -33,6 +33,12 @@ namespace DeveloperTools.Core
         const string LogViewerTitle = "Log Viewer";
         const string LogViewerPath = "global/DeveloperTools/LogViewer";
 
+        const string MemoryDumpTitle = "Memory Dump";
+        const string MemoryDumpPath = "global/DeveloperTools/Memory Dump";
+
+        const string RemoteEventTitle = "Remote Event";
+        const string RemoteEventPath = "global/DeveloperTools/Remote Event";
+
         public IEnumerable<MenuItem> GetMenuItems()
         {
             // Create the top menu section
@@ -46,9 +52,10 @@ namespace DeveloperTools.Core
             var revertToDefault = CreateUrlMenuItem(RevertToDefaultTitle, RevertToDefaultPath, EPiServer.Shell.Paths.ToResource(ModuleName, "RevertToDefault"));
             var contentTypeAnalyzer = CreateUrlMenuItem(ContentTypeAnalyzerTitle, ContentTypeAnalyzerPath, EPiServer.Shell.Paths.ToResource(ModuleName, "ContentTypeAnalyzer"));
             var logViewer = CreateUrlMenuItem(LogViewerTitle, LogViewerPath, EPiServer.Shell.Paths.ToResource(ModuleName, "LogViewer"));
-
-
+            var memoryDumperViewer = CreateUrlMenuItem(MemoryDumpTitle, MemoryDumpPath, EPiServer.Shell.Paths.ToResource(ModuleName, "MemoryDump"));
+            var remoteEventViewer = CreateUrlMenuItem(RemoteEventTitle, RemoteEventPath, EPiServer.Shell.Paths.ToResource(ModuleName, "RemoteEvent"));
             return new MenuItem[] { developerSection, templates, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, logViewer }; 
+            return new MenuItem[] { developerSection, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, logViewer, memoryDumperViewer, remoteEventViewer }; 
         }
 
         protected virtual UrlMenuItem CreateUrlMenuItem(string title, string logicalPath, string resourcePath)
