@@ -27,5 +27,6 @@
     <file src="Views\LogViewer\Show.aspx" target="content\Views\LogViewer\Show.aspx" />
     <file src="Views\Templates\Index.aspx" target="content\Views\Templates\Index.aspx" />
     <file src="Views\MemoryDump\Index.aspx" target="content\Views\MemoryDump\Index.aspx" />
+    <file src="Views\Routes\Index.aspx" target="content\Views\Routes\Index.aspx" />
   </files>
 </package>

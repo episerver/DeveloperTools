@@ -62,7 +62,7 @@ namespace DeveloperTools.Controllers
 
     public sealed class MiniDump
     {
-        public static void WriteDump(string fileName)
+        public static void WriteDump(string fileName, DumpType typeOfdumpType)
         {
             MiniDumpExceptionInformation info;
             info.ThreadId = NativeMethods.GetCurrentThreadId();
@@ -77,7 +77,7 @@ namespace DeveloperTools.Controllers
                 IntPtr processHandle2 = Process.GetCurrentProcess().Handle;
                 // Feel free to specify different dump types
                 //uint dumpType = (uint) (DumpType.MiniDumpNormal | DumpType.MiniDumpWithDataSegs);
-                uint dumpType = (uint)DumpType.MiniDumpWithFullMemory;
+                uint dumpType = (uint)typeOfdumpType;
                 NativeMethods.MiniDumpWriteDump(processHandle2,
                                                 processId,
                                                 fs.SafeFileHandle.DangerousGetHandle(),
@@ -93,20 +93,27 @@ namespace DeveloperTools.Controllers
     {
         public ActionResult Index()
         {
-            string path = VirtualPathUtilityEx.RebasePhysicalPath("[appDataPath]\\Dumps");
-            if (!Directory.Exists(path))
+            return View(new MemoryDumpModel());
+        }
+
+        [HttpPost, ActionName("Index")]
+        public ActionResult DumpMemory(MemoryDumpModel memoryDumpModel)
+        {
+            if (String.IsNullOrEmpty(memoryDumpModel.FilePath))
             {
-                Directory.CreateDirectory(path);
+                memoryDumpModel.FilePath = VirtualPathUtilityEx.RebasePhysicalPath("[appDataPath]\\Dumps");
+            }
+            if (!Directory.Exists(memoryDumpModel.FilePath))
+            {
+                Directory.CreateDirectory(memoryDumpModel.FilePath);
             }
 
             string timeforfileName = DateTime.Now.ToString().Replace('/', '_').Replace(':', '_');
-            string fileName = string.Concat(path, Process.GetCurrentProcess().ProcessName + "_" +timeforfileName, ".dmp");
-            MiniDump.WriteDump(fileName);
-            MemoryDumpModel mdm = new MemoryDumpModel();
-            mdm.Name = Process.GetCurrentProcess().ProcessName;
-            mdm.Path = fileName;
-
-            return View(mdm);
+            string name = string.Concat(memoryDumpModel.FilePath.LastIndexOf('/')==-1 ? memoryDumpModel.FilePath+'\\':memoryDumpModel.FilePath, Process.GetCurrentProcess().ProcessName + "_" + timeforfileName, ".dmp");
+            MiniDump.WriteDump(name, memoryDumpModel.SelectedDumpType);
+            memoryDumpModel.Name = name;
+            return View(memoryDumpModel);
         }
+
     }
 }

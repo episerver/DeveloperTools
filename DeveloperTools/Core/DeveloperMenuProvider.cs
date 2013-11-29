@@ -38,6 +38,9 @@ namespace DeveloperTools.Core
 
         const string RemoteEventTitle = "Remote Event";
         const string RemoteEventPath = "global/DeveloperTools/Remote Event";
+        
+        const string RoutesTitle = "Routes";
+        const string RoutesPath = "global/DeveloperTools/Routes";
 
         public IEnumerable<MenuItem> GetMenuItems()
         {
@@ -54,8 +57,9 @@ namespace DeveloperTools.Core
             var logViewer = CreateUrlMenuItem(LogViewerTitle, LogViewerPath, EPiServer.Shell.Paths.ToResource(ModuleName, "LogViewer"));
             var memoryDumperViewer = CreateUrlMenuItem(MemoryDumpTitle, MemoryDumpPath, EPiServer.Shell.Paths.ToResource(ModuleName, "MemoryDump"));
             var remoteEventViewer = CreateUrlMenuItem(RemoteEventTitle, RemoteEventPath, EPiServer.Shell.Paths.ToResource(ModuleName, "RemoteEvent"));
-            return new MenuItem[] { developerSection, templates, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, logViewer }; 
-            return new MenuItem[] { developerSection, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, logViewer, memoryDumperViewer, remoteEventViewer }; 
+            var routes = CreateUrlMenuItem(RoutesTitle, RoutesPath, EPiServer.Shell.Paths.ToResource(ModuleName, "Routes"));
+
+            return new MenuItem[] { developerSection, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, templates, logViewer, memoryDumperViewer, remoteEventViewer, routes }; 
         }
 
         protected virtual UrlMenuItem CreateUrlMenuItem(string title, string logicalPath, string resourcePath)
