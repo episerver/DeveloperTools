@@ -11,7 +11,7 @@
     <description>Allows to run various support tools on the site.</description>
     <tags>EPiServerModulePackage</tags>
     <dependencies>
-      <dependency id="EPiServer" version="7.0" />
+      <dependency id="EPiServer" version="7.5" />
     </dependencies>
   </metadata>
   <files>
