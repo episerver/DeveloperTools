@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Collections;
+using EPiServer.Events.Clients;
 
 namespace DeveloperTools.Models
 {
@@ -12,14 +13,19 @@ namespace DeveloperTools.Models
     {
         public RemoteEventsModel()
         {
-            RemoteEventModel =    Enumerable.Empty<RemoteEventModel>();
+            RemoteEventModel = Enumerable.Empty<RemoteEventModel>();
             SendRemoteEventModel = new SendRemoteEventModel();
         }
 
-        public IEnumerable<RemoteEventModel> RemoteEventModel {get;set;}
+        public IEnumerable<RemoteEventModel> RemoteEventModel { get; set; }
         public long TotalNumberOfSentEvent { get; set; }
         public long TotalNumberOfReceivedEvent { get; set; }
         public SendRemoteEventModel SendRemoteEventModel { get; set; }
+        public IEnumerable<string> ActiveServers { get; set; }
+        public IEnumerable<ServerState> ServerState { get; set; }
+        public string ProviderName { get; set; }
+        public string ProviderType { get; set; }
+        public bool Enabled { get; set; }
     }
 
     [Serializable]
