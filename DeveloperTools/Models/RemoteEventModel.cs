@@ -32,6 +32,7 @@ namespace DeveloperTools.Models
     public class RemoteEventModel
     {
         public String Name { get; set; }
+        public String Guid { get; set; }
         public long NumberOfSent { get; set; }
         public long NumberOfReceived { get; set; }
     }

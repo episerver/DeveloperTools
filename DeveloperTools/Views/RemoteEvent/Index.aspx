@@ -47,6 +47,7 @@
         <thead>
             <tr>
                 <th align="left">Name</th>
+                <th align="left">Guid</th>
                 <th align="left">Number of Sent Events</th>
                 <th align="left">Number Of Received Events</th>
             </tr>
@@ -56,6 +57,7 @@
                {%>
             <tr>
                 <td><%:m.Name%></td>
+                <td><%:m.Guid%></td>
                 <td><%:m.NumberOfSent%></td>
                 <td><%:m.NumberOfReceived %></td>
             </tr>
