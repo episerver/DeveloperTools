@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<DeveloperTools.Models.AssembliesModel>" MasterPageFile="../Shared/DeveloperTools.Master" %>
 
- <%@ Assembly Name="DeveloperTools" %>
+ <%@ Assembly Name="EPiServer.DeveloperTools" %>
 <%@ Import Namespace="DeveloperTools.Models" %>
 <%@ Import Namespace="EPiServer.Shell.Web.Mvc.Html" %>
 <%@ Import Namespace="System.Reflection" %>

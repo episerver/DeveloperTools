@@ -26,7 +26,7 @@ namespace DeveloperTools.Controllers
             {
                 try
                 {
-                    Type defaultType = plugin.Default != null ? plugin.Default.ConcreteType : null;
+                    Type defaultType = plugin.Default != null ? plugin.Default.ReturnedType : null;
                     if (plugin.Default != null && defaultType == null)
                     {
                         defaultType = container.GetInstance(plugin.Default.PluginType, plugin.Default.Name).GetType();
@@ -34,7 +34,7 @@ namespace DeveloperTools.Controllers
 
                     foreach (var entry in plugin.Instances.Where(i => i != null))
                     {
-                        Type concreteType = entry.ConcreteType;
+                        Type concreteType = entry.ReturnedType;
                         if (concreteType == null && entry.PluginType.ContainsGenericParameters == false)
                         {
                             concreteType = container.GetInstance(entry.PluginType, entry.Name).GetType();
@@ -44,7 +44,7 @@ namespace DeveloperTools.Controllers
                         {
                             PluginType = entry.PluginType == null ? "null" : entry.PluginType.FullName + "," + entry.PluginType.Assembly.FullName,
                             ConcreteType = concreteType == null ? "null" : concreteType.FullName + "," + concreteType.Assembly.FullName,
-                            Scope = plugin.Lifecycle,
+                            Scope = plugin.Lifecycle.ToString(),
                             IsDefault = defaultType == concreteType
                         });
                     }

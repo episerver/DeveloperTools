@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<RemoteEventsModel>" MasterPageFile="../Shared/DeveloperTools.Master" %>
 
-<%@ Assembly Name="DeveloperTools" %>
+<%@ Assembly Name="EPiServer.DeveloperTools" %>
 <%@ Import Namespace="DeveloperTools.Models" %>
 
 <asp:Content ID="Content" runat="server" ContentPlaceHolderID="MainRegion">
