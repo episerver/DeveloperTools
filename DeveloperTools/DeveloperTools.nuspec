@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>EPiServer.DeveloperTools</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <title>EPiServer Developer Tools</title>
     <authors>EPiServer</authors>
     <owners />
@@ -11,22 +11,24 @@
     <description>Allows to run various support tools on the site.</description>
     <tags>EPiServerModulePackage</tags>
     <dependencies>
-      <dependency id="EPiServer" version="7.5" />
+      <dependency id="EPiServer.CMS.Core" version="[9.0.0, 10.0.0)" />
+      <dependency id="EPiServer.Framework" version="[9.0.0, 10.0.0)" />
+      <dependency id="log4net" version="[2.0.3, 3.0.0)"/>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\DeveloperTools.dll" target="lib\DeveloperTools.dll" />
-    <file src="Views\web.config" target="content\Views\web.config" />
-    <file src="Views\Shared\DeveloperTools.master" target="content\Views\Shared\DeveloperTools.master" />
-    <file src="Views\IOC\Index.aspx" target="content\Views\IOC\Index.aspx" />
-    <file src="Views\TimeMeters\Index.aspx" target="content\Views\TimeMeters\Index.aspx" />
-    <file src="Views\RemoteEvent\Index.aspx" target="content\Views\RemoteEvent\Index.aspx" />
-    <file src="Views\LoadedAssemblies\Index.aspx" target="content\Views\LoadedAssemblies\Index.aspx" />
-    <file src="Views\RevertToDefault\Index.aspx" target="content\Views\RevertToDefault\Index.aspx" />
-    <file src="Views\ContentTypeAnalyzer\Index.aspx" target="content\Views\ContentTypeAnalyzer\Index.aspx" />
-    <file src="Views\LogViewer\Show.aspx" target="content\Views\LogViewer\Show.aspx" />
-    <file src="Views\Templates\Index.aspx" target="content\Views\Templates\Index.aspx" />
-    <file src="Views\MemoryDump\Index.aspx" target="content\Views\MemoryDump\Index.aspx" />
-    <file src="Views\Routes\Index.aspx" target="content\Views\Routes\Index.aspx" />
+    <file src="bin\EPiServer.DeveloperTools.dll" target="lib\net45\" />
+    <file src="module.config" target="content\modules\_protected\EPiServer.DeveloperTools\module.config"/>
+    <file src="Views\Shared\DeveloperTools.master" target="content\modules\_protected\EPiServer.DeveloperTools\Views\Shared\DeveloperTools.master" />
+    <file src="Views\IOC\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.aspx" />
+    <file src="Views\TimeMeters\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.aspx" />
+    <file src="Views\RemoteEvent\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx" />
+    <file src="Views\LoadedAssemblies\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.aspx" />
+    <file src="Views\RevertToDefault\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
+    <file src="Views\ContentTypeAnalyzer\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx" />
+    <file src="Views\LogViewer\Show.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.aspx" />
+    <file src="Views\Templates\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx" />
+    <file src="Views\MemoryDump\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.aspx" />
+    <file src="Views\Routes\Index.aspx" target="content\modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
   </files>
 </package>

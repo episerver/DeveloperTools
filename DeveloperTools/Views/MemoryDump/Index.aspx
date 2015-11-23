@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<DeveloperTools.Models.MemoryDumpModel>" MasterPageFile="../Shared/DeveloperTools.Master" %>
-<%@ Assembly Name="DeveloperTools" %>
+<%@ Assembly Name="EPiServer.DeveloperTools" %>
 <%@ Import namespace="log4net.Core" %>
 <%@ Import Namespace = "System.Linq" %>
 <%@ Import namespace="DeveloperTools.Models" %>
