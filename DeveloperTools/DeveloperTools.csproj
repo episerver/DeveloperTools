@@ -8,7 +8,6 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CC833335-20F0-4559-8160-EE6BC0EF9112}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EPiServer.DeveloperTools</RootNamespace>
@@ -246,7 +245,7 @@
   <Target Name="AfterBuild" DependsOnTargets="CreateAddOnPackage">
   </Target>
   <Target Name="CreateAddOnPackage">
-    <Exec Command="..\.nuget\nuget pack DeveloperTools.nuspec -OutputDirectory $(OutputPath)" />
+    <Exec Command="..\.nuget\nuget.exe pack DeveloperTools.nuspec -OutputDirectory $(OutputPath)" />
   </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
