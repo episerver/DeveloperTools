@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using log4net.Core;
-using System.Web.Mvc;
-using System.Globalization;
 using System.Reflection;
+using System.Web.Mvc;
+using log4net.Core;
 
 namespace DeveloperTools.Models
 {
@@ -13,54 +11,61 @@ namespace DeveloperTools.Models
     public class LoggerSettings
     {
         static List<SelectListItem> _levels;
+
         public LoggerSettings()
         {
             LevelValue = Level.All.ToString();
             StartDate = DateTime.MinValue;
             EndDate = DateTime.MaxValue;
         }
+
         public Level Level
         {
             get
             {
-                if (String.IsNullOrEmpty(LevelValue))
+                if(string.IsNullOrEmpty(LevelValue))
                 {
                     return Level.All;
                 }
-                return (Level)typeof(Level).GetFields(BindingFlags.Static | BindingFlags.Public).Where(p=>String.Equals(p.Name, LevelValue, StringComparison.OrdinalIgnoreCase)).First().GetValue(null);
+                return
+                    (Level)
+                    typeof(Level)
+                        .GetFields(BindingFlags.Static | BindingFlags.Public)
+                        .First(p => string.Equals(p.Name, LevelValue, StringComparison.OrdinalIgnoreCase))
+                        .GetValue(null);
             }
         }
-        public String LevelValue { get; set; }
-        public String LoggerName { get; set; }
-        public String ThreadName { get; set; }
-        public String TypeOfException { get; set; }
+
+        public string LevelValue { get; set; }
+        public string LoggerName { get; set; }
+        public string ThreadName { get; set; }
+        public string TypeOfException { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public String UserName { get; set; }
-
+        public string UserName { get; set; }
 
         public static IEnumerable<SelectListItem> GetLevels()
         {
-            if (_levels == null)
-            {
-                _levels = new List<SelectListItem>();
-                _levels.Add(CreateSelectItem(Level.All));
-                _levels.Add(CreateSelectItem(Level.Critical));
-                _levels.Add(CreateSelectItem(Level.Error));
-                _levels.Add(CreateSelectItem(Level.Fatal));
-                _levels.Add(CreateSelectItem(Level.Debug));
-                _levels.Add(CreateSelectItem(Level.Info));
-                _levels.Add(CreateSelectItem(Level.Warn));
-            }
-            return _levels;
-
+            return _levels ?? (_levels = new List<SelectListItem>
+                               {
+                                   CreateSelectItem(Level.All),
+                                   CreateSelectItem(Level.Critical),
+                                   CreateSelectItem(Level.Error),
+                                   CreateSelectItem(Level.Fatal),
+                                   CreateSelectItem(Level.Debug),
+                                   CreateSelectItem(Level.Info),
+                                   CreateSelectItem(Level.Warn)
+                               });
         }
 
         private static SelectListItem CreateSelectItem(Level level)
         {
-            SelectListItem sel = new SelectListItem();
-            sel.Text = level.DisplayName;
-            sel.Value = level.ToString();
+            var sel = new SelectListItem
+            {
+                Text = level.DisplayName,
+                Value = level.ToString()
+            };
+
             return sel;
         }
     }

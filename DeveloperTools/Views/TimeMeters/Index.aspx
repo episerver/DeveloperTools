@@ -13,15 +13,15 @@
 <p>Number of time meters: <strong><%:Model.Count()%></strong>. Total time: <strong><%: TimeSpan.FromMilliseconds(Model.Select(tm => tm.Counters).Sum(c => c.Values.Sum(s => s.ElapsedMilliseconds))).TotalSeconds.ToString("N")%> s</strong>.</p>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
-	<thead>
-		<tr>
+    <thead>
+        <tr>
             <th align="left">Assembly</th>
-			<th align="left">Type</th>
-			<th align="left">Action</th>
-			<th>Time (ms)</th>
-		</tr>
-	</thead>
-	<tbody>
+            <th align="left">Type</th>
+            <th align="left">Action</th>
+            <th>Time (ms)</th>
+        </tr>
+    </thead>
+    <tbody>
 <% foreach (var m in Model){%>
     <%foreach (var item in m.Counters.OrderByDescending(s => s.Value.ElapsedMilliseconds)){ %>
     <tr>

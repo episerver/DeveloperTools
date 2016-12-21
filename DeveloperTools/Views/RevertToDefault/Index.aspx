@@ -11,17 +11,17 @@
 <form method="post">
 <%= Html.AntiForgeryToken()%>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
-	<thead>
-		<tr>
+    <thead>
+        <tr>
             <th align="left"><span ondblclick="selectAll()">Selected</span></th>
             <th align="left">DisplayName</th>
-			<th align="left">FullName</th>
-			<th align="left">ModelType</th>
-			<th align="left">ID</th>
-			<th align="left">Identity</th>
-		</tr>
-	</thead>
-	<tbody>
+            <th align="left">FullName</th>
+            <th align="left">ModelType</th>
+            <th align="left">ID</th>
+            <th align="left">Identity</th>
+        </tr>
+    </thead>
+    <tbody>
 <% foreach (var m in Model){%>
     <tr>
         <td><input type="checkbox" name="selectedObjects" value="<%:m.GUID%>"/></td>

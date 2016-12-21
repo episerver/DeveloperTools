@@ -16,15 +16,15 @@
     </p>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
-	<thead>
-		<tr>
+    <thead>
+        <tr>
             <th align="left">PluginType</th>
-			<th align="left">ConcreteType</th>
-			<th align="left">Scope</th>
-			<th>Is Default</th>
-		</tr>
-	</thead>
-	<tbody>
+            <th align="left">ConcreteType</th>
+            <th align="left">Scope</th>
+            <th>Is Default</th>
+        </tr>
+    </thead>
+    <tbody>
 <% foreach (IOCEntry entry in Model.IOCEntries)
    { %>
     <tr>

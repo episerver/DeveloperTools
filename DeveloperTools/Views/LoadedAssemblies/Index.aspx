@@ -15,15 +15,15 @@
 <p>Dumps all loaded assemblies in the current AppDomain</p>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
-	<thead>
-		<tr>
+    <thead>
+        <tr>
             <th align="left">Name</th>
-			<th align="left">AssemblyVersion</th>
-			<th align="left">FileVersion</th>
-			<th>Location</th>
-		</tr>
-	</thead>
-	<tbody>
+            <th align="left">AssemblyVersion</th>
+            <th align="left">FileVersion</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
 <% foreach (AssemblyInfo entry in Model.Assemblies)
    { %>
     <tr>

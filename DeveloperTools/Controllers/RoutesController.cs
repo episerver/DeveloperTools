@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using EPiServer.Shell.Gadgets;
+using System.Web;
 using System.Web.Mvc;
-using EPiServer.Framework.Initialization;
-using EPiServer.Shell.Web;
 using System.Web.Routing;
 using DeveloperTools.Models;
-using EPiServer.Web.Routing;
-using EPiServer.Web.Routing.Segments;
 using EPiServer.Shell.Services.Rest;
 using EPiServer.Shell.Web.Routing;
-using System.Web;
-using System.IO;
 using EPiServer.Web.Routing.Internal;
+using EPiServer.Web.Routing.Segments;
 
 namespace DeveloperTools.Controllers
 {
@@ -27,41 +23,42 @@ namespace DeveloperTools.Controllers
         }
 
         [HttpPost, ActionName("Index")]
-        public ActionResult FindRoute(String url)
+        public ActionResult FindRoute(string url)
         {
             var routes = GetRouteModels();
-            foreach(var r in routes)
+            foreach (var r in routes)
             {
                 RouteData rd = null;
                 try
                 {
-                    var ctx = new HttpContextWrapper(new HttpContext (new HttpRequest("", url, ""), new HttpResponse(new StringWriter(new StringBuilder()))));
-                    
-                    if (r.Route is DefaultContentRoute)
+                    var ctx = new HttpContextWrapper(new HttpContext(new HttpRequest("", url, ""), new HttpResponse(new StringWriter(new StringBuilder()))));
+
+                    if(r.Route is DefaultContentRoute)
                     {
                         rd = (r.Route as DefaultContentRoute).GetRouteData(ctx);
                     }
-                    else if (r.Route is ModuleRouteCollection)
+                    else if(r.Route is ModuleRouteCollection)
                     {
                         rd = (r.Route as ModuleRouteCollection).GetRouteData(ctx);
                     }
-                    else if (r.Route is RestRoute)
+                    else if(r.Route is RestRoute)
                     {
                         rd = (r.Route as RestRoute).GetRouteData(ctx);
                     }
-                    else if (r.Route is Route)
+                    else if(r.Route is Route)
                     {
                         rd = (r.Route as Route).GetRouteData(ctx);
                     }
                     else
                     {
-                        rd = (r.Route as RouteBase).GetRouteData(ctx);
+                        rd = r.Route.GetRouteData(ctx);
                     }
                 }
                 catch { }
-                if (rd !=  null)
+
+                if(rd != null)
                 {
-                    r.DataTokens = GetValues("DataToken:",rd.DataTokens);
+                    r.DataTokens = GetValues("DataToken:", rd.DataTokens);
                     r.Values = GetValues("Values:", rd.Values);
                     r.IsSelected = true;
                 }
@@ -69,81 +66,84 @@ namespace DeveloperTools.Controllers
             return View("Index", routes);
         }
 
-        private string GetValues(String title, RouteValueDictionary routeValueDictionary)
+        private string GetValues(string title, RouteValueDictionary routeValueDictionary)
         {
-            StringBuilder s = new StringBuilder();
+            var s = new StringBuilder();
             s.Append(title);
-            int index = 0;
             foreach (var rv in routeValueDictionary)
             {
-                index++;
-                s.Append(String.Format("{0}:{1}  ,",  rv.Key, rv.Value != null ? rv.Value.ToString() : "N/A"));
+                s.Append($"{rv.Key}:{rv.Value?.ToString() ?? "N/A"}  ,");
             }
             return s.ToString();
         }
 
         private IEnumerable<RouteModel> GetRouteModels()
         {
-            List<RouteModel> model = new List<RouteModel>();
-            int index = 1;
+            var model = new List<RouteModel>();
+            var index = 1;
             var namedRoutes = GetRouteNamedMap(RouteTable.Routes);
             foreach (var route in RouteTable.Routes)
             {
-                var foundInNamed = namedRoutes.Where(r => r.Value == route).FirstOrDefault();
-                if (foundInNamed.Key != null)
+                var foundInNamed = namedRoutes.FirstOrDefault(r => r.Value == route);
+                if(foundInNamed.Key != null)
                 {
                     CreateRouteData(model, ref index, foundInNamed.Key, foundInNamed.Value);
                 }
-                else if (route != null)
+                else if(route != null)
                 {
                     CreateRouteData(model, ref index, "No Name", route);
                 }
             }
+
             return model;
         }
 
-        private void CreateRouteData(List<RouteModel> model, ref int index, String routeName, RouteBase route)
+        private void CreateRouteData(List<RouteModel> model, ref int index, string routeName, RouteBase route)
         {
-            if (route is ModuleRouteCollection)
+            if(route is ModuleRouteCollection)
             {
                 var m = CreateRouteModelData(routeName, route as ModuleRouteCollection, ref index);
                 model.AddRange(m);
                 return;
             }
+
             RouteModel rm;
-            if (route is DefaultContentRoute)
+            if(route is DefaultContentRoute)
             {
                 var cr = route as DefaultContentRoute;
                 routeName = cr.Name;
                 CreateRouteModelData(routeName, route as Route, index++);
             }
-            
-            if (route is RestRoute)
+
+            if(route is RestRoute)
             {
-               rm =  CreateRouteModelData(routeName, route as RestRoute, index++);
+                rm = CreateRouteModelData(routeName, route as RestRoute, index++);
             }
-            else if (route is Route)
+            else if(route is Route)
             {
                 rm = CreateRouteModelData(routeName, route as Route, index++);
             }
-            else 
+            else
             {
-                rm = CreateRouteModelData(routeName, route as RouteBase, index++);
+                rm = CreateRouteModelData(routeName, route, index++);
             }
-            
+
             model.Add(rm);
         }
 
-        IEnumerable<RouteModel> CreateRouteModelData(String name, ModuleRouteCollection rr, ref int index)
+        IEnumerable<RouteModel> CreateRouteModelData(string name, ModuleRouteCollection rr, ref int index)
         {
-            List<RouteModel> models = new List<RouteModel>();
-            RouteModel rm = new RouteModel();
-            rm.Order = index.ToString();
-            rm.RouteExistingFiles = GetRouteExistingFiles(rr);
-            rm.Name = name;
-            rm.Url = rr.RoutePath;
-            rm.Type = rr.GetType().FullName;
-            rm.Route = rr;
+            var models = new List<RouteModel>();
+            var rm = new RouteModel
+            {
+                Order = index.ToString(),
+                RouteExistingFiles = GetRouteExistingFiles(rr),
+                Name = name,
+                Url = rr.RoutePath,
+                Type = rr.GetType().FullName,
+                Route = rr
+            };
+
             models.Add(rm);
             index++;
             foreach (var r in rr)
@@ -155,32 +155,35 @@ namespace DeveloperTools.Controllers
 
         RouteModel CreateModel(RouteBase rb, int index)
         {
-            RouteModel rm = new RouteModel();
-            rm.Order = index.ToString();
-            rm.Type = rb.GetType().FullName;
-            rm.Route = rb;
-            rm.RouteExistingFiles = GetRouteExistingFiles(rb);
+            var rm = new RouteModel
+            {
+                Order = index.ToString(),
+                Type = rb.GetType().FullName,
+                Route = rb,
+                RouteExistingFiles = GetRouteExistingFiles(rb)
+            };
+
             return rm;
         }
 
-        RouteModel CreateRouteModelData(String name, RouteBase rr, int index)
+        RouteModel CreateRouteModelData(string name, RouteBase rr, int index)
         {
-            RouteModel rm = CreateModel(rr, index);
+            var rm = CreateModel(rr, index);
             rm.Name = name;
             return rm;
         }
 
-        RouteModel CreateRouteModelData(String name, RestRoute rr, int index)
+        RouteModel CreateRouteModelData(string name, RestRoute rr, int index)
         {
-            RouteModel rm = CreateRouteModelData(name, rr as RouteBase, index);
+            var rm = CreateRouteModelData(name, rr as RouteBase, index);
             rm.Url = rr.Url;
             return rm;
         }
 
-        RouteModel CreateRouteModelData(String name, Route rr, int index)
+        RouteModel CreateRouteModelData(string name, Route rr, int index)
         {
-            RouteModel rm = CreateRouteModelData(name, rr as RouteBase, index);
-            if (rr is DefaultContentRoute)
+            var rm = CreateRouteModelData(name, rr as RouteBase, index);
+            if(rr is DefaultContentRoute)
             {
                 rm.Url = GetUrl(rr as DefaultContentRoute);
             }
@@ -198,13 +201,12 @@ namespace DeveloperTools.Controllers
 
         private string GetRouteValueDictionary(RouteValueDictionary routeValueDictionary)
         {
-
-            StringBuilder sb = new StringBuilder();
-            if (routeValueDictionary != null)
+            var sb = new StringBuilder();
+            if(routeValueDictionary != null)
             {
                 foreach (var kv in routeValueDictionary)
                 {
-                    sb.Append(String.Format("{0}:{1}", kv.Key, kv.Value));
+                    sb.Append($"{kv.Key}:{kv.Value}");
                 }
             }
             return sb.ToString();
@@ -214,24 +216,28 @@ namespace DeveloperTools.Controllers
         {
             try
             {
-                return routeBase.GetType().InvokeMember("_routeExistingFiles", System.Reflection.BindingFlags.GetField | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance, null, routeBase, null) as string;
+                return
+                    routeBase.GetType().InvokeMember("_routeExistingFiles", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance, null, routeBase, null) as string;
             }
             catch { }
-            return String.Empty;
+
+            return string.Empty;
         }
 
         private IDictionary<string, RouteBase> GetRouteNamedMap(RouteCollection routeCollection)
         {
-            return routeCollection.GetType().InvokeMember("_namedMap", System.Reflection.BindingFlags.GetField | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance, null, routeCollection, null) as IDictionary<string, RouteBase>;
+            return
+                routeCollection.GetType().InvokeMember("_namedMap", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance, null, routeCollection, null) as
+                    IDictionary<string, RouteBase>;
         }
 
         private static string GetUrl(DefaultContentRoute cr)
         {
             try
             {
-                StringBuilder sb = new StringBuilder();
-                ISegment[] segemnts = cr.GetType().InvokeMember("_urlSegments", System.Reflection.BindingFlags.GetField | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance, null, cr, null) as ISegment[];
-                return String.Join("/", segemnts.Where(s => !String.IsNullOrEmpty(s.Name)).Select(s => s.Name));
+                var sb = new StringBuilder();
+                var segemnts = cr.GetType().InvokeMember("_urlSegments", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance, null, cr, null) as ISegment[];
+                return string.Join("/", segemnts.Where(s => !string.IsNullOrEmpty(s.Name)).Select(s => s.Name));
             }
             catch
             {

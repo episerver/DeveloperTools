@@ -1,23 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using EPiServer.Shell.Navigation;
-using DeveloperTools.Models;
-using EPiServer.Framework.Initialization;
-using StructureMap;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Web.Mvc;
+using DeveloperTools.Models;
 using EPiServer.Web;
 
 namespace DeveloperTools.Controllers
 {
     public class NativeMethods
     {
-        [DllImport("dbghelp.dll", EntryPoint = "MiniDumpWriteDump", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
-        public static extern bool MiniDumpWriteDump(IntPtr hProcess, uint processId, IntPtr hFile, uint dumpType, ref MiniDumpExceptionInformation expParam, IntPtr userStreamParam, IntPtr callbackParam);
+        [DllImport("dbghelp.dll",
+             EntryPoint = "MiniDumpWriteDump",
+             CallingConvention = CallingConvention.StdCall,
+             CharSet = CharSet.Unicode,
+             ExactSpelling = true,
+             SetLastError = true)]
+        public static extern bool MiniDumpWriteDump(IntPtr hProcess,
+                                                    uint processId,
+                                                    IntPtr hFile,
+                                                    uint dumpType,
+                                                    ref MiniDumpExceptionInformation expParam,
+                                                    IntPtr userStreamParam,
+                                                    IntPtr callbackParam);
 
         [DllImport("kernel32.dll", EntryPoint = "GetCurrentThreadId", ExactSpelling = true)]
         public static extern uint GetCurrentThreadId();
@@ -31,8 +36,7 @@ namespace DeveloperTools.Controllers
     {
         public uint ThreadId;
         public IntPtr ExceptionPointers;
-        [MarshalAs(UnmanagedType.Bool)]
-        public bool ClientPointers;
+        [MarshalAs(UnmanagedType.Bool)] public bool ClientPointers;
     }
 
     [Flags]
@@ -57,8 +61,8 @@ namespace DeveloperTools.Controllers
         MiniDumpWithFullAuxiliaryState = 0x00008000,
         MiniDumpWithPrivateWriteCopyMemory = 0x00010000,
         MiniDumpIgnoreInaccessibleMemory = 0x00020000,
-        MiniDumpValidTypeFlags = 0x0003ffff,
-    };
+        MiniDumpValidTypeFlags = 0x0003ffff
+    }
 
     public sealed class MiniDump
     {
@@ -71,13 +75,12 @@ namespace DeveloperTools.Controllers
 
             using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
             {
-
-                uint processId = (uint)Process.GetCurrentProcess().Id;
-                IntPtr processHandle = NativeMethods.GetCurrentProcess();
-                IntPtr processHandle2 = Process.GetCurrentProcess().Handle;
+                var processId = (uint) Process.GetCurrentProcess().Id;
+                var processHandle = NativeMethods.GetCurrentProcess();
+                var processHandle2 = Process.GetCurrentProcess().Handle;
                 // Feel free to specify different dump types
                 //uint dumpType = (uint) (DumpType.MiniDumpNormal | DumpType.MiniDumpWithDataSegs);
-                uint dumpType = (uint)typeOfdumpType;
+                var dumpType = (uint) typeOfdumpType;
                 NativeMethods.MiniDumpWriteDump(processHandle2,
                                                 processId,
                                                 fs.SafeFileHandle.DangerousGetHandle(),
@@ -99,21 +102,23 @@ namespace DeveloperTools.Controllers
         [HttpPost, ActionName("Index")]
         public ActionResult DumpMemory(MemoryDumpModel memoryDumpModel)
         {
-            if (String.IsNullOrEmpty(memoryDumpModel.FilePath))
+            if(string.IsNullOrEmpty(memoryDumpModel.FilePath))
             {
                 memoryDumpModel.FilePath = VirtualPathUtilityEx.RebasePhysicalPath("[appDataPath]\\Dumps");
             }
-            if (!Directory.Exists(memoryDumpModel.FilePath))
+            if(!Directory.Exists(memoryDumpModel.FilePath))
             {
                 Directory.CreateDirectory(memoryDumpModel.FilePath);
             }
 
-            string timeforfileName = DateTime.Now.ToString().Replace('/', '_').Replace(':', '_');
-            string name = string.Concat(memoryDumpModel.FilePath.LastIndexOf('/')==-1 ? memoryDumpModel.FilePath+'\\':memoryDumpModel.FilePath, Process.GetCurrentProcess().ProcessName + "_" + timeforfileName, ".dmp");
+            var timeforfileName = DateTime.Now.ToString().Replace('/', '_').Replace(':', '_');
+            var name = string.Concat(memoryDumpModel.FilePath.LastIndexOf('/') == -1 ? memoryDumpModel.FilePath + '\\' : memoryDumpModel.FilePath,
+                                     Process.GetCurrentProcess().ProcessName + "_" + timeforfileName,
+                                     ".dmp");
             MiniDump.WriteDump(name, memoryDumpModel.SelectedDumpType);
             memoryDumpModel.Name = name;
+
             return View(memoryDumpModel);
         }
-
     }
 }

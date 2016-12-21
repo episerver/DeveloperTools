@@ -11,17 +11,17 @@
 <p>Show content type Synchronization status during initialization (if the content type be changed from admin you need to start the site to see changes)</p>
  
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
-	<thead>
-		<tr>
+    <thead>
+        <tr>
             <th align="left">Type</th>
             <th align="left">DisplayName</th>
-			<th align="left">Name</th>
-			<th align="left">SynchronizationStatus</th>
-			<th align="left">Description</th>
+            <th align="left">Name</th>
+            <th align="left">SynchronizationStatus</th>
+            <th align="left">Description</th>
 
-		</tr>
-	</thead>
-	<tbody>
+        </tr>
+    </thead>
+    <tbody>
 <% foreach (var m in Model){%>
     <tr>
         <td>Content Type Model</td>
