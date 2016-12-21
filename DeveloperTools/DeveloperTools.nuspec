@@ -10,11 +10,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Allows to run various support tools on the site.</description>
     <tags>EPiServerModulePackage</tags>
-    <!--<dependencies>
-      <dependency id="EPiServer.CMS.Core" version="[9.0.0, 10.0.0)" />
-      <dependency id="EPiServer.Framework" version="[9.0.0, 10.0.0)" />
-      <dependency id="log4net" version="[2.0.3, 3.0.0)"/>
-    </dependencies>-->
   </metadata>
   <files>
     <file src="bin\EPiServer.DeveloperTools.dll" target="lib\net45\" />
