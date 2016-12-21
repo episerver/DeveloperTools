@@ -9,7 +9,7 @@ using System.Web.Routing;
 using DeveloperTools.Models;
 using EPiServer.Shell.Services.Rest;
 using EPiServer.Shell.Web.Routing;
-using EPiServer.Web.Routing.Internal;
+using EPiServer.Web.Routing;
 using EPiServer.Web.Routing.Segments;
 
 namespace DeveloperTools.Controllers
@@ -33,21 +33,21 @@ namespace DeveloperTools.Controllers
                 {
                     var ctx = new HttpContextWrapper(new HttpContext(new HttpRequest("", url, ""), new HttpResponse(new StringWriter(new StringBuilder()))));
 
-                    if(r.Route is DefaultContentRoute)
+                    if(r.Route is IContentRoute)
                     {
-                        rd = (r.Route as DefaultContentRoute).GetRouteData(ctx);
+                        rd = ((Route) r.Route).GetRouteData(ctx);
                     }
                     else if(r.Route is ModuleRouteCollection)
                     {
-                        rd = (r.Route as ModuleRouteCollection).GetRouteData(ctx);
+                        rd = ((ModuleRouteCollection) r.Route).GetRouteData(ctx);
                     }
                     else if(r.Route is RestRoute)
                     {
-                        rd = (r.Route as RestRoute).GetRouteData(ctx);
+                        rd = ((RestRoute) r.Route).GetRouteData(ctx);
                     }
                     else if(r.Route is Route)
                     {
-                        rd = (r.Route as Route).GetRouteData(ctx);
+                        rd = ((Route) r.Route).GetRouteData(ctx);
                     }
                     else
                     {
@@ -100,17 +100,19 @@ namespace DeveloperTools.Controllers
 
         private void CreateRouteData(List<RouteModel> model, ref int index, string routeName, RouteBase route)
         {
-            if(route is ModuleRouteCollection)
+            var collection = route as ModuleRouteCollection;
+            if(collection != null)
             {
-                var m = CreateRouteModelData(routeName, route as ModuleRouteCollection, ref index);
+                var m = CreateRouteModelData(routeName, collection, ref index);
                 model.AddRange(m);
                 return;
             }
 
             RouteModel rm;
-            if(route is DefaultContentRoute)
+            var rr = route as IContentRoute;
+            if(rr != null)
             {
-                var cr = route as DefaultContentRoute;
+                var cr = rr;
                 routeName = cr.Name;
                 CreateRouteModelData(routeName, route as Route, index++);
             }
@@ -183,9 +185,9 @@ namespace DeveloperTools.Controllers
         RouteModel CreateRouteModelData(string name, Route rr, int index)
         {
             var rm = CreateRouteModelData(name, rr as RouteBase, index);
-            if(rr is DefaultContentRoute)
+            if(rr is IContentRoute)
             {
-                rm.Url = GetUrl(rr as DefaultContentRoute);
+                rm.Url = GetUrl(rr as IContentRoute);
             }
             else
             {
@@ -231,11 +233,10 @@ namespace DeveloperTools.Controllers
                     IDictionary<string, RouteBase>;
         }
 
-        private static string GetUrl(DefaultContentRoute cr)
+        private static string GetUrl(IContentRoute cr)
         {
             try
             {
-                var sb = new StringBuilder();
                 var segemnts = cr.GetType().InvokeMember("_urlSegments", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance, null, cr, null) as ISegment[];
                 return string.Join("/", segemnts.Where(s => !string.IsNullOrEmpty(s.Name)).Select(s => s.Name));
             }
