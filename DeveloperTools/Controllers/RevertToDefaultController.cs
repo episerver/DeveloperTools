@@ -11,7 +11,6 @@ using EPiServer;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAbstraction.RuntimeModel;
 using EPiServer.Core;
-using EPiServer.DataAbstraction.PageTypeAvailability;
 
 namespace DeveloperTools.Controllers
 {

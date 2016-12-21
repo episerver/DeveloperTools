@@ -5,6 +5,7 @@ using System.Text;
 using System.Reflection;
 using System.Collections;
 using EPiServer.Events.Clients;
+using EPiServer.Events.Clients.Internal;
 
 namespace DeveloperTools.Models
 {

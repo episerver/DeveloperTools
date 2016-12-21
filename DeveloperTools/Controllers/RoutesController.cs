@@ -14,6 +14,7 @@ using EPiServer.Shell.Services.Rest;
 using EPiServer.Shell.Web.Routing;
 using System.Web;
 using System.IO;
+using EPiServer.Web.Routing.Internal;
 
 namespace DeveloperTools.Controllers
 {
@@ -36,9 +37,9 @@ namespace DeveloperTools.Controllers
                 {
                     var ctx = new HttpContextWrapper(new HttpContext (new HttpRequest("", url, ""), new HttpResponse(new StringWriter(new StringBuilder()))));
                     
-                    if (r.Route is ContentRoute)
+                    if (r.Route is DefaultContentRoute)
                     {
-                        rd = (r.Route as ContentRoute).GetRouteData(ctx);
+                        rd = (r.Route as DefaultContentRoute).GetRouteData(ctx);
                     }
                     else if (r.Route is ModuleRouteCollection)
                     {
@@ -110,9 +111,9 @@ namespace DeveloperTools.Controllers
                 return;
             }
             RouteModel rm;
-            if (route is ContentRoute)
+            if (route is DefaultContentRoute)
             {
-                var cr = route as ContentRoute;
+                var cr = route as DefaultContentRoute;
                 routeName = cr.Name;
                 CreateRouteModelData(routeName, route as Route, index++);
             }
@@ -179,9 +180,9 @@ namespace DeveloperTools.Controllers
         RouteModel CreateRouteModelData(String name, Route rr, int index)
         {
             RouteModel rm = CreateRouteModelData(name, rr as RouteBase, index);
-            if (rr is ContentRoute)
+            if (rr is DefaultContentRoute)
             {
-                rm.Url = GetUrl(rr as ContentRoute);
+                rm.Url = GetUrl(rr as DefaultContentRoute);
             }
             else
             {
@@ -224,7 +225,7 @@ namespace DeveloperTools.Controllers
             return routeCollection.GetType().InvokeMember("_namedMap", System.Reflection.BindingFlags.GetField | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance, null, routeCollection, null) as IDictionary<string, RouteBase>;
         }
 
-        private static string GetUrl(ContentRoute cr)
+        private static string GetUrl(DefaultContentRoute cr)
         {
             try
             {

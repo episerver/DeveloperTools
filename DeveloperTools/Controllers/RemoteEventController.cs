@@ -13,6 +13,8 @@ using DeveloperTools.Models;
 using EPiServer.Events.Clients;
 using EPiServer.Events.Providers;
 using System.Threading.Tasks;
+using EPiServer.Events.Clients.Internal;
+using EPiServer.Events.Providers.Internal;
 using EPiServer.Licensing.Services;
 
 namespace DeveloperTools.Controllers

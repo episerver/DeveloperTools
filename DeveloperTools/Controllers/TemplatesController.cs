@@ -14,7 +14,7 @@ namespace DeveloperTools.Controllers
     {
         public ActionResult Index()
         {
-            var templateRepo = ServiceLocator.Current.GetInstance<TemplateModelRepository>();
+            var templateRepo = ServiceLocator.Current.GetInstance<ITemplateRepository>();
             var modelRepo = ServiceLocator.Current.GetInstance<ContentTypeModelRepository>();
 
             var templates = modelRepo.List()
