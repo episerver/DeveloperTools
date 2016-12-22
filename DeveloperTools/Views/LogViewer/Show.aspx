@@ -34,16 +34,16 @@ Start/stop in-memory appender:  <strong><%= !Model.IsStarted ? Html.ActionLink("
 </div>
 <hr />
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
-	<thead>
-		<tr>
+    <thead>
+        <tr>
             <th align="left" width="10%">Date</th>
-			<th align="left">Message</th>
-			<th align="left">LoggerName</th>
+            <th align="left">Message</th>
+            <th align="left">LoggerName</th>
             <th align="left">Level</th>
-			<th align="left">ThreadName</th>
-		</tr>
-	</thead>
-	<tbody>
+            <th align="left">ThreadName</th>
+        </tr>
+    </thead>
+    <tbody>
 <% foreach (log4net.Core.LoggingEvent logevent in Model.LoggingEvents){%>
  <%if (logevent.Level == Level.Error)%>
         <%Response.Write("<tr style='background-color:Red'>");%>
@@ -58,7 +58,7 @@ Start/stop in-memory appender:  <strong><%= !Model.IsStarted ? Html.ActionLink("
         <td><%=logevent.ThreadName.ToString()%></td>
     </tr>
     <%} %>
-	</tbody>
+    </tbody>
 </table>
 
 <script>

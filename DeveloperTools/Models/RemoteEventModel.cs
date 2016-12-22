@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.Collections;
-using EPiServer.Events.Clients;
+using EPiServer.Events.Clients.Internal;
 
 namespace DeveloperTools.Models
 {
@@ -31,8 +28,8 @@ namespace DeveloperTools.Models
     [Serializable]
     public class RemoteEventModel
     {
-        public String Name { get; set; }
-        public String Guid { get; set; }
+        public string Name { get; set; }
+        public string Guid { get; set; }
         public long NumberOfSent { get; set; }
         public long NumberOfReceived { get; set; }
     }
@@ -44,6 +41,5 @@ namespace DeveloperTools.Models
         public string Param { get; set; }
         public int NumberOfevents { get; set; }
         public int NumberOfeventsSent { get; set; }
-
     }
 }

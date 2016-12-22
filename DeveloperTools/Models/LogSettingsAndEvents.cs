@@ -1,8 +1,6 @@
-﻿using log4net.Core;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using log4net.Core;
 
 namespace DeveloperTools.Models
 {
@@ -12,11 +10,10 @@ namespace DeveloperTools.Models
         {
             LoggingEvents = Enumerable.Empty<LoggingEvent>();
             LoggerSetting = new LoggerSettings();
-
         }
+
         public bool IsStarted { get; set; }
         public IEnumerable<LoggingEvent> LoggingEvents { get; set; }
         public LoggerSettings LoggerSetting { get; set; }
     }
-
 }

@@ -1,6 +1,7 @@
-﻿using EPiServer.Shell.Navigation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using EPiServer.Security;
+using EPiServer.Shell;
+using EPiServer.Shell.Navigation;
 
 namespace DeveloperTools.Core
 {
@@ -38,38 +39,40 @@ namespace DeveloperTools.Core
 
         const string RemoteEventTitle = "Remote Event";
         const string RemoteEventPath = "global/DeveloperTools/Remote Event";
-        
+
         const string RoutesTitle = "Routes";
         const string RoutesPath = "global/DeveloperTools/Routes";
 
         public IEnumerable<MenuItem> GetMenuItems()
         {
             // Create the top menu section
-            var developerSection = new SectionMenuItem(GlobalMenuTitle, GlobalMenuLogicalPath);
-            developerSection.IsAvailable = (request) => PrincipalInfo.HasAdminAccess;
+            var developerSection = new SectionMenuItem(GlobalMenuTitle, GlobalMenuLogicalPath)
+            {
+                IsAvailable = request => PrincipalInfo.HasAdminAccess
+            };
 
-            var timeMeters = CreateUrlMenuItem(TimeMetersTitle, TimeMetersPath, EPiServer.Shell.Paths.ToResource(ModuleName, "TimeMeters"));
-            var templates = CreateUrlMenuItem(TemplatesTitle, TemplatesPath, EPiServer.Shell.Paths.ToResource(ModuleName, "Templates"));
-            var ioc = CreateUrlMenuItem(IocTitle, IocPath, EPiServer.Shell.Paths.ToResource(ModuleName, "IOC"));
-            var loadedAssemblies = CreateUrlMenuItem(LoadedAssembliesTitle, LoadedAssembliesPath, EPiServer.Shell.Paths.ToResource(ModuleName, "LoadedAssemblies"));
-            var revertToDefault = CreateUrlMenuItem(RevertToDefaultTitle, RevertToDefaultPath, EPiServer.Shell.Paths.ToResource(ModuleName, "RevertToDefault"));
-            var contentTypeAnalyzer = CreateUrlMenuItem(ContentTypeAnalyzerTitle, ContentTypeAnalyzerPath, EPiServer.Shell.Paths.ToResource(ModuleName, "ContentTypeAnalyzer"));
-            var logViewer = CreateUrlMenuItem(LogViewerTitle, LogViewerPath, EPiServer.Shell.Paths.ToResource(ModuleName, "LogViewer"));
-            var memoryDumperViewer = CreateUrlMenuItem(MemoryDumpTitle, MemoryDumpPath, EPiServer.Shell.Paths.ToResource(ModuleName, "MemoryDump"));
-            var remoteEventViewer = CreateUrlMenuItem(RemoteEventTitle, RemoteEventPath, EPiServer.Shell.Paths.ToResource(ModuleName, "RemoteEvent"));
-            var routes = CreateUrlMenuItem(RoutesTitle, RoutesPath, EPiServer.Shell.Paths.ToResource(ModuleName, "Routes"));
+            var timeMeters = CreateUrlMenuItem(TimeMetersTitle, TimeMetersPath, Paths.ToResource(ModuleName, "TimeMeters"));
+            var templates = CreateUrlMenuItem(TemplatesTitle, TemplatesPath, Paths.ToResource(ModuleName, "Templates"));
+            var ioc = CreateUrlMenuItem(IocTitle, IocPath, Paths.ToResource(ModuleName, "IOC"));
+            var loadedAssemblies = CreateUrlMenuItem(LoadedAssembliesTitle, LoadedAssembliesPath, Paths.ToResource(ModuleName, "LoadedAssemblies"));
+            var revertToDefault = CreateUrlMenuItem(RevertToDefaultTitle, RevertToDefaultPath, Paths.ToResource(ModuleName, "RevertToDefault"));
+            var contentTypeAnalyzer = CreateUrlMenuItem(ContentTypeAnalyzerTitle, ContentTypeAnalyzerPath, Paths.ToResource(ModuleName, "ContentTypeAnalyzer"));
+            var logViewer = CreateUrlMenuItem(LogViewerTitle, LogViewerPath, Paths.ToResource(ModuleName, "LogViewer"));
+            var memoryDumperViewer = CreateUrlMenuItem(MemoryDumpTitle, MemoryDumpPath, Paths.ToResource(ModuleName, "MemoryDump"));
+            var remoteEventViewer = CreateUrlMenuItem(RemoteEventTitle, RemoteEventPath, Paths.ToResource(ModuleName, "RemoteEvent"));
+            var routes = CreateUrlMenuItem(RoutesTitle, RoutesPath, Paths.ToResource(ModuleName, "Routes"));
 
-            return new MenuItem[] { developerSection, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, templates, logViewer, memoryDumperViewer, remoteEventViewer, routes }; 
+            return new MenuItem[]
+                { developerSection, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, templates, logViewer, memoryDumperViewer, remoteEventViewer, routes };
         }
 
         protected virtual UrlMenuItem CreateUrlMenuItem(string title, string logicalPath, string resourcePath)
         {
-            var menuItem = new UrlMenuItem(title, // Title
-                                          logicalPath, // Logical path
-                                          resourcePath);
-            menuItem.IsAvailable = (request) => PrincipalInfo.HasAdminAccess;
+            var menuItem = new UrlMenuItem(title, logicalPath, resourcePath)
+            {
+                IsAvailable = request => PrincipalInfo.HasAdminAccess
+            };
             return menuItem;
         }
-
     }
 }

@@ -24,17 +24,17 @@
 <% } %>
 </div>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
-	<thead>
-		<tr>
+    <thead>
+        <tr>
             <th align="left">Order</th>
             <th align="left">Name</th>
             <th align="left">Type</th>
             <th align="left">Url</th>
             <th align="left">RouteHandler </th>
             <th align="left">Defaults </th>
-		</tr>
-	</thead>
-	<tbody>
+        </tr>
+    </thead>
+    <tbody>
 <% foreach (var entry in Model)
    { %>
         <%if (entry.IsSelected)%>

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EPiServer.Shell.Gadgets;
+﻿using System.Linq;
 using System.Web.Mvc;
 using EPiServer.Framework.Initialization;
-using EPiServer.Shell.Web;
 
 namespace DeveloperTools.Controllers
 {
