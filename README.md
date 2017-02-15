@@ -12,12 +12,8 @@ Current features:
 * View Content Type sync state between Code and DB
 * Take memory dumps
 * View templates for content
-- View and test ASP.NET routes
+* View and test ASP.NET routes
 * View loaded assemblies in AppDomain
 * View startup time for initialization modules
 * View remote event statistics, provider and servers
-
-
-TODO:
-* Being able to group templates per content type in the "Templates"-tool
-* Revert to Default and Content Type Analyzer should be merged in some way, seems weird with 2 tools.
+* View all registered view engines
