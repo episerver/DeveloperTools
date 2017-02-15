@@ -1,7 +1,7 @@
 Developer Tools project
 ==============
 
-[Download latest build here.](https://github.com/episerver/DeveloperTools/releases)
+Download latest build on [NuGet](http://nuget.episerver.com/en/OtherPages/Package/?packageId=EPiServer.DeveloperTools) or [under releases](https://github.com/episerver/DeveloperTools/releases)
 
 Experimental project to build small tools useful for developers. Install as an add-on in EPiServer CMS 7.5 (or later) using the manual upload button under Addons. When installed you must be part of the Administrators group to use the tool, a new menu "Developer" should appear in the top menu. And remember, use at your own risk - this is not a supported product.
 
