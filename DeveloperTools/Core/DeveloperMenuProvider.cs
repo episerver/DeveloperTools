@@ -43,6 +43,9 @@ namespace DeveloperTools.Core
         const string RoutesTitle = "Routes";
         const string RoutesPath = "global/DeveloperTools/Routes";
 
+        const string ViewLocationsTitle = "View Locations";
+        const string ViewLocationsPath = "global/DeveloperTools/ViewLocations";
+
         public IEnumerable<MenuItem> GetMenuItems()
         {
             // Create the top menu section
@@ -61,9 +64,23 @@ namespace DeveloperTools.Core
             var memoryDumperViewer = CreateUrlMenuItem(MemoryDumpTitle, MemoryDumpPath, Paths.ToResource(ModuleName, "MemoryDump"));
             var remoteEventViewer = CreateUrlMenuItem(RemoteEventTitle, RemoteEventPath, Paths.ToResource(ModuleName, "RemoteEvent"));
             var routes = CreateUrlMenuItem(RoutesTitle, RoutesPath, Paths.ToResource(ModuleName, "Routes"));
+            var viewLocations = CreateUrlMenuItem(ViewLocationsTitle, ViewLocationsPath, Paths.ToResource(ModuleName, "ViewEngineLocations"));
 
             return new MenuItem[]
-                { developerSection, timeMeters, ioc, loadedAssemblies, revertToDefault, contentTypeAnalyzer, templates, logViewer, memoryDumperViewer, remoteEventViewer, routes };
+            {
+                developerSection,
+                timeMeters,
+                ioc,
+                loadedAssemblies,
+                revertToDefault,
+                contentTypeAnalyzer,
+                templates,
+                logViewer,
+                memoryDumperViewer,
+                remoteEventViewer,
+                routes,
+                viewLocations
+            };
         }
 
         protected virtual UrlMenuItem CreateUrlMenuItem(string title, string logicalPath, string resourcePath)

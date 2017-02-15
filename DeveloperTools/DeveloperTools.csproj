@@ -38,7 +38,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,7 +48,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -203,6 +203,7 @@
     <Compile Include="Controllers\IOCController.cs" />
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Controllers\TimeMetersController.cs" />
+    <Compile Include="Controllers\ViewEngineLocationsController.cs" />
     <Compile Include="Core\DeveloperMenuProvider.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
     <Compile Include="Models\RouteModel.cs" />
@@ -211,27 +212,36 @@
     <Compile Include="Models\IOCModel.cs" />
     <Compile Include="Models\LoggerSettings.cs" />
     <Compile Include="Models\LogSettingsAndEvents.cs" />
+    <Compile Include="Models\ViewEngineLocationsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\RollingMemoryAppender.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\ContentTypeAnalyzer\Index.aspx">
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\EPiServer.DeveloperTools.zip" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
-    <None Include="Views\Routes\Index.aspx" />
-    <None Include="Views\RemoteEvent\Index.aspx">
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
-    <None Include="Views\IOC\Index.aspx" />
-    <None Include="Views\LoadedAssemblies\Index.aspx" />
-    <None Include="Views\LogViewer\Show.aspx">
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
-    <None Include="Views\MemoryDump\Index.aspx" />
-    <None Include="Views\RevertToDefault\Index.aspx" />
-    <None Include="Views\Templates\Index.aspx" />
-    <None Include="Views\TimeMeters\Index.aspx" />
-    <None Include="Views\Web.config" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -241,14 +251,17 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Views\Shared\DeveloperTools.Master" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DeveloperTools.Master" />
     <None Include="Web.config" />
-    <None Include="module.config" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />
     <Content Include="web.config.transform" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -260,7 +273,7 @@
   <Target Name="AfterBuild" DependsOnTargets="CreateAddOnPackage">
   </Target>
   <Target Name="CreateAddOnPackage">
-    <Exec Command="..\.nuget\nuget.exe pack DeveloperTools.nuspec -OutputDirectory $(OutputPath)" />
+    <Exec Command="..\.nuget\nuget.exe pack DeveloperTools.csproj -Properties Configuration=Release -OutputDirectory ..\.nuget" />
   </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
