@@ -203,6 +203,7 @@
     <Compile Include="Controllers\IOCController.cs" />
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Controllers\TimeMetersController.cs" />
+    <Compile Include="Controllers\ViewEngineLocationsController.cs" />
     <Compile Include="Core\DeveloperMenuProvider.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
     <Compile Include="Models\RouteModel.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\IOCModel.cs" />
     <Compile Include="Models\LoggerSettings.cs" />
     <Compile Include="Models\LogSettingsAndEvents.cs" />
+    <Compile Include="Models\ViewEngineLocationsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\RollingMemoryAppender.cs" />
   </ItemGroup>
@@ -232,8 +234,13 @@
     </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
   </ItemGroup>
   <ItemGroup />
