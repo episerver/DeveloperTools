@@ -129,9 +129,11 @@ namespace DeveloperTools.Controllers
                 { new Guid("B10915E6-0C84-4a6a-8707-FF6F357A1099"), "BlogModule-BlogReplication" },
                 { new Guid("F6F0147E-F60F-4801-8647-66270D10AFB9"), "ForumModule-ForumReplication" },
                 { new Guid("F6742777-6F38-46a1-AA38-9985715089A2"), "ImageGalleryModule-ImageGalleryReplication" },
-                { new Guid("F160271E-7972-447a-81D0-152A35FD77BD"), "OnlineStatusModule-OnlineStatusReplication" }
+                { new Guid("F160271E-7972-447a-81D0-152A35FD77BD"), "OnlineStatusModule-OnlineStatusReplication" },
+                { new Guid("BE4D5630-8307-4361-9366-71C0032E8A84"), "SiteDefinitionRepository-Saved" },
+                { new Guid("B8635A4C-7D77-4C69-B1EB-674D4AB442FC"), "PermanentLinkMapStore-ClearCache" },
+                { new Guid("96728921-417C-4061-B278-C5621BD4F995"), "UI push notification" }
             };
-
         }
     }
 }
