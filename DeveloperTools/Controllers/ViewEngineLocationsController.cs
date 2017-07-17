@@ -29,7 +29,7 @@ namespace DeveloperTools.Controllers
                 var enginesCollection = memberInfo?.GetValue(modules) as Dictionary<string, IViewEngine>;
                 if(enginesCollection != null)
                 {
-                    foreach (var engine in enginesCollection.Values.OfType<WebFormViewEngine>())
+                    foreach (var engine in enginesCollection.Values.OfType<VirtualPathProviderViewEngine>())
                     {
                         var engineName = engine.GetType().Name;
                         model.ViewLocations.AddRange(engine.ViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, engineName)));
