@@ -14,7 +14,9 @@ namespace DeveloperTools.Controllers
         public ActionResult Index()
         {
             var ie = (InitializationEngine) typeof(InitializationModule).GetField("_engine", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-            var container = (IContainer) ie.GetType().GetProperty("Container", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(ie, new object[0]);
+
+            var services = ie.GetType().GetProperty("Services", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(ie, null);
+            var container = (IContainer) services.GetType().GetProperty("Container").GetValue(services, null);
 
             var iocEntries = new List<IOCEntry>();
             var typeErrors = new List<string>();
