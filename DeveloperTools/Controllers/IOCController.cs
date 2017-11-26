@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using DeveloperTools.Models;
 using EPiServer.Framework.Initialization;
-using StructureMap;
+using EPiServer.ServiceLocation.Internal;
 
 namespace DeveloperTools.Controllers
 {
@@ -15,42 +15,47 @@ namespace DeveloperTools.Controllers
         {
             var ie = (InitializationEngine) typeof(InitializationModule).GetField("_engine", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
 
-            var services = ie.GetType().GetProperty("Services", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(ie, null);
-            var container = (IContainer) services.GetType().GetProperty("Container").GetValue(services, null);
+            var services = ie.GetType().GetProperty("Services", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(ie, null) as StructureMapConfiguration;
 
             var iocEntries = new List<IOCEntry>();
             var typeErrors = new List<string>();
 
-            foreach (var plugin in container.Model.PluginTypes)
+            if (services != null)
             {
-                try
-                {
-                    var defaultType = plugin.Default?.ReturnedType;
-                    if(plugin.Default != null && defaultType == null)
-                    {
-                        defaultType = container.GetInstance(plugin.Default.PluginType, plugin.Default.Name).GetType();
-                    }
+                var container = services.Container;
 
-                    foreach (var entry in plugin.Instances.Where(i => i != null))
+                foreach (var plugin in container.Model.PluginTypes)
+                {
+                    try
                     {
-                        var concreteType = entry.ReturnedType;
-                        if(concreteType == null && entry.PluginType.ContainsGenericParameters == false)
+                        var defaultType = plugin.Default?.ReturnedType;
+                        if (plugin.Default != null && defaultType == null)
                         {
-                            concreteType = container.GetInstance(entry.PluginType, entry.Name).GetType();
+                            defaultType = container.GetInstance(plugin.Default.PluginType, plugin.Default.Name).GetType();
                         }
 
-                        iocEntries.Add(new IOCEntry
-                                       {
-                                           PluginType = entry.PluginType == null ? "null" : $"{entry.PluginType.FullName},{entry.PluginType.Assembly.FullName}",
-                                           ConcreteType = concreteType == null ? "null" : $"{concreteType.FullName},{concreteType.Assembly.FullName}",
-                                           Scope = plugin.Lifecycle.ToString(),
-                                           IsDefault = defaultType == concreteType
-                                       });
+                        foreach (var entry in plugin.Instances.Where(i => i != null))
+                        {
+                            var concreteType = entry.ReturnedType;
+                            if (concreteType == null && entry.PluginType.ContainsGenericParameters == false)
+                            {
+                                concreteType = container.GetInstance(entry.PluginType, entry.Name).GetType();
+                            }
+
+                            iocEntries.Add(new IOCEntry
+                            {
+                                PluginType = entry.PluginType == null ? "null" : $"{entry.PluginType.FullName},{entry.PluginType.Assembly.FullName}",
+                                ConcreteType = concreteType == null ? "null" : $"{concreteType.FullName},{concreteType.Assembly.FullName}",
+
+                                Scope = plugin.Lifecycle.ToString(),
+                                IsDefault = defaultType == concreteType
+                            });
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    typeErrors.Add("Failed to get type " + plugin.PluginType.FullName + ", reason:" + ex.Message);
+                    catch (Exception ex)
+                    {
+                        typeErrors.Add("Failed to get type " + plugin.PluginType.FullName + ", reason:" + ex.Message);
+                    }
                 }
             }
 
