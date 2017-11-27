@@ -11,9 +11,5 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>EXPERIMENTAL! Allows to run various support tools on the site. Currently not officially supported by EPiServer Support Services. Use at your own risk!</description>
     <tags>EPiServerModulePackage</tags>
-    <dependencies>
-      <dependency id="EPiServer.CMS.UI.Core" version="10.0.2" />
-      <dependency id="log4net" version="2.0.3" />
-    </dependencies>
   </metadata>
 </package>

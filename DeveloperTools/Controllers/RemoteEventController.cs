@@ -81,7 +81,7 @@ namespace DeveloperTools.Controllers
                 TotalNumberOfSentEvent = sentEvents,
                 ActiveServers = activeServers,
                 ServerState = remoteServers,
-                ProviderName = _providerService.DefaultProvider.Description ?? _providerService.DefaultProvider.Name,
+                ProviderName = _providerService.DefaultProvider.Name,
                 ProviderType = _providerService.DefaultProvider.GetType().FullName,
                 Enabled = _providerService.Enabled
             };
