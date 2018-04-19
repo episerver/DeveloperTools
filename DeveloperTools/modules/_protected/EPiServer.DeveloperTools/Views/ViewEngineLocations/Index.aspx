@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<DeveloperTools.Models.ViewEngineLocationsModel>" MasterPageFile="../Shared/DeveloperTools.Master" %>
-<%@ Import Namespace="EPiServer.DataAbstraction" %> 
+<%@ Import Namespace="EPiServer.DataAbstraction" %>
 
  <asp:Content ID="Content" runat="server" ContentPlaceHolderID="MainRegion">
 
@@ -8,7 +8,7 @@
 <script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
 <h1>View Engine Locations</h1>
 <p>Show a list of all view locations where Mvc would look for templates.</p>
- 
+
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theViewLocations">
     <thead>
         <tr>
@@ -21,11 +21,11 @@
     <tr>
         <td><%:l.Location%></td>
         <td><%:l.EngineName%></td>
-    </tr>  
+    </tr>
   <%}%>
   </tbody>
 </table>
-     
+
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="thePartialViewLocations">
     <thead>
         <tr>
@@ -38,7 +38,7 @@
     <tr>
         <td><%:l.Location%></td>
         <td><%:l.EngineName%></td>
-    </tr>  
+    </tr>
   <%}%>
   </tbody>
 </table>

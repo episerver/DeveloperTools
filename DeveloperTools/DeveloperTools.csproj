@@ -230,8 +230,8 @@
     <Compile Include="Core\RollingMemoryAppender.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\_protected\EPiServer.DeveloperTools\EPiServer.DeveloperTools.zip" />
     <None Include="app.config" />
+    <None Include="EPiServer.DeveloperTools.zip" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx">

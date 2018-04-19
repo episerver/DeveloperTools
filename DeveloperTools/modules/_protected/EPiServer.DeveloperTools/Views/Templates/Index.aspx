@@ -1,14 +1,14 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<IEnumerable<EPiServer.DataAbstraction.TemplateModel>>" MasterPageFile="../Shared/DeveloperTools.Master" %>
-<%@ Import Namespace="EPiServer.DataAbstraction" %> 
+<%@ Import Namespace="EPiServer.DataAbstraction" %>
 
  <asp:Content ID="Content" runat="server" ContentPlaceHolderID="MainRegion">
 
-<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" />
-<script type="text/javascript" language="javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" />
+<script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
 <h1>Templates</h1>
 <p>Show a list of all templates registered in the system by querying each content type for its templates and then making a summarized list of the unique templates found.</p>
- 
+
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
     <thead>
         <tr>
@@ -33,7 +33,7 @@
         <td><%:t.AvailableWithoutTag ? "Yes":"No"%></td>
         <td><%:t.Path%></td>
         <td><%:t.TemplateType%></td>
-    </tr>  
+    </tr>
   <%}%>
   </tbody>
 </table>
