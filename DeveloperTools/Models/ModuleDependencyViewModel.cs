@@ -7,5 +7,7 @@ namespace DeveloperTools.Models
         public IEnumerable<ModuleInfo> Nodes { get; set; }
 
         public IEnumerable<ModuleDependency> Links { get; set; }
+
+        public bool ShowAll { get; set; }
     }
 }

@@ -6,14 +6,14 @@ namespace DeveloperTools.Models
     {
         public ModuleInfo()
         {
-            Value = 5;
+            Size = 10;
         }
 
         public string Id { get; set; }
 
         public int Group { get; set; }
 
-        public int Value { get; set; }
+        public int Size { get; set; }
 
         public Type ModuleType { get; set; }
 

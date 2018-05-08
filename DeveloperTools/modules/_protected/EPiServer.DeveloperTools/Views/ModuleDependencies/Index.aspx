@@ -21,10 +21,20 @@
 </asp:Content>
 
 <asp:Content ID="Content" runat="server" ContentPlaceHolderID="MainRegion">
-    <h2>Module Dependencies</h2>
+    <h1>Module Dependencies</h1>
     <div class="controls">
         <div class="control-wrapper"></div>
-        <button class="form-control button">all modules</button>
+        <% if(!Model.ShowAll) { %>
+            <% using (Html.BeginForm("Index", "ModuleDependencies", new { }, FormMethod.Post)) { %>
+                <button type="submit">Show all modules</button>
+                <input type="hidden" id="showAll" name="showAll" value="true"/>
+            <% } %>
+        <% } else { %>
+            <% using (Html.BeginForm("Index", "ModuleDependencies", new { }, FormMethod.Post)) { %>
+                <button type="submit">Hide EPiServer modules</button>
+                <input type="hidden" id="showAll" name="showAll" value="false"/>
+            <% } %>
+        <% } %>
     </div>
     <div id="graphContainer">
         <div id="modulesnetwork"></div>
@@ -41,8 +51,9 @@
         var edgesDataset = new vis.DataSet(edges);
 
         function redrawAll() {
-            var container = document.getElementById('modulesnetwork');
-            var options = {
+            var container = document.getElementById('modulesnetwork'),
+                edgeLength = nodesDataset.length > 20 ? 200 : 100,
+                options = {
                 nodes: {
                     shape: 'dot',
                     shadow: {
@@ -65,7 +76,7 @@
                     }
                 },
                 edges: {
-                    width: 0.5,
+                    width: 2,
                     arrows: {
                         to: {
                             enabled: true
@@ -77,20 +88,19 @@
                     color: { inherit: 'from' }
                 },
                 physics: {
-                    maxVelocity: 37,
-                    minVelocity: 0.79,
+                    maxVelocity: 30,
+                    minVelocity: 0.7,
                     stabilization: {
                         iterations: 100
                     },
                     barnesHut: {
-                        gravitationalConstant: -5000,
-                        centralGravity: 0.1,
-                        springLength: 225,
+                        gravitationalConstant: -3000,
+                        centralGravity: 0.2,
+                        springLength: edgeLength,
                         springConstant: 0.05,
-                        avoidOverlap: 1
+                        avoidOverlap: 0.7
                     }
                 },
-
                 autoResize: true,
                 width: '100%',
                 height: '100%',

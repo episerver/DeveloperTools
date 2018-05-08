@@ -20,7 +20,7 @@ namespace DeveloperTools.Controllers
             _engine = engine;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(bool showAll = false)
         {
             var sortedModules = _engine.GetType().GetField("_dependencySortedList", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_engine) as IList;
             var l = new List<ExtractedModuleInfo>();
@@ -41,8 +41,6 @@ namespace DeveloperTools.Controllers
                           Dependencies = depps
                       });
             }
-
-            var showAll = false;
 
             var modules = (from module in l
                            let asmName = module.Type.Assembly.GetName().Name + ".dll"
@@ -75,10 +73,25 @@ namespace DeveloperTools.Controllers
             var model = new ModuleDependencyViewModel
                             {
                                 Nodes = modules,
-                                Links = dependencies
+                                Links = dependencies,
+                                ShowAll = showAll
                             };
 
-                return View(model);
+            // process sizes of the modules
+            var incomingDeps = model.Links.GroupBy(_ => _.To)
+                                    .Select(group => new
+                                                     {
+                                                         Name = group.Key,
+                                                         Count = group.Count()
+                                                     });
+
+            foreach (var incomingDep in incomingDeps)
+            {
+                var m = model.Nodes.First(_ => _.Id == incomingDep.Name);
+                m.Size = m.Size + incomingDep.Count * 2;
+            }
+
+            return View(model);
         }
 
         private int GetAssemblyGroup(string assemblyName)
