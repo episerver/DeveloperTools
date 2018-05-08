@@ -22,52 +22,32 @@ namespace DeveloperTools.Controllers
 
         public ActionResult Index(bool showAll = false)
         {
-            var sortedModules = _engine.GetType().GetField("_dependencySortedList", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_engine) as IList;
-            var l = new List<ExtractedModuleInfo>();
+            var sortedModules = GetSortedModules();
 
-            // some dirty internals toget to sorted module list
-            foreach (var m in sortedModules)
-            {
-                var t = m.GetType();
-                var tt = t.GetProperty("ModuleType", BindingFlags.Instance | BindingFlags.Public).GetValue(m) as Type;
-                var deps = t.GetProperty("Dependencies", BindingFlags.Instance | BindingFlags.Public).GetValue(m) as IEnumerable;
+            var modules = from module in sortedModules
+                          let asmName = module.Type.Assembly.GetName().Name + ".dll"
+                          select new ModuleInfo
+                                 {
+                                     Id = module.Type.FullName,
+                                     ModuleType = module.Type,
+                                     Label = module.Type.Name,
+                                     Title = $"Name: {module.Type.Name}<br>Type: {(typeof(IConfigurableModule).IsAssignableFrom(module.Type) ? "Configurable" : "Initializable")}<br>Namespace: {module.Type.Namespace}<br>Assembly: {asmName}",
+                                     Group = GetAssemblyGroup(asmName)
+                                 };
 
-                var depps = (from object dep in deps
-                             select dep as Type).ToList();
-
-                l.Add(new ExtractedModuleInfo
-                      {
-                          Type = tt,
-                          Dependencies = depps
-                      });
-            }
-
-            var modules = (from module in l
-                           let asmName = module.Type.Assembly.GetName().Name + ".dll"
-                           select new ModuleInfo
-                                  {
-                                      Id = module.Type.FullName,
-                                      ModuleType = module.Type,
-                                      Label = module.Type.Name,
-                                      Title =
-                                          $"Name: {module.Type.Name}<br>Type: {(typeof(IConfigurableModule).IsAssignableFrom(module.Type) ? "Configurable" : "Initializable")}<br>Namespace: {module.Type.Namespace}<br>Assembly: {asmName}",
-                                      Group = GetAssemblyGroup(asmName)
-                                  }).ToList();
-
-            var dependencies = l.Where(_ => _.Dependencies.Count > 0)
-                                .SelectMany(_ => _.Dependencies,
-                                            (_, t) => new ModuleDependency
-                                                      {
-                                                          From = _.Type.FullName,
-                                                          To = t.FullName
-                                                      });
+            var dependencies = sortedModules.Where(_ => _.Dependencies.Count > 0).SelectMany(_ => _.Dependencies,
+                                                                                             (from, to) => new ModuleDependency
+                                                                                                           {
+                                                                                                               From = from.Type.FullName,
+                                                                                                               To = to.FullName
+                                                                                                           });
 
             if(!showAll)
             {
                 dependencies = dependencies.Where(_ => !_.From.StartsWith("EPiServer"));
                 modules = Enumerable.Union(modules.Where(m => !m.ModuleType.FullName.StartsWith("EPiServer")),
                                            modules.Where(m => dependencies.Any(d => d.To == m.ModuleType.FullName)),
-                                           new ModuleListComparer()).ToList();
+                                           new ModuleListComparer());
             }
 
             var model = new ModuleDependencyViewModel
@@ -77,6 +57,13 @@ namespace DeveloperTools.Controllers
                                 ShowAll = showAll
                             };
 
+            WeightModulesByDependants(model);
+
+            return View(model);
+        }
+
+        private void WeightModulesByDependants(ModuleDependencyViewModel model)
+        {
             // process sizes of the modules
             var incomingDeps = model.Links.GroupBy(_ => _.To)
                                     .Select(group => new
@@ -90,29 +77,54 @@ namespace DeveloperTools.Controllers
                 var m = model.Nodes.First(_ => _.Id == incomingDep.Name);
                 m.Size = m.Size + incomingDep.Count * 2;
             }
+        }
 
-            return View(model);
+        private List<ExtractedModuleInfo> GetSortedModules()
+        {
+            var sortedModules = _engine.GetType().GetField("_dependencySortedList", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_engine) as IList;
+            var result = new List<ExtractedModuleInfo>();
+
+            // some nasty dirty internal business to get sorted module list with dependencies
+            foreach (var module in sortedModules)
+            {
+                var t = module.GetType();
+
+                // we cannot cast to `ModuleNode` as this is internal type. we have to blindly invoke property from the underlying type
+                var moduleType = t.GetProperty("ModuleType", BindingFlags.Instance | BindingFlags.Public).GetValue(module) as Type;
+                var dependencies = t.GetProperty("Dependencies", BindingFlags.Instance | BindingFlags.Public).GetValue(module) as IEnumerable;
+
+                var dependencyTypes = (from object dep in dependencies
+                                       select dep as Type);
+
+                result.Add(new ExtractedModuleInfo
+                           {
+                               Type = moduleType,
+                               Dependencies = dependencyTypes.ToList()
+                           });
+            }
+
+            return result;
         }
 
         private int GetAssemblyGroup(string assemblyName)
+        {
+            if(!_assemblyGroups.Any())
             {
-                if(!_assemblyGroups.Any())
-                {
-                    _assemblyGroups.Add(assemblyName, 1);
-                    return 1;
-                }
-
-                if(_assemblyGroups.ContainsKey(assemblyName))
-                    return _assemblyGroups[assemblyName];
-
-                var max = _assemblyGroups.Max(_ => _.Value);
-                _assemblyGroups.Add(assemblyName, max + 1);
-
-                return max;
+                _assemblyGroups.Add(assemblyName, 1);
+                return 1;
             }
-        }
 
-    public class ModuleListComparer : IEqualityComparer<ModuleInfo>
+            if(_assemblyGroups.ContainsKey(assemblyName))
+                return _assemblyGroups[assemblyName];
+
+            var max = _assemblyGroups.Max(_ => _.Value);
+            _assemblyGroups.Add(assemblyName, max + 1);
+
+            return max;
+        }
+    }
+
+    class ModuleListComparer : IEqualityComparer<ModuleInfo>
     {
         public bool Equals(ModuleInfo x, ModuleInfo y)
         {
