@@ -4,9 +4,9 @@ namespace DeveloperTools.Models
 {
     public class ModuleDependencyViewModel
     {
-        public IEnumerable<ModuleInfo> Nodes { get; set; }
+        public ICollection<ModuleInfo> Nodes { get; set; }
 
-        public IEnumerable<ModuleDependency> Links { get; set; }
+        public ICollection<ModuleDependency> Links { get; set; }
 
         public bool ShowAll { get; set; }
     }

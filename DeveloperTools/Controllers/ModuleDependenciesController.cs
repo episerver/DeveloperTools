@@ -48,13 +48,13 @@ namespace DeveloperTools.Controllers
                 dependencies = dependencies.Where(_ => !_.From.StartsWith("EPiServer"));
                 modules = modules.Where(m => !m.ModuleType.FullName.StartsWith("EPiServer"))
                                  .Union(modules.Where(m => dependencies.Any(d => d.To == m.ModuleType.FullName)))
-                                 .DistinctBy(_ => _.Id);
+                                 .DistinctBy(_ => _.Id).ToList();
             }
 
             var model = new ModuleDependencyViewModel
                             {
-                                Nodes = modules,
-                                Links = dependencies,
+                                Nodes = modules.ToList(),
+                                Links = dependencies.ToList(),
                                 ShowAll = showAll
                             };
 
