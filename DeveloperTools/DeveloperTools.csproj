@@ -218,6 +218,7 @@
     <Compile Include="Controllers\TimeMetersController.cs" />
     <Compile Include="Controllers\ViewEngineLocationsController.cs" />
     <Compile Include="Core\DeveloperMenuProvider.cs" />
+    <Compile Include="Core\EnumerableExtensions.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
     <Compile Include="Models\ExtractedModuleInfo.cs" />
     <Compile Include="Models\ModuleDependency.cs" />

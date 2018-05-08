@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using DeveloperTools.Models;
+using EPiServer.DeveloperTools.Core;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
 
@@ -45,9 +46,9 @@ namespace DeveloperTools.Controllers
             if(!showAll)
             {
                 dependencies = dependencies.Where(_ => !_.From.StartsWith("EPiServer"));
-                modules = Enumerable.Union(modules.Where(m => !m.ModuleType.FullName.StartsWith("EPiServer")),
-                                           modules.Where(m => dependencies.Any(d => d.To == m.ModuleType.FullName)),
-                                           new ModuleListComparer());
+                modules = modules.Where(m => !m.ModuleType.FullName.StartsWith("EPiServer"))
+                                 .Union(modules.Where(m => dependencies.Any(d => d.To == m.ModuleType.FullName)))
+                                 .DistinctBy(_ => _.Id);
             }
 
             var model = new ModuleDependencyViewModel
@@ -121,25 +122,6 @@ namespace DeveloperTools.Controllers
             _assemblyGroups.Add(assemblyName, max + 1);
 
             return max;
-        }
-    }
-
-    class ModuleListComparer : IEqualityComparer<ModuleInfo>
-    {
-        public bool Equals(ModuleInfo x, ModuleInfo y)
-        {
-            if(x == null)
-                return false;
-
-            if(y == null)
-                return false;
-
-            return x.Id.ToUpper() == y.Id.ToUpper();
-        }
-
-        public int GetHashCode(ModuleInfo obj)
-        {
-            return obj.GetHashCode();
         }
     }
 }
