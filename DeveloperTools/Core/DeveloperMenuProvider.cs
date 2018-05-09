@@ -46,6 +46,9 @@ namespace DeveloperTools.Core
         const string ViewLocationsTitle = "View Locations";
         const string ViewLocationsPath = "global/DeveloperTools/ViewLocations";
 
+        const string ModuleDependenciesTitle = "Module Dependencies";
+        const string ModuleDependenciesPath = "global/DeveloperTools/ModuleDependencies";
+
         public IEnumerable<MenuItem> GetMenuItems()
         {
             // Create the top menu section
@@ -65,6 +68,7 @@ namespace DeveloperTools.Core
             var remoteEventViewer = CreateUrlMenuItem(RemoteEventTitle, RemoteEventPath, Paths.ToResource(ModuleName, "RemoteEvent"));
             var routes = CreateUrlMenuItem(RoutesTitle, RoutesPath, Paths.ToResource(ModuleName, "Routes"));
             var viewLocations = CreateUrlMenuItem(ViewLocationsTitle, ViewLocationsPath, Paths.ToResource(ModuleName, "ViewEngineLocations"));
+            var moduleDependencies = CreateUrlMenuItem(ModuleDependenciesTitle, ModuleDependenciesPath, Paths.ToResource(ModuleName, "ModuleDependencies"));
 
             return new MenuItem[]
             {
@@ -79,17 +83,17 @@ namespace DeveloperTools.Core
                 memoryDumperViewer,
                 remoteEventViewer,
                 routes,
-                viewLocations
+                viewLocations,
+                moduleDependencies
             };
         }
 
         protected virtual UrlMenuItem CreateUrlMenuItem(string title, string logicalPath, string resourcePath)
         {
-            var menuItem = new UrlMenuItem(title, logicalPath, resourcePath)
+            return new UrlMenuItem(title, logicalPath, resourcePath)
             {
                 IsAvailable = request => PrincipalInfo.HasAdminAccess
             };
-            return menuItem;
         }
     }
 }

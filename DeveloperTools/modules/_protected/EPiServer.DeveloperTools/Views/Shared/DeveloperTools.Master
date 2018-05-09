@@ -22,6 +22,7 @@
     <%= Html.CssLink(ThemeUtility.GetCssThemeUrl(Page, "system.css")) %>
     <%= Html.CssLink(ThemeUtility.GetCssThemeUrl(Page, "ToolButton.css")) %>
     <%= Html.CssLink(Paths.ToClientResource("CMS", "ClientResources/Epi/Base/CMS.css")) %>
+    <asp:ContentPlaceHolder ID="HeaderStyles" runat="server"/>
 </head>
 <body class="claro epi-visitorgroup-admin-ui">
 <asp:ContentPlaceHolder ID="FullRegion" runat="server">

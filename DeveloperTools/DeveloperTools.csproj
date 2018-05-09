@@ -218,7 +218,12 @@
     <Compile Include="Controllers\TimeMetersController.cs" />
     <Compile Include="Controllers\ViewEngineLocationsController.cs" />
     <Compile Include="Core\DeveloperMenuProvider.cs" />
+    <Compile Include="Core\EnumerableExtensions.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
+    <Compile Include="Models\ExtractedModuleInfo.cs" />
+    <Compile Include="Models\ModuleDependency.cs" />
+    <Compile Include="Models\ModuleDependencyViewModel.cs" />
+    <Compile Include="Models\ModuleInfo.cs" />
     <Compile Include="Models\RouteModel.cs" />
     <Compile Include="Models\RemoteEventModel.cs" />
     <Compile Include="Models\MemoryDumpModel.cs" />
@@ -231,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Compile Include="Controllers\ModuleDependenciesController.cs" />
     <None Include="EPiServer.DeveloperTools.zip" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
@@ -255,6 +261,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.aspx" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
   </ItemGroup>
   <ItemGroup />
@@ -280,15 +287,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>-->
-  <Target Name="AfterBuild" DependsOnTargets="CreateAddOnPackage">
-  </Target>
-  <Target Name="CreateAddOnPackage">
-    <Exec Command="..\.nuget\nuget.exe pack DeveloperTools.csproj -Properties Configuration=Release -OutputDirectory ..\.nuget" />
-  </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
