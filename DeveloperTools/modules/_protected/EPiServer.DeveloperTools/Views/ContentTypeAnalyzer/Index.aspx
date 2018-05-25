@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<IEnumerable<ContentTypeModel>>" MasterPageFile="../Shared/DeveloperTools.Master" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<DeveloperTools.Models.ContentTypeAnalyzerModel>" MasterPageFile="../Shared/DeveloperTools.Master" %>
  <%@ Import Namespace="EPiServer.DataAbstraction.RuntimeModel" %>
 
 
@@ -22,24 +22,14 @@
         </tr>
     </thead>
     <tbody>
-<% foreach (var m in Model){%>
+<% foreach (var m in Model.ContentTypes){%>
     <tr>
-        <td>Content Type Model</td>
+        <td><%:m.Type%></td>
         <td><%:m.DisplayName%></td>
         <td><%:m.Name%></td>
-        <td <%: (m.State == EPiServer.DataAbstraction.RuntimeModel.SynchronizationStatus.Conflict ? "bgcolor=red":"")%>><%:m.State%></td>
+        <td <%:m.HasConflict ? "bgcolor=red":""%>><%:m.State%></td>
         <td><%:m.Description%></td>
     </tr>
-
-    <% foreach (var pd in m.PropertyDefinitionModels){%>
-     <tr>
-        <td>Property Type Model</td>
-        <td><%:pd.DisplayName%></td>
-        <td><%:m.Name%>-<%:pd.Name%></td>
-        <td <%: (pd.State == EPiServer.DataAbstraction.RuntimeModel.SynchronizationStatus.Conflict ? "bgcolor=red":"")%>><%:pd.State%></td>
-        <td><%:pd.Description%></td>
-    </tr>
-    <%}%>
   <%}%>
   </tbody>
 </table>

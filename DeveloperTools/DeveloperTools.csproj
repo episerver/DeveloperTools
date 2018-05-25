@@ -220,6 +220,7 @@
     <Compile Include="Core\DeveloperMenuProvider.cs" />
     <Compile Include="Core\EnumerableExtensions.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
+    <Compile Include="Models\ContentTypeAnalyzerModel.cs" />
     <Compile Include="Models\ExtractedModuleInfo.cs" />
     <Compile Include="Models\ModuleDependency.cs" />
     <Compile Include="Models\ModuleDependencyViewModel.cs" />
@@ -238,7 +239,9 @@
     <None Include="app.config" />
     <Compile Include="Controllers\ModuleDependenciesController.cs" />
     <None Include="EPiServer.DeveloperTools.zip" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
