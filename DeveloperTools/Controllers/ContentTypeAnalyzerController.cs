@@ -166,6 +166,7 @@ namespace DeveloperTools.Controllers
 
         private static string AclToString(AccessControlList acl)
         {
+            if (acl == null) return string.Empty;
             var sb = new StringBuilder();
             foreach (var entry in acl.Entries)
             {
