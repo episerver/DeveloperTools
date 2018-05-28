@@ -30,7 +30,9 @@ namespace DeveloperTools.Models
 
         public class ConflictModel
         {
-
+            public string Name { get; set; }
+            public string ContentTypeModelValue { get; set; }
+            public string ContentTypeValue { get; set; }
         }
     }
 }
