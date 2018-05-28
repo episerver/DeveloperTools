@@ -17,6 +17,7 @@
             <th align="left">DisplayName</th>
             <th align="left">Name</th>
             <th align="left">SynchronizationStatus</th>
+            <th align="left">Conflicts</th>
             <th align="left">Description</th>
 
         </tr>
@@ -28,6 +29,15 @@
         <td><%:m.DisplayName%></td>
         <td><%:m.Name%></td>
         <td <%:m.HasConflict ? "bgcolor=red":""%>><%:m.State%></td>
+        <td>
+            <% if(m.HasConflict){%>
+            <ul>
+            <% foreach (var c in m.Conflicts){%>
+                <li><%:c.Name %> - Code = "<%:c.ContentTypeModelValue %>" vs DB = "<%:c.ContentTypeValue %>"</li>
+            <%} %>
+            </ul>
+            <%} %>
+        </td>
         <td><%:m.Description%></td>
     </tr>
   <%}%>
