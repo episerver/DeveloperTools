@@ -1,17 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using DeveloperTools.Models;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAbstraction.RuntimeModel;
-using EPiServer.ServiceLocation;
 
 namespace DeveloperTools.Controllers
 {
     public class ContentTypeAnalyzerController : DeveloperToolsController
     {
+        private readonly ContentTypeModelRepository _contentTypeModelRepository;
+
+        public ContentTypeAnalyzerController(ContentTypeModelRepository contentTypeModelRepository)
+        {
+            _contentTypeModelRepository = contentTypeModelRepository ?? throw new ArgumentNullException(nameof(contentTypeModelRepository));
+        }
+
         public ActionResult Index()
         {
-            var contentTypeModels = ServiceLocator.Current.GetInstance<ContentTypeModelRepository>().List();
+            var contentTypeModels = _contentTypeModelRepository.List();
             var model = new ContentTypeAnalyzerModel
             {
                 ContentTypes = CreateContentTypeModels(contentTypeModels)
