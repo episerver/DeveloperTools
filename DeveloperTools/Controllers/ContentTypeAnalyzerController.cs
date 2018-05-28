@@ -172,7 +172,7 @@ namespace DeveloperTools.Controllers
             {
                 sb.Append($"{entry.Name}, {entry.Access}, {entry.EntityType}; ");
             }
-            return sb.ToString().TrimEnd();
+            return sb.ToString().TrimEnd().TrimEnd(';');
         }
 
         private ContentTypeAnalyzerModel.ContentTypeModel CreateContentTypeModel(PropertyDefinitionModel propertyDefinitionModel, ContentTypeModel contentTypeModel)
