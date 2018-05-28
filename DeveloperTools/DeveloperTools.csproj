@@ -10,7 +10,7 @@
     <ProjectGuid>{CC833335-20F0-4559-8160-EE6BC0EF9112}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EPiServer.DeveloperTools</RootNamespace>
+    <RootNamespace>DeveloperTools</RootNamespace>
     <AssemblyName>EPiServer.DeveloperTools</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>

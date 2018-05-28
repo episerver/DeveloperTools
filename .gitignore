@@ -63,3 +63,7 @@ packages/
 
 #Test files
 *.testsettings
+
+#Visual Studio cache
+.vs
+*/.vs/
