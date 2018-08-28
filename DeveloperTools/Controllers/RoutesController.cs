@@ -194,7 +194,7 @@ namespace DeveloperTools.Controllers
                 rm.Url = GetUrl(rr);
             }
 
-            rm.RouteHandler = rr.RouteHandler.GetType().ToString();
+            rm.RouteHandler = rr.RouteHandler?.GetType().ToString();
             rm.Defaults = GetRouteValueDictionary(rr.Defaults);
             rm.Constraints = GetRouteValueDictionary(rr.Constraints);
             rm.DataTokens = GetRouteValueDictionary(rr.DataTokens);
