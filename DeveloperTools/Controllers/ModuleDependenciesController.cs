@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using DeveloperTools.Core;
 using DeveloperTools.Models;
-using EPiServer.DeveloperTools.Core;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
 

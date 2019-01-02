@@ -1,10 +1,8 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<RemoteEventsModel>" MasterPageFile="../Shared/DeveloperTools.Master" %>
-
 <%@ Assembly Name="EPiServer.DeveloperTools" %>
 <%@ Import Namespace="DeveloperTools.Models" %>
 
 <asp:Content ID="Content" runat="server" ContentPlaceHolderID="MainRegion">
-
     <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
     <script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js" type="text/javascript"></script>

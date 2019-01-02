@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DeveloperTools.Controllers;
+using DeveloperTools.Core;
 using DeveloperTools.Models;
-using EPiServer.DeveloperTools.Core;
 using Xunit;
 
 namespace DeveloperTools.Tests
