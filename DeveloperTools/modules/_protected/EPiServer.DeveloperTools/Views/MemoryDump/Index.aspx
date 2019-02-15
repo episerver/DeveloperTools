@@ -10,7 +10,7 @@
     <script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
 
     <h1>Memory Dump</h1>
-    <p>A tool that you can dumps memory with different flag that can be analyized with windbg tool.</p>
+    <p>A tool that you can dump memory with different flag that can be analyzed with Windbg or similar tool.</p>
          <br />
     <div >
     <% using (Html.BeginForm("Index", "MemoryDump", new {  }, FormMethod.Post))
@@ -22,7 +22,7 @@
     <p>
     <% if(!string.IsNullOrEmpty(Model.Name))
        {
-           Response.Write($"A File with name{Model.Name} has been created under path {Model.FilePath}");
+           Response.Write(string.Format("A File with name {0} has been created under path {1}", Model.Name, Model.FilePath));
        }%>
     </p>
     </div>

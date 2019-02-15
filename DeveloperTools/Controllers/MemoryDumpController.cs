@@ -76,12 +76,11 @@ namespace DeveloperTools.Controllers
             using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 var processId = (uint) Process.GetCurrentProcess().Id;
-                var processHandle = NativeMethods.GetCurrentProcess();
-                var processHandle2 = Process.GetCurrentProcess().Handle;
+                var processHandle = Process.GetCurrentProcess().Handle;
                 // Feel free to specify different dump types
                 //uint dumpType = (uint) (DumpType.MiniDumpNormal | DumpType.MiniDumpWithDataSegs);
                 var dumpType = (uint) typeOfdumpType;
-                NativeMethods.MiniDumpWriteDump(processHandle2,
+                NativeMethods.MiniDumpWriteDump(processHandle,
                                                 processId,
                                                 fs.SafeFileHandle.DangerousGetHandle(),
                                                 dumpType,
