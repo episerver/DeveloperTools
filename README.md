@@ -17,3 +17,7 @@ Current features:
 * View startup time for initialization modules
 * View remote event statistics, provider and servers
 * View all registered view engines
+
+## How Risky it is to install on production?
+
+You can read more in depth analysis of toolset and it's side-effects [here](https://blog.tech-fellow.net/2019/02/14/how-risky-are-episerver-developertools-on-production-environment/).
