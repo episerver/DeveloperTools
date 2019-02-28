@@ -38,20 +38,20 @@ namespace DeveloperTools.Controllers
             foreach (var id in selectedObjects)
             {
                 var ct = contentTypeRepository.Load(id);
-                var writeableContentType = ct.CreateWritableClone() as ContentType;
-                writeableContentType.ResetContentType();
-                foreach (var propDef in writeableContentType.PropertyDefinitions)
+                var writableContentType = ct.CreateWritableClone() as ContentType;
+                writableContentType.ResetContentType();
+                foreach (var propDef in writableContentType.PropertyDefinitions)
                 {
-                    RevertToDeafultPropertyDefinition(propDef);
+                    RevertToDefaultPropertyDefinition(propDef);
                 }
-                contentTypeRepository.Save(writeableContentType);
-                SaveAvailablePageTypes(writeableContentType as PageType);
+                contentTypeRepository.Save(writableContentType);
+                SaveAvailablePageTypes(writableContentType as PageType);
             }
 
             return View("Index", ContentTypes);
         }
 
-        private void RevertToDeafultPropertyDefinition(PropertyDefinition propeDef)
+        private void RevertToDefaultPropertyDefinition(PropertyDefinition propeDef)
         {
             propeDef.ResetPropertyDefinition();
             _propertyDefinitionRepository.Save(propeDef);
