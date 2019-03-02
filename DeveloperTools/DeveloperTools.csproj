@@ -220,6 +220,7 @@
     <Compile Include="Controllers\ViewEngineLocationsController.cs" />
     <Compile Include="Core\DeveloperMenuProvider.cs" />
     <Compile Include="Core\EnumerableExtensions.cs" />
+    <Compile Include="Core\HttpParamActionAttribute.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
     <Compile Include="Models\ContentTypeAnalyzerModel.cs" />
     <Compile Include="Models\ExtractedModuleInfo.cs" />
@@ -234,7 +235,6 @@
     <Compile Include="Models\LoggerSettings.cs" />
     <Compile Include="Models\LogSettingsAndEvents.cs" />
     <Compile Include="Models\ViewEngineLocationsModel.cs" />
-    <Compile Include="Params\HttpParamActionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\RollingMemoryAppender.cs" />
   </ItemGroup>
