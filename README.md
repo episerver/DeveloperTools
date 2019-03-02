@@ -17,6 +17,7 @@ Current features:
 * View startup time for initialization modules
 * View remote event statistics, provider and servers
 * View all registered view engines
+* View local object cache content (with option to remove some items)
 
 ## How Risky it is to install on production?
 
