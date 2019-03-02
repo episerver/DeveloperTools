@@ -1,5 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Web.Mvc;
 using DeveloperTools.Core;
 using DeveloperTools.Models;
@@ -13,11 +17,11 @@ namespace DeveloperTools.Controllers
     [GuiPlugIn(Area = PlugInArea.AdminMenu, Url = "~/localobjectcache", DisplayName = "Clear Local Object Cache")]
     public class LocalObjectCacheController : DeveloperToolsController
     {
-        private readonly ISynchronizedObjectInstanceCache cache;
+        private readonly ISynchronizedObjectInstanceCache _cache;
 
         public LocalObjectCacheController(ISynchronizedObjectInstanceCache cache)
         {
-            this.cache = cache;
+            _cache = cache;
         }
 
         public ActionResult Index(string FilteredBy)
@@ -29,13 +33,13 @@ namespace DeveloperTools.Controllers
             switch (FilteredBy)
             {
                 case "pages":
-                    model.CachedItems = cachedEntries.Where(item => item.Value is PageData);
+                    model.CachedItems = ConvertToListItem(cachedEntries.Where(item => item.Value is PageData));
                     break;
                 case "content":
-                    model.CachedItems = cachedEntries.Where(item => item.Value is IContent);
+                    model.CachedItems = ConvertToListItem(cachedEntries.Where(item => item.Value is IContent));
                     break;
                 default:
-                    model.CachedItems = cachedEntries;
+                    model.CachedItems = ConvertToListItem(cachedEntries);
                     break;
             }
 
@@ -50,14 +54,22 @@ namespace DeveloperTools.Controllers
             return View(model);
         }
 
+        private IEnumerable<LocalObjectCacheItem> ConvertToListItem(IEnumerable<DictionaryEntry> cachedEntries) =>
+            cachedEntries.Select(e => new LocalObjectCacheItem
+                                      {
+                                          Key = e.Key.ToString(),
+                                          Value = e.Value,
+                                          Size = GetObjectSize(e.Value)
+                                      }).ToList();
+
         [HttpParamAction]
-        public ActionResult RemoveLocalCache(string[] cacheKeys, LocalObjectCache model)
+        public ActionResult RemoveLocalCache(string[] cacheKeys)
         {
             if(cacheKeys != null)
             {
                 foreach (string key in cacheKeys)
                 {
-                    cache.RemoveLocal(key);
+                    _cache.RemoveLocal(key);
                 }
             }
 
@@ -71,12 +83,33 @@ namespace DeveloperTools.Controllers
             {
                 foreach (string key in cacheKeys)
                 {
-                    cache.RemoveLocal(key);
-                    cache.RemoveRemote(key);
+                    _cache.RemoveLocal(key);
+                    _cache.RemoveRemote(key);
                 }
             }
 
             return RedirectToAction("Index");
+        }
+
+        private static long GetObjectSize(object obj)
+        {
+            if(obj == null)
+                return 0;
+
+            try
+            {
+                using (Stream s = new MemoryStream())
+                {
+                    var formatter = new BinaryFormatter();
+                    formatter.Serialize(s, obj);
+
+                    return s.Length;
+                }
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
     }
 }

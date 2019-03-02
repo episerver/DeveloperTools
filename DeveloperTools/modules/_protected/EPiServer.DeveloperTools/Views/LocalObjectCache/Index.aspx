@@ -43,7 +43,10 @@
 
             <% using (Html.BeginForm("Action", "LocalObjectCache", FormMethod.Post))
                { %>
-            <div class="epi-buttonDefault">
+                <div class="epi-contentArea">
+                    <p class="EP-systemInfo">Total count of cached items: <%= Model.CachedItems.Count() %></p>
+                </div>
+                <div class="epi-buttonDefault">
                     <span class="epi-cmsButton">
                         <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" type="submit" name="RemoveLocalCache" id="RemoveLocalCache" value="Remove Local Cache Items" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
                     </span>
@@ -58,16 +61,18 @@
                             <th><input type="checkbox" id="clearAll" name="clearAll" onClick="toggle(this)" value="true" /></th>
                             <th class="table-column-width">Key</th>
                             <th class="table-column-width">Type</th>
+                            <th>Size</th>
                             <%--<th class="table-column-width">@(string.IsNullOrWhiteSpace(Model.FilteredBy) ? "Value" : "Name (ID) Published")</th>--%>
                         </tr>
                     </thead>
                     <tbody>
-                        <% foreach (DictionaryEntry item in Model.CachedItems)
+                        <% foreach (var item in Model.CachedItems)
                         { %>
                             <tr>
                                 <td class="center"><input type="checkbox" id="<%= item.Key %>" name="cacheKeys" value="<%= item.Key %>" /></td>
                                 <td><%= item.Key %></td>
                                 <td><%= item.Value.GetType() %></td>
+                                <td><%= item.Size %></td>
                                 <%--<td>
                                     <% if (item.Value is IContent)
                                         {
@@ -82,7 +87,7 @@
                                         } %>
                                 </td>--%>
                             </tr>
-                        <% }   %>
+                        <% } %>
                     </tbody>
                 </table>
 
