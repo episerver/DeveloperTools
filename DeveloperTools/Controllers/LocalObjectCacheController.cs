@@ -66,7 +66,7 @@ namespace DeveloperTools.Controllers
         {
             var model = new LocalObjectCache();
 
-            var cachedEntries = HttpContext.Cache.Cast<DictionaryEntry>();
+            var cachedEntries = HttpContext.Cache.Cast<DictionaryEntry>().Take(10_000);
 
             switch (FilteredBy)
             {
