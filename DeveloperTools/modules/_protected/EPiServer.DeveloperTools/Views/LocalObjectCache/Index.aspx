@@ -53,6 +53,9 @@
                     <span class="epi-cmsButton">
                         <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" type="submit" name="removeLocalRemoteCache" id="removeLocalRemoteCache" value="Remove Local and Remote Cache Items" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
                     </span>
+                    <span class="epi-cmsButton">
+                        <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-ViewMode" type="submit" name="ViewObjectSize" id="ViewObjectSize" value="View Object Size" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                    </span>
                 </div>
 
                 <table class="table table-condensed table-bordered table-condensed stripe">
@@ -62,7 +65,6 @@
                             <th class="table-column-width">Key</th>
                             <th class="table-column-width">Type</th>
                             <th>Size</th>
-                            <%--<th class="table-column-width">@(string.IsNullOrWhiteSpace(Model.FilteredBy) ? "Value" : "Name (ID) Published")</th>--%>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,19 +75,6 @@
                                 <td><%= item.Key %></td>
                                 <td><%= item.Value.GetType() %></td>
                                 <td><%= item.Size %></td>
-                                <%--<td>
-                                    <% if (item.Value is IContent)
-                                        {
-                                            (item.Value as IContent).Name;
-                                         %>
-                                        <span class="badge badge-warning"><%((item.Value as IContent).ContentLink.ID); %></span>
-                                    <%
-                                        }
-                                        if (item.Value is PageData)
-                                        {
-                                            ((item.Value as PageData).StartPublish);
-                                        } %>
-                                </td>--%>
                             </tr>
                         <% } %>
                     </tbody>
@@ -98,7 +87,12 @@
                     <span class="epi-cmsButton">
                         <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" type="submit" name="removeLocalRemoteCache" id="removeLocalRemoteCacheBottom" value="Remove Local and Remote Cache Items" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
                     </span>
+                    <span class="epi-cmsButton">
+                        <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-ViewMode" type="submit" name="ViewObjectSize" id="ViewObjectSize" value="View Object Size" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                    </span>
                 </div>
+
+                <input type="hidden" id="os" name="os" value="<%= Model.ViewObjectSize %>"/>
             <% } %>
         </div>
     </div>

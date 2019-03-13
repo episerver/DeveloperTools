@@ -10,6 +10,8 @@ namespace DeveloperTools.Models
         public string FilteredBy { get; set; }
 
         public IEnumerable<SelectListItem> Choices { get; set; }
+
+        public bool ViewObjectSize { get; set; }
     }
 
     public class LocalObjectCacheItem
