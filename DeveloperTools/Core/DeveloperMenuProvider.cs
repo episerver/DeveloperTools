@@ -49,6 +49,9 @@ namespace DeveloperTools.Core
         const string ModuleDependenciesTitle = "Module Dependencies";
         const string ModuleDependenciesPath = "global/DeveloperTools/ModuleDependencies";
 
+        const string LocalObjectCacheTitle = "Local Object Cache";
+        const string LocalObjectCachePath = "global/DeveloperTools/LocalObjectCache";
+
         public IEnumerable<MenuItem> GetMenuItems()
         {
             // Create the top menu section
@@ -69,6 +72,7 @@ namespace DeveloperTools.Core
             var routes = CreateUrlMenuItem(RoutesTitle, RoutesPath, Paths.ToResource(ModuleName, "Routes"));
             var viewLocations = CreateUrlMenuItem(ViewLocationsTitle, ViewLocationsPath, Paths.ToResource(ModuleName, "ViewEngineLocations"));
             var moduleDependencies = CreateUrlMenuItem(ModuleDependenciesTitle, ModuleDependenciesPath, Paths.ToResource(ModuleName, "ModuleDependencies"));
+            var localobjectcache = CreateUrlMenuItem(LocalObjectCacheTitle, LocalObjectCachePath, Paths.ToResource(ModuleName, "LocalObjectCache"));
 
             return new MenuItem[]
             {
@@ -84,7 +88,8 @@ namespace DeveloperTools.Core
                 remoteEventViewer,
                 routes,
                 viewLocations,
-                moduleDependencies
+                moduleDependencies,
+                localobjectcache
             };
         }
 

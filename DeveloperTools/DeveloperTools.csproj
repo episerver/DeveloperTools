@@ -206,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ContentTypeAnalyzerController.cs" />
+    <Compile Include="Controllers\LocalObjectCacheController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\RemoteEventController.cs" />
     <Compile Include="Controllers\MemoryDumpController.cs" />
@@ -219,9 +220,11 @@
     <Compile Include="Controllers\ViewEngineLocationsController.cs" />
     <Compile Include="Core\DeveloperMenuProvider.cs" />
     <Compile Include="Core\EnumerableExtensions.cs" />
+    <Compile Include="Core\HttpParamActionAttribute.cs" />
     <Compile Include="Models\AssembliesModel.cs" />
     <Compile Include="Models\ContentTypeAnalyzerModel.cs" />
     <Compile Include="Models\ExtractedModuleInfo.cs" />
+    <Compile Include="Models\LocalObjectCache.cs" />
     <Compile Include="Models\ModuleDependency.cs" />
     <Compile Include="Models\ModuleDependencyViewModel.cs" />
     <Compile Include="Models\ModuleInfo.cs" />
@@ -242,6 +245,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
