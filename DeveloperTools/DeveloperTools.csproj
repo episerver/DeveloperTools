@@ -246,6 +246,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.cshtml" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
@@ -254,9 +255,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
