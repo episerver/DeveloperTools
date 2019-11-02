@@ -1,0 +1,69 @@
+﻿@using DeveloperTools.Models
+@using EPiServer.Shell
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.ContentTypeAnalyzerModel>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Content Type Analyzer</h1>
+    <p>
+        Show content type Synchronization status during initialization (if the content type be changed from admin you need to start the site to see changes).
+    </p>
+</div>
+<div class="epi-formArea">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+        <thead>
+        <tr>
+            <th align="left">Type</th>
+            <th align="left">DisplayName</th>
+            <th align="left">Name</th>
+            <th align="left">SynchronizationStatus</th>
+            <th align="left">Conflicts</th>
+            <th align="left">Description</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var m in Model.ContentTypes)
+        {
+            <tr>
+                <td>@m.Type</td>
+                <td>@m.DisplayName</td>
+                <td>@m.Name</td>
+                <td @(m.HasConflict ? "bgcolor=red" : "")>@m.State</td>
+                <td>
+                    @if (m.HasConflict)
+                    {
+                        <ul>
+                            @foreach (var c in m.Conflicts)
+                            {
+                                <li>@c.Name - Code = "@c.ContentTypeModelValue" vs DB = "@c.ContentTypeValue"</li>
+                            }
+                        </ul>
+                    }
+                </td>
+                <td>@m.Description</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#theList').dataTable(
+                {
+                    "aaSorting": [[1, "desc"]],
+                    "bPaginate": false,
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bSort": true,
+                    "bInfo": false,
+                    "bAutoWidth": true
+                });
+        });
+    </script>
+}
