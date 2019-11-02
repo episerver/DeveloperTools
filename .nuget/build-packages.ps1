@@ -9,3 +9,4 @@ If(Test-path $destination) {Remove-item $destination}
 [io.compression.zipfile]::CreateFromDirectory($Source, $destination)
 
 .\nuget.exe pack ..\DeveloperTools\DeveloperTools.csproj -Properties Configuration=Release
+
