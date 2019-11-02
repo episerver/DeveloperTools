@@ -6,10 +6,6 @@
     Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
 }
 
-@section Styles {
-    <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" />
-}
-
 <div class="epi-contentArea">
     <h1 class="EP-prefix">IoC Container</h1>
     <p>
@@ -40,18 +36,18 @@
     </table>
 </div>
 
-<b>Retrieval errors:</b>
-<ul>
-    @foreach (var message in Model.LoadingErrors)
-    {
-        <li>@message<br/>________________________________________________________________</li>
-    }
-</ul>
+@if (Model.LoadingErrors.Any())
+{
+    <b>Retrieval errors:</b>
+    <ul>
+        @foreach (var message in Model.LoadingErrors)
+        {
+            <li>@message<br/>________________________________________________________________</li>
+        }
+    </ul>
+}
 
 @section Scripts {
-    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
-
     <script>
         $(document).ready(function () {
             $('#theList').dataTable(
