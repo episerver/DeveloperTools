@@ -250,9 +250,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
@@ -261,6 +259,7 @@
     </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
@@ -269,6 +268,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.cshtml" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
   </ItemGroup>
   <ItemGroup />
@@ -279,7 +279,9 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DeveloperTools.Master" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DeveloperTools.Master">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <None Include="Web.config" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />
     <Content Include="web.config.transform" />
