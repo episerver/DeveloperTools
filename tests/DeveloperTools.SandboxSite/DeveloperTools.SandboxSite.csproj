@@ -339,7 +339,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\DeveloperTools\DeveloperTools.csproj">
+      <Project>{cc833335-20f0-4559-8160-ee6bc0ef9112}</Project>
+      <Name>DeveloperTools</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\EPiServerDB_0d3ce289.mdf" />
     <Content Include="App_Data\EPiServerDB_0d3ce289_log.ldf">
