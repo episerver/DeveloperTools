@@ -3,6 +3,7 @@
 <%@ Import Namespace="EPiServer.Web.PageExtensions" %>
 <%@ Import Namespace="EPiServer.Shell" %>
 <%@ Import Namespace="EPiServer.Framework.Web.Resources" %>
+<%@ Import Namespace="EPiServer.Shell.Navigation.Internal" %>
 
 <!DOCTYPE html>
 
@@ -24,8 +25,14 @@
 </head>
 <body class="claro epi-visitorgroup-admin-ui">
 <asp:ContentPlaceHolder ID="FullRegion" runat="server">
-    <%= Html.GlobalMenu() %>
-    <div class="epi-padding"><asp:ContentPlaceHolder ID="MainRegion" runat="server"/></div>
+    <%= Html.Raw(Html.CreatePlatformNavigationMenu()) %>
+    <div <%= Html.Raw(Html.ApplyFullscreenPlatformNavigation())%>>
+        <div class="epi-padding">
+            <div class="epi-contentContainer epi-fullWidth">
+                <asp:ContentPlaceHolder ID="MainRegion" runat="server"/>
+            </div>
+        </div>
+    </div>
 </asp:ContentPlaceHolder>
 </body>
 </html>

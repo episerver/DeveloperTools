@@ -9,12 +9,15 @@
     <script type="text/javascript" language="javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
 
-    <h1>IoC Container</h1>
-    <p>
-        Dumps all types registered in the StructureMap container used by EPiServer.
-    </p>
+    <div class="epi-contentArea">
+        <h1 class="EP-prefix">IoC Container</h1>
+        <p>
+            Dumps all types registered in the StructureMap container used by EPiServer.
+        </p>
+    </div>
 
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+    <div class="epi-formArea">
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
         <thead>
             <tr>
                 <th align="left">PluginType</th>
@@ -36,6 +39,7 @@
      %>
     </tbody>
     </table>
+    </div>
 
     <b>Retrieval errors:</b>
     <ul>
