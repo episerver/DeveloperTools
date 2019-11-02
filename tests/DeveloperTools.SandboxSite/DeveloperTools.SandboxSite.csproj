@@ -88,6 +88,9 @@
     <Reference Include="EPiServer.Data.Cache, Version=11.12.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EPiServer.Framework.11.12.0\lib\net461\EPiServer.Data.Cache.dll</HintPath>
     </Reference>
+    <Reference Include="EPiServer.DeveloperTools, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EPiServer.DeveloperTools.3.5.0\lib\net472\EPiServer.DeveloperTools.dll</HintPath>
+    </Reference>
     <Reference Include="EPiServer.Enterprise, Version=11.12.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EPiServer.CMS.Core.11.12.0\lib\net461\EPiServer.Enterprise.dll</HintPath>
     </Reference>
@@ -340,12 +343,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DeveloperTools\DeveloperTools.csproj">
-      <Project>{cc833335-20f0-4559-8160-ee6bc0ef9112}</Project>
-      <Name>DeveloperTools</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_Data\EPiServerDB_0d3ce289.mdf" />
     <Content Include="App_Data\EPiServerDB_0d3ce289_log.ldf">
       <DependentUpon>EPiServerDB_0d3ce289.mdf</DependentUpon>
@@ -414,6 +411,9 @@
     <Content Include="modules\_protected\CMS\web.config" />
     <Content Include="modules\_protected\CMS\CMS.zip" />
     <Content Include="module.config" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\EPiServer.DeveloperTools.zip" />
     <None Include="packages.config" />
     <Content Include="Views\_viewstart.cshtml" />
     <Content Include="Views\VideoFile\Index.cshtml" />
