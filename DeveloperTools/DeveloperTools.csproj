@@ -265,9 +265,8 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx">
