@@ -58,7 +58,7 @@ namespace DeveloperTools.Controllers
 
                 if(rd != null)
                 {
-                    r.DataTokens = GetValues("DataToken:", rd.DataTokens);
+                    r.DataTokens = GetValues("DataTokens:", rd.DataTokens);
                     r.Values = GetValues("Values:", rd.Values);
                     r.IsSelected = true;
                 }
@@ -68,13 +68,7 @@ namespace DeveloperTools.Controllers
 
         private string GetValues(string title, RouteValueDictionary routeValueDictionary)
         {
-            var s = new StringBuilder();
-            s.Append(title);
-            foreach (var rv in routeValueDictionary)
-            {
-                s.Append($"{rv.Key}:{rv.Value?.ToString() ?? "N/A"}  ,");
-            }
-            return s.ToString();
+            return $"{title}{string.Join(", ", routeValueDictionary.Select(kv => $"{kv.Key}:{kv.Value?.ToString() ?? "N/A"}"))}";
         }
 
         private IEnumerable<RouteModel> GetRouteModels()
@@ -208,7 +202,7 @@ namespace DeveloperTools.Controllers
             {
                 foreach (var kv in routeValueDictionary)
                 {
-                    sb.Append($"{kv.Key}:{kv.Value}");
+                    sb.Append($"{kv.Key}:{kv.Value}/");
                 }
             }
             return sb.ToString();
