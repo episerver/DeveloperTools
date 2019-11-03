@@ -1,0 +1,72 @@
+﻿@using System.Collections
+@using DeveloperTools.Models
+@using EPiServer.Shell
+@inherits System.Web.Mvc.WebViewPage<IEnumerable<EPiServer.DataAbstraction.ContentType>>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Revert Content Types to Default</h1>
+    <p>
+        Resets overridden values stored in the database for a content type and all its properties.
+    </p>
+</div>
+<div class="epi-formArea">
+    @using (Html.BeginForm("Index", "RevertToDefault", new { }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+            <thead>
+            <tr>
+                <th align="left"><span ondblclick="selectAll()">Selected</span></th>
+                <th align="left">DisplayName</th>
+                <th align="left">FullName</th>
+                <th align="left">ModelType</th>
+                <th align="left">ID</th>
+                <th align="left">Identity</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" name="selectedObjects" value="@m.GUID"/></td>
+                    <td>@m.DisplayName</td>
+                    <td>@m.FullName</td>
+                    <td>@m.ModelType</td>
+                    <td>@m.ID</td>
+                    <td>@m.GUID</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <br/>
+        <span class ="epi-cmsButton">
+            <input type="submit" value="Revert To Default" class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" />
+        </span>
+    }
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#theList').dataTable(
+            {
+                "aaSorting": [[1, "desc"]],
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": true
+            });
+    });
+
+    function selectAll() {
+        $('input:checkbox').attr('checked', 'checked');
+    }
+</script>
+}

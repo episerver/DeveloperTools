@@ -13,6 +13,6 @@
     <tags>Episerver Developer Tools DeveloperTools IoC Routes ViewLocations MemoryDump LogViewer ContentTypeAnalyzer ModuleDependencies EPiServerModulePackage</tags>
   </metadata>
   <files>
-    <file src="EPiServer.DeveloperTools.zip" target="content\modules\_protected\EPiServer.DeveloperTools" />
+    <file src="readme.txt" target="readme.txt" />
   </files>
 </package>

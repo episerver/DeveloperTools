@@ -238,20 +238,19 @@
   <ItemGroup>
     <Compile Include="Controllers\ModuleDependenciesController.cs" />
     <None Include="app.config" />
-    <None Include="EPiServer.DeveloperTools.zip" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.cshtml" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
   </ItemGroup>
   <ItemGroup />
@@ -262,9 +261,10 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.cshtml" />
     <None Include="Web.config" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />
+    <Content Include="readme.txt" />
     <Content Include="web.config.transform" />
   </ItemGroup>
   <PropertyGroup>

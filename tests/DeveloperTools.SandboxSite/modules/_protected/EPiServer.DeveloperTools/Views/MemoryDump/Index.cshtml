@@ -1,0 +1,33 @@
+﻿@using System.Collections
+@using DeveloperTools.Models
+@using EPiServer.Shell
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.MemoryDumpModel>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Memory Dump</h1>
+    <p>
+        A tool that you can dump memory with different flag that can be analyzed with Windbg or similar tool.
+    </p>
+</div>
+
+<div class="epi-contentArea epi-formArea">
+    @using (Html.BeginForm("Index", "MemoryDump", new {  }, FormMethod.Post))
+    {
+        <span>@Html.Label("File Path"):</span> <span>@Html.TextBox("filepath", null, new { style="width:30%" })</span>
+        <span>@Html.Label("DumpType"):</span> <span>@Html.DropDownListFor(m => m.SelectedDumpValue, MemoryDumpModel.GetDumpTypes())</span>
+
+        <span class="epi-cmsButton">
+            <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Search" type="submit" name="DumpMemory" id="DumpMemory" value="DumpMemory" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)"/>
+        </span>
+    }
+    <p>
+    @if(!string.IsNullOrEmpty(Model.Name))
+    {
+        <div>@string.Format("A File with name {0} has been created under path {1}", Model.Name, Model.FilePath)</div>
+    }
+    </p>
+</div>
