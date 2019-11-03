@@ -269,9 +269,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.cshtml" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
@@ -287,6 +285,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DeveloperTools.Master">
       <SubType>ASPXCodeBehind</SubType>
     </None>
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.cshtml" />
     <None Include="Web.config" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />
     <Content Include="web.config.transform" />
