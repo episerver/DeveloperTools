@@ -269,6 +269,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
