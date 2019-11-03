@@ -248,6 +248,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.cshtml" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
