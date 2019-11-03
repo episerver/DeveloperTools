@@ -253,6 +253,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.cshtml" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.aspx" />
