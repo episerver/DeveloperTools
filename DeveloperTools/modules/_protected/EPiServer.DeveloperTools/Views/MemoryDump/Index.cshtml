@@ -21,7 +21,7 @@
         <span>@Html.Label("DumpType"):</span> <span>@Html.DropDownListFor(m => m.SelectedDumpValue, MemoryDumpModel.GetDumpTypes())</span>
 
         <span class="epi-cmsButton">
-            <input class="epi-cmsButton-text" type="submit" name="DumpMemory" id="DumpMemory" value="DumpMemory" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)"/>
+            <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Search" type="submit" name="DumpMemory" id="DumpMemory" value="DumpMemory" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)"/>
         </span>
     }
     <p>
