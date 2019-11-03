@@ -1,0 +1,78 @@
+﻿@using DeveloperTools.Models
+@using EPiServer.Shell
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.ViewEngineLocationsModel>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">View Engine Locations</h1>
+    <p>Show a list of all view locations where Mvc would look for templates.</p>
+</div>
+<div class="epi-formArea">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theViewLocations">
+        <thead>
+        <tr>
+            <th align="left">View Location</th>
+            <th align="left">Engine</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var l in Model.ViewLocations)
+        {
+        <tr>
+            <td>@l.Location</td>
+            <td>@l.EngineName</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+    <br/>
+    <h2 class="EP-prefix">Partial View Locations</h2>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="thePartialViewLocations">
+        <thead>
+        <tr>
+            <th align="left">Partial View Location</th>
+            <th align="left">Engine</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var l in Model.PartialViewLocations)
+        {
+        <tr>
+            <td>@l.Location</td>
+            <td>@l.EngineName</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $('#theViewLocations').dataTable(
+            {
+                "aaSorting": [[0, "desc"]],
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": true
+            });
+
+        $('#thePartialViewLocations').dataTable(
+            {
+                "aaSorting": [[0, "desc"]],
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": true
+            });
+    });
+</script>
+}
