@@ -263,6 +263,7 @@
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
+    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx">
       <SubType>ASPXCodeBehind</SubType>
