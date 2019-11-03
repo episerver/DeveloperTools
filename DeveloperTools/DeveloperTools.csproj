@@ -239,35 +239,18 @@
     <Compile Include="Controllers\ModuleDependenciesController.cs" />
     <None Include="app.config" />
     <None Include="EPiServer.DeveloperTools.zip" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.aspx" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.aspx" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.aspx" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.aspx" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.aspx" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.cshtml" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.aspx" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.aspx" />
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.cshtml" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
   </ItemGroup>
@@ -279,9 +262,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DeveloperTools.Master">
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
     <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.cshtml" />
     <None Include="Web.config" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />

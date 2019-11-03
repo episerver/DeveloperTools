@@ -88,9 +88,6 @@
     <Reference Include="EPiServer.Data.Cache, Version=11.12.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EPiServer.Framework.11.12.0\lib\net461\EPiServer.Data.Cache.dll</HintPath>
     </Reference>
-    <Reference Include="EPiServer.DeveloperTools, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EPiServer.DeveloperTools.3.5.0\lib\net472\EPiServer.DeveloperTools.dll</HintPath>
-    </Reference>
     <Reference Include="EPiServer.Enterprise, Version=11.12.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EPiServer.CMS.Core.11.12.0\lib\net461\EPiServer.Enterprise.dll</HintPath>
     </Reference>
@@ -407,9 +404,6 @@
     <Content Include="modules\_protected\EPiServer.Cms.TinyMce\web.config" />
     <Content Include="modules\_protected\EPiServer.Cms.TinyMce\EPiServer.Cms.TinyMce.zip" />
     <Content Include="module.config" />
-    <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
-    <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />
-    <Content Include="modules\_protected\EPiServer.DeveloperTools\EPiServer.DeveloperTools.zip" />
     <Content Include="modules\_protected\Shell\web.config" />
     <Content Include="modules\_protected\Shell\Shell.zip" />
     <Content Include="modules\_protected\CMS\web.config" />
