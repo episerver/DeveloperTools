@@ -1,0 +1,46 @@
+﻿@using EPiServer
+@using EPiServer.Framework.Web.Mvc.Html
+@using EPiServer.Framework.Web.Resources
+@using EPiServer.Shell
+@using EPiServer.Shell.Navigation
+@using EPiServer.Shell.Navigation.Internal
+@using EPiServer.Web.PageExtensions
+@inherits System.Web.Mvc.WebViewPage
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta name="viewport" content="width=device-width"/>
+<title>Episerver.DeveloperTools</title>
+    @if (ViewBag.SkipDojo == null)
+    {
+        <script type="text/javascript" src="@Paths.ToShellClientResource("ClientResources/dojo/dojo.js")"></script>
+    }
+    <link type="text/css" rel="stylesheet" href="@Paths.ToShellClientResource("ClientResources/epi/themes/legacy/ShellCore.css")" />
+    <link type="text/css" rel="stylesheet" href="@Paths.ToShellClientResource("ClientResources/epi/themes/legacy/DojoDashboardCompatibility.css")" />
+    <link type="text/css" rel="stylesheet" href="@Paths.ToResource("CMS", "App_Themes/Default/Styles/system.css")" />
+    <link type="text/css" rel="stylesheet" href="@Paths.ToResource("CMS", "App_Themes/Default/Styles/ToolButton.css")" />
+    <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css" />
+
+    @Html.ScriptResource(UriSupport.ResolveUrlFromUtilBySettings("javascript/episerverscriptmanager.js"))
+    @Html.ScriptResource(UriSupport.ResolveUrlFromUIBySettings("javascript/system.js"))
+    @Html.ScriptResource(UriSupport.ResolveUrlFromUIBySettings("javascript/dialog.js"))
+    @Html.ScriptResource(UriSupport.ResolveUrlFromUIBySettings("javascript/system.aspx"))
+
+    @RenderSection("Styles", false)
+</head>
+<body class="claro epi-visitorgroup-admin-ui">
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+<div @Html.Raw(Html.ApplyFullscreenPlatformNavigation())>
+    <div class="epi-padding">
+        <div class="epi-contentContainer epi-fullWidth">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js" type="text/javascript"></script>
+@RenderSection("Scripts", false)
+</body>
+</html>

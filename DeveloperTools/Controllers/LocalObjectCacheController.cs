@@ -28,38 +28,41 @@ namespace DeveloperTools.Controllers
         }
 
         [HttpParamAction]
+        [HttpPost]
         public ActionResult RemoveLocalCache(string[] cacheKeys, bool os)
         {
             if(cacheKeys != null)
             {
-                foreach (string key in cacheKeys)
+                foreach (var key in cacheKeys)
                 {
                     _cache.RemoveLocal(key);
                 }
             }
 
-            return RedirectToAction("Index", new RouteValueDictionary(new { os }));
+            return RedirectToAction(nameof(Index), new RouteValueDictionary(new { os }));
         }
 
         [HttpParamAction]
+        [HttpPost]
         public ActionResult RemoveLocalRemoteCache(string[] cacheKeys, bool os)
         {
             if(cacheKeys != null)
             {
-                foreach (string key in cacheKeys)
+                foreach (var key in cacheKeys)
                 {
                     _cache.RemoveLocal(key);
                     _cache.RemoveRemote(key);
                 }
             }
 
-            return RedirectToAction("Index", new RouteValueDictionary(new { os }));
+            return RedirectToAction(nameof(Index), new RouteValueDictionary(new { os }));
         }
 
         [HttpParamAction]
+        [HttpPost]
         public ActionResult ViewObjectSize()
         {
-            return RedirectToAction("Index", new RouteValueDictionary(new { os = true }));
+            return RedirectToAction(nameof(Index), new RouteValueDictionary(new { os = true }));
         }
 
         private LocalObjectCache PrepareViewModel(string FilteredBy, bool viewObjectSize)
@@ -90,6 +93,7 @@ namespace DeveloperTools.Controllers
                             };
 
             model.ViewObjectSize = viewObjectSize;
+
             return model;
         }
 

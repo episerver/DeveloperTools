@@ -1,0 +1,90 @@
+﻿@using System.Collections
+@using DeveloperTools.Models
+@using EPiServer.Shell
+@using log4net.Core
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.LogSettingAndEvents>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Log Viewer</h1>
+    <p>
+        A tool that uses an in-memory appender to catch ALL log messages. WARNING! Never use in production, it will seriously harm performance.
+    </p>
+    <p>
+        Start/stop in-memory appender: <strong>@(!Model.IsStarted ? Html.ActionLink("Start", "Start") : Html.ActionLink("Stop", "Stop"))</strong>
+    </p>
+</div>
+
+<hr />
+<div>
+
+@using (Html.BeginForm("Index", "LogViewer", new {  }, FormMethod.Post))
+{
+    <span>@Html.Label("Level"):</span> <span>@Html.DropDownListFor(m=>m.LoggerSetting.LevelValue, LoggerSettings.GetLevels())</span>
+    <span>@Html.Label("Logger Name"):</span> <span>@Html.TextBoxFor(m=>m.LoggerSetting.LoggerName)</span>
+    <span>@Html.Label("Start Date"):</span> <span>@Html.TextBoxFor(m=>m.LoggerSetting.StartDate)</span>
+    <span>@Html.Label("End Date"):</span> <span>@Html.TextBoxFor(m=>m.LoggerSetting.EndDate)</span>
+    <span>@Html.Label("Thread Id"):</span> <span>@Html.TextBoxFor(m=>m.LoggerSetting.ThreadName)</span>
+    <span>@Html.Label("UserName "):</span> <span>@Html.TextBoxFor(m=>m.LoggerSetting.UserName)</span>
+
+    <span class="epi-cmsButton">
+        <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Refresh" type="submit" name="filter" id="filter" value="Filter" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)"/>
+    </span>
+    <span>Hits:</span> @Model.LoggingEvents.Count()
+}
+</div>
+<hr />
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+    <thead>
+        <tr>
+            <th align="left" width="10%">Date</th>
+            <th align="left">Message</th>
+            <th align="left">LoggerName</th>
+            <th align="left">Level</th>
+            <th align="left">ThreadName</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (log4net.Core.LoggingEvent logevent in Model.LoggingEvents)
+    {
+        var cls = string.Empty;
+        if (logevent.Level == Level.Error)
+        {
+            cls = "style='background-color:Red'";
+        }
+        else if (logevent.Level == Level.Warn)
+        {
+            cls = "style='background-color:Yellow'";
+        }
+
+        <tr @cls>
+            <td>@logevent.TimeStamp</td>
+            <td title="@logevent.RenderedMessage">@(logevent.RenderedMessage.Length > 200 ? logevent.RenderedMessage.Substring(0, 200) + " (..)" : logevent.RenderedMessage)</td>
+            <td>@logevent.LoggerName</td>
+            <td>@logevent.Level.DisplayName</td>
+            <td>@logevent.ThreadName</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $('#theList').dataTable(
+        {
+            "aaSorting": [[0, "desc"]],
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": true
+        });
+    });
+</script>
+}

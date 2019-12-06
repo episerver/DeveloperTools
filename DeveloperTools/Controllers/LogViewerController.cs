@@ -53,7 +53,7 @@ namespace DeveloperTools.Controllers
             if(_memoryAppender != null)
                 _memoryAppender.IsStarted = true;
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public ActionResult Stop()
@@ -61,7 +61,7 @@ namespace DeveloperTools.Controllers
             if(_memoryAppender != null)
                 _memoryAppender.IsStarted = false;
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         private void InitMessageLogger()
