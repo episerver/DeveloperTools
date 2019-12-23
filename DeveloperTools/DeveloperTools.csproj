@@ -202,6 +202,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="copy-to-sandbox.ps1" />
     <Compile Include="Controllers\ContentTypeAnalyzerController.cs" />
     <Compile Include="Controllers\LocalObjectCacheController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
@@ -234,23 +235,23 @@
     <Compile Include="Models\ViewEngineLocationsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\RollingMemoryAppender.cs" />
+    <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ModuleDependenciesController.cs" />
-    <None Include="EPiServer.DeveloperTools.zip" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\ContentTypeAnalyzer\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\LoadedAssemblies\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\LocalObjectCache\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\LogViewer\Show.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\MemoryDump\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\ModuleDependencies\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\RemoteEvent\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\RevertToDefault\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\Routes\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\Shared\DevToolsMaster.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\Templates\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\TimeMeters\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\IOC\Index.cshtml" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\Web.config" />
   </ItemGroup>
   <ItemGroup />
@@ -261,7 +262,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.cshtml" />
+    <Content Include="modules\_protected\EPiServer.DeveloperTools\Views\ViewEngineLocations\Index.cshtml" />
     <None Include="Web.config" />
     <Content Include="modules\_protected\EPiServer.DeveloperTools\module.config" />
     <Content Include="web.config.transform" />
@@ -281,8 +282,7 @@
   </Target>
   <ProjectExtensions />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>powershell.exe -noexit -file "$(ProjectDir)copy-to-sandbox.ps1"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
