@@ -1,0 +1,95 @@
+﻿@using System.Collections
+@using DeveloperTools.Models
+@using EPiServer.Shell
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.AssembliesModel>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Loaded Assemblies</h1>
+    <p>
+        Dumps all loaded assemblies in the current AppDomain
+    </p>
+</div>
+<div class="epi-formArea">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+        <thead>
+        <tr>
+            <th align="left">Name</th>
+            <th align="left">AssemblyVersion</th>
+            <th align="left">FileVersion</th>
+            <th>Location</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var entry in Model.Assemblies)
+        {
+            <tr>
+                <td>@entry.Name</td>
+                <td>@entry.AssemblyVersion</td>
+                <td>@entry.FileVersion</td>
+                <td>@entry.Location</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br/>
+    <h2 class="EP-prefix">Environment Variables</h2>
+    @{ var variables = Environment.GetEnvironmentVariables(); }
+    <pre><table cellpadding="0" cellspacing="0" border="0" class="display">
+    @foreach (DictionaryEntry entry in variables)
+    {
+        <tr>
+            <td>@entry.Key</td>
+            <td>@entry.Value</td>
+        </tr>
+    }
+    </table></pre>
+
+    <h2 class="EP-prefix">Misc</h2>
+    <pre><table cellpadding="0" cellspacing="0" border="0" class="display">
+        <tr>
+            <td>Response.Filter</td>
+            <td>@Request.Filter.ToString()</td>
+        </tr>
+        <tr>
+            <td>Request.ApplicationPath</td>
+            <td>@Request.ApplicationPath</td>
+        </tr>
+        <tr>
+            <td>Request.PhysicalApplicationPath</td>
+            <td>@Request.PhysicalApplicationPath</td>
+        </tr>
+        <tr>
+            <td>Request.PhysicalPath</td>
+            <td>@Request.PhysicalPath</td>
+        </tr>
+        <tr>
+            <td>Request.UrlReferrer</td>
+            <td>@Request.UrlReferrer</td>
+        </tr>
+        <tr>
+            <td>Request.UserLanguages</td>
+            <td>@string.Join(",", Request.UserLanguages ?? new string[0])</td>
+        </tr>
+    </table></pre>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#theList').dataTable(
+                {
+                    "aaSorting": [[0, "asc"]],
+                    "bPaginate": false,
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bSort": true,
+                    "bInfo": false,
+                    "bAutoWidth": true
+                });
+        });
+    </script>
+}

@@ -1,0 +1,108 @@
+﻿@using System.Collections
+@using DeveloperTools.Models
+@using EPiServer.Shell
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.LocalObjectCache>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+@section Styles{
+    <style type="text/css">
+        .table-column-width {
+            width: 30%;
+        }
+
+        .stripe tbody tr:nth-child(even) {
+            background-color: #f0f2f2;
+        }
+    </style>
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Local Object Cache</h1>
+    <p>
+        This tool shows all of the current items in the local object cache, and allows the deletion of one or more cached items.
+    </p>
+</div>
+
+    <div class="epi-contentArea epi-formArea">
+        @using (Html.BeginForm("Index", "LocalObjectCache", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                <span>Filter By</span>
+                <span>@Html.DropDownListFor(m => m.FilteredBy, Model.Choices)</span>
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Refresh" type="submit" name="filter" id="filter" value="Filter" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)"/>
+                </span>
+            </div>
+        }
+
+        @using (Html.BeginForm("Action", "LocalObjectCache", FormMethod.Post))
+        {
+            <div class="epi-contentArea">
+                <p class="EP-systemInfo">Total count of cached items: @Model.CachedItems.Count()</p>
+            </div>
+            <div class="epi-buttonDefault">
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" type="submit" name="RemoveLocalCache" id="RemoveLocalCache" value="Remove Local Cache Items" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                </span>
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" type="submit" name="removeLocalRemoteCache" id="removeLocalRemoteCache" value="Remove Local and Remote Cache Items" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                </span>
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-ViewMode" type="submit" name="ViewObjectSize" id="ViewObjectSize" value="View Object Size" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                </span>
+            </div>
+
+            <table class="table table-condensed table-bordered table-condensed stripe">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="clearAll" name="clearAll" onClick="toggle(this)" value="true" /></th>
+                        <th class="table-column-width">Key</th>
+                        <th class="table-column-width">Type</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CachedItems)
+                    {
+                        <tr>
+                            <td class="center"><input type="checkbox" id="@item.Key" name="cacheKeys" value="@item.Key"/></td>
+                            <td>@item.Key</td>
+                            <td>@item.Value.GetType()</td>
+                            <td>@item.Size</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="epi-buttonDefault">
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" type="submit" name="RemoveLocalCache" id="RemoveLocalCacheBottom" value="Remove Local Cache Items" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                </span>
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Delete" type="submit" name="removeLocalRemoteCache" id="removeLocalRemoteCacheBottom" value="Remove Local and Remote Cache Items" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                </span>
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-ViewMode" type="submit" name="ViewObjectSize" id="ViewObjectSize" value="View Object Size" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)" />
+                </span>
+            </div>
+
+            <input type="hidden" id="os" name="os" value="@Model.ViewObjectSize.ToString()" />
+        }
+    </div>
+
+
+@section Scripts {
+    <script language="JavaScript">
+        function toggle(source) {
+            checkboxes = document.getElementsByName('cacheKeys');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+}
