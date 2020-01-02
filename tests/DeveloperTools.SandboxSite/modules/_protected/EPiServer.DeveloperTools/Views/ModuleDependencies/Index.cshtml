@@ -1,0 +1,216 @@
+﻿@using System.Collections
+@using DeveloperTools.Models
+@using EPiServer.Shell
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.ModuleDependencyViewModel>
+
+@{
+    ViewBag.SkipDojo = true;
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+@section Styles {
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css" integrity="sha256-tTIVWrgsLDcekkoaiqePYP86joMAiyp4KqEswPMmTfQ=" crossorigin="anonymous" />
+<style type="text/css">
+    #graphContainer {
+        margin: 0 auto;
+        display: block;
+        width: calc(100vw - 100px);
+        height: calc(100vh - 200px);
+    }
+
+    #modulesnetwork {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Module Dependencies</h1>
+</div>
+
+<div class="epi-contentArea epi-formArea">
+    <div class="controls">
+        <div class="control-wrapper"></div>
+        @if(!Model.ShowAll)
+        {
+            using (Html.BeginForm("Index", "ModuleDependencies", new { }, FormMethod.Post))
+            {
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Search" type="submit" name="ShowAllModules" id="ShowAllModules" value="Show All Modules" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)"/>
+                </span>
+                <input type="hidden" id="showAll" name="showAll" value="true"/>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("Index", "ModuleDependencies", new { }, FormMethod.Post))
+            {
+                <span class="epi-cmsButton">
+                    <input class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Search" type="submit" name="HideEpiModules" id="HideEpiModules" value="Hide Episerver Modules" onmouseover="EPi.ToolButton.MouseDownHandler(this)" onmouseout="EPi.ToolButton.ResetMouseDownHandler(this)"/>
+                </span>
+                <input type="hidden" id="showAll" name="showAll" value="false"/>
+            }
+        }
+    </div>
+    <div id="graphContainer">
+        <div id="modulesnetwork"></div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js" integrity="sha256-JuQeAGbk9rG/EoRMixuy5X8syzICcvB0dj3KindZkY0=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var nodes = @MvcHtmlString.Create(JsonConvert.SerializeObject(Model.Nodes, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
+        edges = @MvcHtmlString.Create(JsonConvert.SerializeObject(Model.Links, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
+        network,
+        allNodes,
+        highlightActive = false;
+
+    var nodesDataset = new vis.DataSet(nodes);
+    var edgesDataset = new vis.DataSet(edges);
+
+    function redrawAll() {
+        var container = document.getElementById('modulesnetwork'),
+            edgeLength = nodesDataset.length > 20 ? 200 : 100,
+            options = {
+                nodes: {
+                    shape: 'dot',
+                    shadow: {
+                        enabled: true
+                    },
+                    scaling: {
+                        min: 10,
+                        max: 100,
+                        label: {
+                            enabled: true,
+                            min: 8,
+                            max: 30,
+                            drawThreshold: 10,
+                            maxVisible: 50
+                        }
+                    },
+                    font: {
+                        size: 12,
+                        face: 'Tahoma'
+                    }
+                },
+                edges: {
+                    width: 2,
+                    arrows: {
+                        to: {
+                            enabled: true
+                        }
+                    },
+                    smooth: {
+                        type: 'cubicBezier'
+                    },
+                    color: { inherit: 'from' }
+                },
+                physics: {
+                    maxVelocity: 30,
+                    minVelocity: 0.7,
+                    stabilization: {
+                        iterations: 100
+                    },
+                    barnesHut: {
+                        gravitationalConstant: -3000,
+                        centralGravity: 0.2,
+                        springLength: edgeLength,
+                        springConstant: 0.05,
+                        avoidOverlap: 0.7
+                    }
+                },
+                autoResize: true,
+                width: '100%',
+                height: '100%',
+                interaction: {
+                    tooltipDelay: 200
+                }
+            };
+
+        var data = { nodes: nodesDataset, edges: edgesDataset };
+        network = new vis.Network(container, data, options);
+        allNodes = nodesDataset.get({ returnType: "Object" });
+        network.on("click", neighbourhoodHighlight);
+    }
+
+    function neighbourhoodHighlight(params) {
+        // if something is selected:
+        if (params.nodes.length > 0) {
+            highlightActive = true;
+            var i, j;
+            var selectedNode = params.nodes[0];
+            var degrees = 2;
+
+            // mark all nodes as hard to read.
+            for (var nodeId in allNodes) {
+                allNodes[nodeId].color = 'rgba(200,200,200,0.5)';
+                if (allNodes[nodeId].hiddenLabel === undefined) {
+                    allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+                    allNodes[nodeId].label = undefined;
+                }
+            }
+
+            var connectedNodes = network.getConnectedNodes(selectedNode);
+            var allConnectedNodes = [];
+
+            // get the second degree nodes
+            for (i = 1; i < degrees; i++) {
+                for (j = 0; j < connectedNodes.length; j++) {
+                    allConnectedNodes = allConnectedNodes.concat(network.getConnectedNodes(connectedNodes[j]));
+                }
+            }
+
+            // all second degree nodes get a different color and their label back
+            for (i = 0; i < allConnectedNodes.length; i++) {
+                allNodes[allConnectedNodes[i]].color = 'rgba(150,150,150,0.75)';
+                if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+                    allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
+                    allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+                }
+            }
+
+            // all first degree nodes get their own color and their label back
+            for (i = 0; i < connectedNodes.length; i++) {
+                allNodes[connectedNodes[i]].color = undefined;
+                if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+                    allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
+                    allNodes[connectedNodes[i]].hiddenLabel = undefined;
+                }
+            }
+
+            // the main node gets its own color and its label back.
+            allNodes[selectedNode].color = undefined;
+            if (allNodes[selectedNode].hiddenLabel !== undefined) {
+                allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+                allNodes[selectedNode].hiddenLabel = undefined;
+            }
+        } else if (highlightActive === true) {
+            // reset all nodes
+            for (var nodeId in allNodes) {
+                allNodes[nodeId].color = undefined;
+                if (allNodes[nodeId].hiddenLabel !== undefined) {
+                    allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+                    allNodes[nodeId].hiddenLabel = undefined;
+                }
+            }
+            highlightActive = false;
+        }
+
+        // transform the object into an array
+        var updateArray = [];
+        for (nodeId in allNodes) {
+            if (allNodes.hasOwnProperty(nodeId)) {
+                updateArray.push(allNodes[nodeId]);
+            }
+        }
+
+        nodesDataset.update(updateArray);
+    }
+
+    redrawAll();
+</script>
+}

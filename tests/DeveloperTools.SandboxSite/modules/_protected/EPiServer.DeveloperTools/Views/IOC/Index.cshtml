@@ -1,0 +1,65 @@
+﻿@using DeveloperTools.Models
+@using EPiServer.Shell
+@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.IOCModel>
+
+@{
+    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
+}
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">IoC Container</h1>
+    <p>
+        Dumps all types registered in the StructureMap container used by EPiServer.
+    </p>
+</div>
+<div class="epi-formArea">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+        <thead>
+        <tr>
+            <th align="left">PluginType</th>
+            <th align="left">ConcreteType</th>
+            <th align="left">Scope</th>
+            <th>Is Default</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var entry in Model.IOCEntries)
+        {
+            <tr>
+                <td>@entry.PluginType</td>
+                <td>@entry.ConcreteType</td>
+                <td>@entry.Scope</td>
+                <td>@entry.IsDefault</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@if (Model.LoadingErrors.Any())
+{
+    <b>Retrieval errors:</b>
+    <ul>
+        @foreach (var message in Model.LoadingErrors)
+        {
+            <li>@message<br/>________________________________________________________________</li>
+        }
+    </ul>
+}
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $('#theList').dataTable(
+            {
+                "aaSorting": [[1, "desc"]],
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": true
+            });
+    });
+</script>
+}
