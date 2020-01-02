@@ -22,4 +22,10 @@ Current features:
 You can read more in depth analysis of toolset and it's side-effects [here](https://blog.tech-fellow.net/2019/02/14/how-risky-are-episerver-developertools-on-production-environment/).
 
 ## Contributing?
+
+### Sandbox Site
 Sandbox site credentials: admin/P@ssword1!
+
+### Building
+Post build event is copying Razor views from source project (DeveloperTools/) to test sandbox site (tests/DeveloperTools.SandboxSite).
+If it fails to execute - please create an GitHub issue.
