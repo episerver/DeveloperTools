@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using DeveloperTools.Models;
 using EPiServer.Events.Clients;
 using EPiServer.Events.Clients.Internal;
 using EPiServer.Events.Providers.Internal;
 using EPiServer.Licensing.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTools.Controllers
 {
@@ -81,8 +81,8 @@ namespace DeveloperTools.Controllers
                 TotalNumberOfSentEvent = sentEvents,
                 ActiveServers = activeServers,
                 ServerState = remoteServers,
-                ProviderName = _providerService.DefaultProvider.Name,
-                ProviderType = _providerService.DefaultProvider.GetType().FullName,
+                //ProviderName = _providerService.DefaultProvider.Name,
+                //ProviderType = _providerService.DefaultProvider.GetType().FullName,
                 Enabled = _providerService.Enabled
             };
         }

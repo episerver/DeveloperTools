@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Web.Mvc;
 using DeveloperTools.Models;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAbstraction.RuntimeModel;
 using EPiServer.Security;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTools.Controllers
 {

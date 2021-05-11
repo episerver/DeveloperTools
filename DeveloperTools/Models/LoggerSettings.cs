@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web.Mvc;
-using log4net.Core;
+using EPiServer.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DeveloperTools.Models
 {
@@ -14,7 +14,7 @@ namespace DeveloperTools.Models
 
         public LoggerSettings()
         {
-            LevelValue = Level.All.ToString();
+            LevelValue = Level.Critical.ToString();
             StartDate = DateTime.MinValue;
             EndDate = DateTime.MaxValue;
         }
@@ -23,10 +23,10 @@ namespace DeveloperTools.Models
         {
             get
             {
-                if(string.IsNullOrEmpty(LevelValue))
-                {
-                    return Level.All;
-                }
+                //if(string.IsNullOrEmpty(LevelValue))
+                //{
+                //    return Level.All;
+                //}
                 return
                     (Level)
                     typeof(Level)
@@ -48,13 +48,13 @@ namespace DeveloperTools.Models
         {
             return _levels ?? (_levels = new List<SelectListItem>
                                {
-                                   CreateSelectItem(Level.All),
+                                   //CreateSelectItem(Level.All),
                                    CreateSelectItem(Level.Critical),
                                    CreateSelectItem(Level.Error),
-                                   CreateSelectItem(Level.Fatal),
+                                   //CreateSelectItem(Level.Fatal),
                                    CreateSelectItem(Level.Debug),
-                                   CreateSelectItem(Level.Info),
-                                   CreateSelectItem(Level.Warn)
+                                   //CreateSelectItem(Level.Info),
+                                   //CreateSelectItem(Level.Warn)
                                });
         }
 
@@ -62,7 +62,7 @@ namespace DeveloperTools.Models
         {
             var sel = new SelectListItem
             {
-                Text = level.DisplayName,
+                Text = level.ToString(),
                 Value = level.ToString()
             };
 

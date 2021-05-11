@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using System.Web.Mvc;
 using EPiServer.Framework.Initialization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTools.Controllers
 {

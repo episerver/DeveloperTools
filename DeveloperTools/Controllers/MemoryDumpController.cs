@@ -2,9 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Web.Mvc;
 using DeveloperTools.Models;
 using EPiServer.Web;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTools.Controllers
 {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Web.Mvc;
 using DeveloperTools.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTools.Controllers
 {

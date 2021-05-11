@@ -4,22 +4,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Web.Mvc;
-using System.Web.Routing;
 using DeveloperTools.Core;
 using DeveloperTools.Models;
 using EPiServer.Core;
 using EPiServer.Framework.Cache;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace DeveloperTools.Controllers
 {
     public class LocalObjectCacheController : DeveloperToolsController
     {
         private readonly ISynchronizedObjectInstanceCache _cache;
+        private readonly IMemoryCache _memoryCache;
 
-        public LocalObjectCacheController(ISynchronizedObjectInstanceCache cache)
+        public LocalObjectCacheController(ISynchronizedObjectInstanceCache cache, IMemoryCache memoryCache)
         {
             _cache = cache;
+            _memoryCache = memoryCache;
         }
 
         public ActionResult Index(string FilteredBy, bool os = false)
@@ -27,7 +32,7 @@ namespace DeveloperTools.Controllers
             return View(PrepareViewModel(FilteredBy, os));
         }
 
-        [HttpParamAction]
+        //[HttpParamAction]
         [HttpPost]
         public ActionResult RemoveLocalCache(string[] cacheKeys, bool os)
         {
@@ -42,7 +47,7 @@ namespace DeveloperTools.Controllers
             return RedirectToAction(nameof(Index), new RouteValueDictionary(new { os }));
         }
 
-        [HttpParamAction]
+        //[HttpParamAction]
         [HttpPost]
         public ActionResult RemoveLocalRemoteCache(string[] cacheKeys, bool os)
         {
@@ -58,7 +63,7 @@ namespace DeveloperTools.Controllers
             return RedirectToAction(nameof(Index), new RouteValueDictionary(new { os }));
         }
 
-        [HttpParamAction]
+        //[HttpParamAction]
         [HttpPost]
         public ActionResult ViewObjectSize()
         {
@@ -69,20 +74,20 @@ namespace DeveloperTools.Controllers
         {
             var model = new LocalObjectCache();
 
-            var cachedEntries = HttpContext.Cache.Cast<DictionaryEntry>().Take(10_000);
+            //var cachedEntries = _memoryCache.Cast<DictionaryEntry>().Take(10_000);
 
-            switch (FilteredBy)
-            {
-                case "pages":
-                    model.CachedItems = ConvertToListItem(cachedEntries.Where(item => item.Value is PageData), viewObjectSize);
-                    break;
-                case "content":
-                    model.CachedItems = ConvertToListItem(cachedEntries.Where(item => item.Value is IContent), viewObjectSize);
-                    break;
-                default:
-                    model.CachedItems = ConvertToListItem(cachedEntries, viewObjectSize);
-                    break;
-            }
+            //switch (FilteredBy)
+            //{
+            //    case "pages":
+            //        model.CachedItems = ConvertToListItem(cachedEntries.Where(item => item.Value is PageData), viewObjectSize);
+            //        break;
+            //    case "content":
+            //        model.CachedItems = ConvertToListItem(cachedEntries.Where(item => item.Value is IContent), viewObjectSize);
+            //        break;
+            //    default:
+            //        model.CachedItems = ConvertToListItem(cachedEntries, viewObjectSize);
+            //        break;
+            //}
 
             model.FilteredBy = FilteredBy;
             model.Choices = new[]

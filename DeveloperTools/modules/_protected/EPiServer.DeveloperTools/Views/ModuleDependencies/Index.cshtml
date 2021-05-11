@@ -1,4 +1,5 @@
-﻿@using System.Collections
+@using Microsoft.AspNetCore.Html
+@using System.Collections
 @using DeveloperTools.Models
 @using EPiServer.Shell
 @using Newtonsoft.Json
@@ -63,8 +64,8 @@
 @section Scripts {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js" integrity="sha256-JuQeAGbk9rG/EoRMixuy5X8syzICcvB0dj3KindZkY0=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    var nodes = @MvcHtmlString.Create(JsonConvert.SerializeObject(Model.Nodes, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
-        edges = @MvcHtmlString.Create(JsonConvert.SerializeObject(Model.Links, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
+    var nodes = HtmlString.Create(JsonConvert.SerializeObject(Model.Nodes, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
+        edges = HtmlString.Create(JsonConvert.SerializeObject(Model.Links, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
         network,
         allNodes,
         highlightActive = false;

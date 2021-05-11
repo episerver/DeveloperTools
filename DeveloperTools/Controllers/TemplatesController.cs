@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using System.Web.Mvc;
 using EPiServer.DataAbstraction;
 using EPiServer.ServiceLocation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTools.Controllers
 {
@@ -9,14 +9,14 @@ namespace DeveloperTools.Controllers
     {
         public ActionResult Index()
         {
-            var templateRepo = ServiceLocator.Current.GetInstance<ITemplateRepository>();
+            //var templateRepo = ServiceLocator.Current.GetInstance<ITemplateRepository>();
             var modelRepo = ServiceLocator.Current.GetInstance<ContentTypeModelRepository>();
 
-            var templates = modelRepo.List()
-                                     .Where(ct => ct.ModelType != null)
-                                     .SelectMany(ct => templateRepo.List(ct.ModelType))
-                                     .GroupBy(t => GetHashCode(t.Name, t.Path, t.TemplateType, t.TemplateTypeCategory))
-                                     .Select(g => g.First());
+            var templates = modelRepo.List();
+                                     //.Where(ct => ct.ModelType != null)
+                                     //.SelectMany(ct => templateRepo.List(ct.ModelType))
+                                     //.GroupBy(t => GetHashCode(t.Name, t.Path, t.TemplateType, t.TemplateTypeCategory))
+                                     //.Select(g => g.First());
 
             return View(templates);
         }

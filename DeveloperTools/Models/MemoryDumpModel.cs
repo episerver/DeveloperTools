@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
 using DeveloperTools.Controllers;
 using EPiServer.Web;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DeveloperTools.Models
 {

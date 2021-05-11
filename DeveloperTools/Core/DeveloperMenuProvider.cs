@@ -57,7 +57,8 @@ namespace DeveloperTools.Core
             // Create the top menu section
             var developerSection = new SectionMenuItem(GlobalMenuTitle, GlobalMenuLogicalPath)
             {
-                IsAvailable = request => PrincipalInfo.HasAdminAccess
+                //IsAvailable = request => PrincipalInfo.HasAdminAccess
+                AuthorizationPolicy = "episerver:cmsadmin"
             };
 
             var timeMeters = CreateUrlMenuItem(TimeMetersTitle, TimeMetersPath, Paths.ToResource(ModuleName, "TimeMeters"));
@@ -97,7 +98,8 @@ namespace DeveloperTools.Core
         {
             return new UrlMenuItem(title, logicalPath, resourcePath)
             {
-                IsAvailable = request => PrincipalInfo.HasAdminAccess
+                AuthorizationPolicy = "episerver:cmsadmin"
+                //IsAvailable = request => PrincipalInfo.HasAdminAccess
             };
         }
     }
