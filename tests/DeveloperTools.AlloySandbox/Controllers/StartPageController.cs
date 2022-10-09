@@ -9,7 +9,10 @@ namespace DeveloperTools.AlloySandbox.Controllers;
 
 public class StartPageController : PageControllerBase<StartPage>
 {
-    public StartPageController(MenuAssembler assembler) { }
+    public StartPageController(MenuAssembler assembler)
+    {
+        var menu = assembler.GetMenuHierarchy("/global", 100);
+    }
 
     public IActionResult Index(StartPage currentPage)
     {

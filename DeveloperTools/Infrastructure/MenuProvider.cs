@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using DeveloperTools;
 using EPiServer.Shell;
 using EPiServer.Shell.Modules;
@@ -9,99 +10,46 @@ namespace EPiServer.DeveloperTools.Infrastructure;
 [MenuProvider]
 public class MenuProvider : IMenuProvider
 {
-    const string GlobalMenuTitle = "Developer Tools";
-
-    const string TimeMetersTitle = "Startup Perf";
-    const string TimeMetersPath = "StartupPerf";
-
-    const string TemplatesTitle = "Templates";
-    const string TemplatesPath = "global/DeveloperTools/Templates";
-
-    const string IocTitle = "Container";
-    const string IocPath = "global/DeveloperTools/IOC";
-
-    const string LoadedAssembliesTitle = "Loaded Assemblies";
-    const string LoadedAssembliesPath = "global/DeveloperTools/LoadedAssemblies";
-
-    const string RevertToDefaultTitle = "Revert Content Types";
-    const string RevertToDefaultPath = "global/DeveloperTools/RevertToDefault";
-
-    const string ContentTypeAnalyzerTitle = "Content Type Analyzer";
-    const string ContentTypeAnalyzerPath = "global/DeveloperTools/ContentTypeAnalyzer";
-
-    const string LogViewerTitle = "Log Viewer";
-    const string LogViewerPath = "global/DeveloperTools/LogViewer";
-
-    const string MemoryDumpTitle = "Memory Dump";
-    const string MemoryDumpPath = "global/DeveloperTools/Memory Dump";
-
-    const string RemoteEventTitle = "Remote Event";
-    const string RemoteEventPath = "global/DeveloperTools/Remote Event";
-
-    const string RoutesTitle = "Routes";
-    const string RoutesPath = "global/DeveloperTools/Routes";
-
-    const string ViewLocationsTitle = "View Locations";
-    const string ViewLocationsPath = "global/DeveloperTools/ViewLocations";
-
-    const string ModuleDependenciesTitle = "Module Dependencies";
-    const string ModuleDependenciesPath = "global/DeveloperTools/ModuleDependencies";
-
-    const string LocalObjectCacheTitle = "Local Object Cache";
-    const string LocalObjectCachePath = "global/DeveloperTools/LocalObjectCache";
+    private const string MenuPath = "/cms/DeveloperTools";
 
     public IEnumerable<MenuItem> GetMenuItems()
     {
         // Create the top menu section
-        var developerSection = new UrlMenuItem(GlobalMenuTitle, MenuPaths.Global + "/cms/DeveloperTools", Paths.ToResource(GetType(), "default"))
+        var developerSection = new UrlMenuItem("Developer Tools", MenuPaths.Global + MenuPath, Paths.ToResource(GetType(), "default"))
         {
             SortIndex = 100,
             AuthorizationPolicy = Constants.PolicyName
         };
 
-        var timeMeters = CreateUrlMenuItem(TimeMetersTitle, TimeMetersPath, "TimeMeters");
-
-        //var templates = CreateUrlMenuItem(TemplatesTitle, TemplatesPath, "Templates");
-        //var ioc = CreateUrlMenuItem(IocTitle, IocPath, "IOC");
-        //var loadedAssemblies = CreateUrlMenuItem(LoadedAssembliesTitle, LoadedAssembliesPath, "LoadedAssemblies");
-        //var revertToDefault = CreateUrlMenuItem(RevertToDefaultTitle, RevertToDefaultPath, "RevertToDefault");
-        //var contentTypeAnalyzer = CreateUrlMenuItem(ContentTypeAnalyzerTitle, ContentTypeAnalyzerPath, "ContentTypeAnalyzer");
-        //var logViewer = CreateUrlMenuItem(LogViewerTitle, LogViewerPath, "LogViewer");
-        //var memoryDumperViewer = CreateUrlMenuItem(MemoryDumpTitle, MemoryDumpPath, "MemoryDump");
-        //var remoteEventViewer = CreateUrlMenuItem(RemoteEventTitle, RemoteEventPath, "RemoteEvent");
-        //var routes = CreateUrlMenuItem(RoutesTitle, RoutesPath, "Routes");
-        //var viewLocations = CreateUrlMenuItem(ViewLocationsTitle, ViewLocationsPath, "ViewEngineLocations");
-        //var moduleDependencies = CreateUrlMenuItem(ModuleDependenciesTitle, ModuleDependenciesPath, "ModuleDependencies");
-        //var localObjectCache = CreateUrlMenuItem(LocalObjectCacheTitle, LocalObjectCachePath, "LocalObjectCache");
-
         return new MenuItem[]
         {
             developerSection,
-            timeMeters,
-            //ioc,
-            //loadedAssemblies,
-            //revertToDefault,
-            //contentTypeAnalyzer,
-            //templates,
-            //logViewer,
-            //memoryDumperViewer,
-            //remoteEventViewer,
-            //routes,
-            //viewLocations,
-            //moduleDependencies,
-            //localObjectCache
+            CreateUrlMenuItem("Welcome", "default", 10),
+            CreateUrlMenuItem("Startup Perf", "StartupPerf", 20),
+            CreateUrlMenuItem("IoC", "IOC", 30),
+            CreateUrlMenuItem("Loaded Assemblies", "LoadedAssemblies", 40),
+            CreateUrlMenuItem("Revert Content Types", "RevertToDefault", 50),
+            CreateUrlMenuItem("Content Type Analyzer", "ContentTypeAnalyzer", 60),
+            CreateUrlMenuItem("Templates", "Templates", 70),
+            CreateUrlMenuItem("Log Viewer", "LogViewer", 80),
+            CreateUrlMenuItem("Memory Dump", "MemoryDump", 90),
+            CreateUrlMenuItem("Remote Events", "RemoteEvent", 100),
+            CreateUrlMenuItem("Routes", "Routes", 110),
+            CreateUrlMenuItem("View Locations", "ViewLocations", 120),
+            CreateUrlMenuItem("Module Dependencies", "ModuleDependencies", 130),
+            CreateUrlMenuItem("Local Object Cache", "LocalObjectCache", 140)
         };
     }
 
-    protected virtual UrlMenuItem CreateUrlMenuItem(string title, string logicalPath, string resourcePath)
+    protected virtual UrlMenuItem CreateUrlMenuItem(string title, string path, int index)
     {
         var link = new UrlMenuItem(
             title,
-            MenuPaths.Global + "/cms/DeveloperTools/" + logicalPath,
-            Paths.ToResource(GetType(), "default#/" + resourcePath))
+            MenuPaths.Global + MenuPath + "/" + path,
+            Paths.ToResource(GetType(), "/" + path))
         {
             AuthorizationPolicy = Constants.PolicyName,
-            SortIndex = 10,
+            SortIndex = index,
             Alignment = MenuItemAlignment.Left
         };
 
