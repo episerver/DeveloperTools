@@ -46,7 +46,7 @@ public class MenuProvider : IMenuProvider
         var link = new UrlMenuItem(
             title,
             MenuPaths.Global + MenuPath + "/" + path,
-            Paths.ToResource(GetType(), "/" + path))
+            Paths.ToResource(GetType(), path))
         {
             AuthorizationPolicy = Constants.PolicyName,
             SortIndex = index,
