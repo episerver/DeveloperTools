@@ -1,0 +1,13 @@
+@model PageViewModel<ArticlePage>
+
+@{ Layout = "~/Views/Shared/Layouts/_LeftNavigation.cshtml"; }
+
+<div class="content">
+    <h1 @Html.EditAttributes(x => x.CurrentPage.PageName)>@Model.CurrentPage.PageName</h1>
+    <p class="lead" @Html.EditAttributes(x => x.CurrentPage.MetaDescription)>@Model.CurrentPage.MetaDescription</p>
+    <div class="clearfix">
+        @Html.PropertyFor(m => m.CurrentPage.MainBody)
+    </div>
+</div>
+
+@Html.PropertyFor(x => x.CurrentPage.MainContentArea, new { CssClass = "row" })
