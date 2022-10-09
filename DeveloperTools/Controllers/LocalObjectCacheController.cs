@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using DeveloperTools.Core;
 using DeveloperTools.Models;
 using EPiServer.Core;
 using EPiServer.Framework.Cache;

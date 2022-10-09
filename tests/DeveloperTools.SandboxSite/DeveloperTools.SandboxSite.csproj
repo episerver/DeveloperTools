@@ -340,9 +340,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DeveloperTools\DeveloperTools.csproj">
+    <ProjectReference Include="..\..\DeveloperTools\EPiServer.DeveloperTools.csproj">
       <Project>{cc833335-20f0-4559-8160-ee6bc0ef9112}</Project>
-      <Name>DeveloperTools</Name>
+      <Name>EPiServer.DeveloperTools</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

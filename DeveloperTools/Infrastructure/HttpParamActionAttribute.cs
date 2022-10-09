@@ -1,8 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
-
-namespace DeveloperTools.Core
+﻿namespace EPiServer.DeveloperTools.Infrastructure
 {
     //public class HttpParamActionAttribute : ActionNameSelectorAttribute
     //{

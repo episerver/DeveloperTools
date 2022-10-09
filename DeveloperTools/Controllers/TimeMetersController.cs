@@ -1,15 +1,16 @@
-﻿using System.Linq;
+using System.Linq;
+using EPiServer.Cms.Shell.UI.Controllers.Internal;
 using EPiServer.Framework.Initialization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DeveloperTools.Controllers
+namespace EPiServer.DeveloperTools.Controllers;
+
+public class TimeMetersController : BaseController
 {
-    public class TimeMetersController : DeveloperToolsController
+    [HttpGet]
+    public ActionResult Index()
     {
-        public ActionResult Index()
-        {
-            var allTimers = TimeMeters.GetAllRegistered();
-            return View("Index", allTimers.OrderByDescending(t => t.Counters.Values.Max(sw => sw.ElapsedMilliseconds)));
-        }
+        var allTimers = TimeMeters.GetAllRegistered();
+        return View("Index", allTimers.OrderByDescending(t => t.Counters.Values.Max(sw => sw.ElapsedMilliseconds)));
     }
 }

@@ -1,5 +1,6 @@
 using DeveloperTools.AlloySandbox.Models.Pages;
 using DeveloperTools.AlloySandbox.Models.ViewModels;
+using EPiServer.Shell.Navigation;
 using EPiServer.Web;
 using EPiServer.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,8 @@ namespace DeveloperTools.AlloySandbox.Controllers;
 
 public class StartPageController : PageControllerBase<StartPage>
 {
+    public StartPageController(MenuAssembler assembler) { }
+
     public IActionResult Index(StartPage currentPage)
     {
         var model = PageViewModel.Create(currentPage);

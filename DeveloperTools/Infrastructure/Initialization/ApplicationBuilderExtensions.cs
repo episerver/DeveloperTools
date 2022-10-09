@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 
-namespace DeveloperTools;
+namespace EPiServer.DeveloperTools.Infrastructure.Initialization;
 
 public static class ApplicationBuilderExtensions
 {

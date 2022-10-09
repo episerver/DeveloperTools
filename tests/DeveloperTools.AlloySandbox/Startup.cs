@@ -1,6 +1,8 @@
 using DeveloperTools.AlloySandbox.Extensions;
 using EPiServer.Cms.Shell;
 using EPiServer.Cms.UI.AspNetIdentity;
+using EPiServer.DeveloperTools.Infrastructure.Configuration;
+using EPiServer.DeveloperTools.Infrastructure.Initialization;
 using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;

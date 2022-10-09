@@ -1,7 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Linq;
-
-namespace DeveloperTools.Core
+﻿namespace EPiServer.DeveloperTools.Infrastructure
 {
     /// <summary>
     ///     Simple appender to avoid filling up memory
