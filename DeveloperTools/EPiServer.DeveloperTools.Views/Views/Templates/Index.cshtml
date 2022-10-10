@@ -1,10 +1,4 @@
-﻿@using DeveloperTools.Models
-@using EPiServer.Shell
-@inherits System.Web.Mvc.WebViewPage<IEnumerable<EPiServer.DataAbstraction.TemplateModel>>
-
-@{
-    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
-}
+﻿@model EPiServer.DeveloperTools.Features.Templates.TemplatesModel
 
 <div class="epi-contentArea">
     <h1 class="EP-prefix">Templates</h1>
@@ -14,35 +8,44 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
         <thead>
         <tr>
+            <th align="left">ContentModelType</th>
             <th align="left">Name</th>
             <th align="left">Category</th>
-            <th align="left">Default</th>
             <th align="left">Inherit</th>
             <th align="left">Tags</th>
             <th align="left">AvailableWithoutTag</th>
             <th align="left">Path</th>
-            <th align="left">Type</th>
+            <th align="left">ModelType</th>
+            <th align="left">TemplateType</th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var t in Model)
+        @foreach (var a in Model.Templates)
         {
-            <tr>
-                <td>@t.Name</td>
-                <td>@t.TemplateTypeCategory</td>
-                <td>@(t.Default ? "yes" : "no")</td>
-                <td>@(t.Inherit ? "yes" : "no")</td>
-                <td>@(t.Tags == null ? "" : string.Join(",", t.Tags))</td>
-                <td>@(t.AvailableWithoutTag ? "Yes" : "No")</td>
-                <td>@t.Path</td>
-                <td>@t.TemplateType</td>
-            </tr>
+            var i = 0;
+
+            @foreach (var t in a.Value)
+            {
+                <tr>
+                    <td>@(i == 0 ? a.Key.ModelType.FullName : string.Empty)</td>
+                    <td>@t.DisplayName (@t.Name)</td>
+                    <td>@t.TemplateTypeCategory</td>
+                    <td>@(t.Inherit ? "yes" : "no")</td>
+                    <td>@(t.Tags == null ? "" : string.Join(",", t.Tags))</td>
+                    <td>@(t.AvailableWithoutTag ? "Yes" : "No")</td>
+                    <td>@t.Path</td>
+                    <td>@t.ModelType</td>
+                    <td>@t.TemplateType</td>
+                </tr>
+
+                i++;
+            }
         }
         </tbody>
     </table>
 </div>
 
-@section Scripts {
+@section AdditionalScripts {
 <script>
     $(document).ready(function () {
         $('#theList').dataTable(
