@@ -1,11 +1,5 @@
 ﻿@using System.Collections
-@using DeveloperTools.Models
-@using EPiServer.Shell
-@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.AssembliesModel>
-
-@{
-    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
-}
+@model EPiServer.DeveloperTools.Features.AppEnvironment.AppEnvironmentModel
 
 <div class="epi-contentArea">
     <h1 class="EP-prefix">Loaded Assemblies</h1>
@@ -48,36 +42,31 @@
     }
     </table></pre>
 
+    <br/>
+    <h2 class="EP-prefix">Connection Strings</h2>
+    <pre><table cellpadding="0" cellspacing="0" border="0" class="display">
+    @foreach (var entry in Model.ConnectionString)
+    {
+        <tr>
+            <td>@entry.Key</td>
+            <td>@entry.Value</td>
+        </tr>
+    }
+    </table></pre>
+
     <h2 class="EP-prefix">Misc</h2>
     <pre><table cellpadding="0" cellspacing="0" border="0" class="display">
+    @foreach (var entry in Model.Misc)
+    {
         <tr>
-            <td>Response.Filter</td>
-            <td>@Request.Filter.ToString()</td>
+            <td>@entry.Key</td>
+            <td>@entry.Value</td>
         </tr>
-        <tr>
-            <td>Request.ApplicationPath</td>
-            <td>@Request.ApplicationPath</td>
-        </tr>
-        <tr>
-            <td>Request.PhysicalApplicationPath</td>
-            <td>@Request.PhysicalApplicationPath</td>
-        </tr>
-        <tr>
-            <td>Request.PhysicalPath</td>
-            <td>@Request.PhysicalPath</td>
-        </tr>
-        <tr>
-            <td>Request.UrlReferrer</td>
-            <td>@Request.UrlReferrer</td>
-        </tr>
-        <tr>
-            <td>Request.UserLanguages</td>
-            <td>@string.Join(",", Request.UserLanguages ?? new string[0])</td>
-        </tr>
+    }
     </table></pre>
 </div>
 
-@section Scripts {
+@section AdditionalScripts {
     <script>
         $(document).ready(function () {
             $('#theList').dataTable(

@@ -27,7 +27,7 @@ public class MenuProvider : IMenuProvider
             CreateUrlMenuItem("Welcome", "default", 10),
             CreateUrlMenuItem("Startup Perf", "StartupPerf", 20),
             CreateUrlMenuItem("IoC", "IOC", 30),
-            CreateUrlMenuItem("Loaded Assemblies", "LoadedAssemblies", 40),
+            CreateUrlMenuItem("App Environment", "AppEnvironment", 40),
             CreateUrlMenuItem("Revert Content Types", "RevertToDefault", 50),
             CreateUrlMenuItem("Content Type Analyzer", "ContentTypeAnalyzer", 60),
             CreateUrlMenuItem("Templates", "Templates", 70),
