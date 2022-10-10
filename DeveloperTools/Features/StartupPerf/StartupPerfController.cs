@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using EPiServer.Cms.Shell.UI.Controllers.Internal;
-using EPiServer.DeveloperTools.Models;
 using EPiServer.Framework.Initialization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EPiServer.DeveloperTools.Controllers;
+namespace EPiServer.DeveloperTools.Features.StartupPerf;
 
 public class StartupPerfController : BaseController
 {

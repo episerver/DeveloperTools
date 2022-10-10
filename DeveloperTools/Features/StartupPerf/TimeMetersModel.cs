@@ -1,4 +1,4 @@
-namespace EPiServer.DeveloperTools.Models;
+namespace EPiServer.DeveloperTools.Features.StartupPerf;
 
 public class TimeMetersModel
 {

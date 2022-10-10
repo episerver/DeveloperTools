@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DeveloperTools;
+using EPiServer.DeveloperTools.Features.IoC;
 using EPiServer.Shell.Modules;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,7 @@ public static class IServiceCollectionExtensions
         Action<OptimizelyDeveloperToolsOptions> setupAction,
         Action<AuthorizationPolicyBuilder> configurePolicy)
     {
+        services.AddSingleton(new ServiceCollectionClosure(services));
 
         services.Configure<ProtectedModuleOptions>(
             pm =>

@@ -1,15 +1,9 @@
-﻿@using DeveloperTools.Models
-@using EPiServer.Shell
-@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.IOCModel>
-
-@{
-    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
-}
+﻿@model EPiServer.DeveloperTools.Features.IoC.IOCModel
 
 <div class="epi-contentArea">
     <h1 class="EP-prefix">IoC Container</h1>
     <p>
-        Dumps all types registered in the StructureMap container used by EPiServer.
+        Dumps all types registered in the Dependency Injection container (aka Service Collection) used by Optimizely.
     </p>
 </div>
 <div class="epi-formArea">
@@ -18,8 +12,9 @@
         <tr>
             <th align="left">PluginType</th>
             <th align="left">ConcreteType</th>
+            <th align="left">ImplementationFactory</th>
+            <th align="left">ImplementationInstance</th>
             <th align="left">Scope</th>
-            <th>Is Default</th>
         </tr>
         </thead>
         <tbody>
@@ -28,26 +23,16 @@
             <tr>
                 <td>@entry.PluginType</td>
                 <td>@entry.ConcreteType</td>
+                <td>@entry.ImplementationFactory</td>
+                    <td>@entry.ImplementationInstance</td>
                 <td>@entry.Scope</td>
-                <td>@entry.IsDefault</td>
             </tr>
         }
         </tbody>
     </table>
 </div>
 
-@if (Model.LoadingErrors.Any())
-{
-    <b>Retrieval errors:</b>
-    <ul>
-        @foreach (var message in Model.LoadingErrors)
-        {
-            <li>@message<br/>________________________________________________________________</li>
-        }
-    </ul>
-}
-
-@section Scripts {
+@section AdditionalScripts {
 <script>
     $(document).ready(function () {
         $('#theList').dataTable(
