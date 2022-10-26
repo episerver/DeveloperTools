@@ -1,10 +1,4 @@
-﻿@using DeveloperTools.Models
-@using EPiServer.Shell
-@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.ContentTypeAnalyzerModel>
-
-@{
-    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
-}
+﻿@model EPiServer.DeveloperTools.Features.ContentTypeAnalyzer.ContentTypeAnalyzerModel
 
 <div class="epi-contentArea">
     <h1 class="EP-prefix">Content Type Analyzer</h1>
@@ -51,7 +45,7 @@
     </table>
 </div>
 
-@section Scripts {
+@section AdditionalScripts {
     <script>
         $(document).ready(function () {
             $('#theList').dataTable(
