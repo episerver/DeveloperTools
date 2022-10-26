@@ -1,14 +1,7 @@
-﻿@using System.Collections
-@using DeveloperTools.Models
-@using EPiServer.Shell
-@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.RemoteEventsModel>
-
-@{
-    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
-}
+﻿@model EPiServer.DeveloperTools.Features.RemoteEvent.RemoteEventsModel
 
 <div class="epi-contentArea">
-    <h1 class="EP-prefix">A tool uses for show diagnostic and statical Remote Events</h1>
+    <h1 class="EP-prefix">Tool to show diagnostic and statics for Remote Events</h1>
     <p>
         Configuration status: <strong>@(Model.Enabled ? "Enabled" : "Disabled")</strong><br />
         Provider: <strong>@Model.ProviderName</strong> (@Model.ProviderType)<br />
@@ -39,7 +32,7 @@
     </table>
 
     <p style="margin-bottom: .5em">
-        Number of Event Types: <strong>@(Model.RemoteEventModel !=null ? Model.RemoteEventModel.Count() : 0).</strong><br />
+        Number of Event Types: <strong>@(Model.RemoteEventModel?.Count() ?? 0).</strong><br />
         Total Number of Sent Events: <strong>@Model.TotalNumberOfSentEvent.</strong><br />
         Total Number of Received Events: <strong>@Model.TotalNumberOfReceivedEvent.</strong>
     </p>
@@ -71,9 +64,9 @@
         {
             <span>@Html.Label("EventId"):</span> <span>@Html.TextBoxFor(m => m.SendRemoteEventModel.EventId)</span>
             <span>@Html.Label("Param"):</span> <span>@Html.TextBoxFor(m => m.SendRemoteEventModel.Param)</span>
-            <span>@Html.Label("Number Of Events"):</span> <span>@Html.TextBoxFor(m => m.SendRemoteEventModel.NumberOfevents)</span>
+            <span>@Html.Label("Number Of Events"):</span> <span>@Html.TextBoxFor(m => m.SendRemoteEventModel.NumberOfEvents)</span>
             <input type="submit" value="Send Message" />
-            <span>Sent message: @Model.SendRemoteEventModel.NumberOfeventsSent</span>
+            <span>Sent message: @Model.SendRemoteEventModel.NumberOfEventsSent</span>
         }
     </div>
 </div>
