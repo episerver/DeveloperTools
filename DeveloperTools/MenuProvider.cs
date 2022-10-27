@@ -5,7 +5,7 @@ using EPiServer.Shell;
 using EPiServer.Shell.Modules;
 using EPiServer.Shell.Navigation;
 
-namespace EPiServer.DeveloperTools.Infrastructure;
+namespace EPiServer.DeveloperTools;
 
 [MenuProvider]
 public class MenuProvider : IMenuProvider
@@ -35,7 +35,7 @@ public class MenuProvider : IMenuProvider
             //CreateUrlMenuItem("Memory Dump", "MemoryDump", 90),
             CreateUrlMenuItem("Remote Events", "RemoteEvent", 100),
             CreateUrlMenuItem("Routes", "Routes", 110),
-            //CreateUrlMenuItem("View Locations", "ViewLocations", 120),
+            CreateUrlMenuItem("View Locations", "ViewLocations", 120),
             //CreateUrlMenuItem("Module Dependencies", "ModuleDependencies", 130),
             //CreateUrlMenuItem("Local Object Cache", "LocalObjectCache", 140)
         };
