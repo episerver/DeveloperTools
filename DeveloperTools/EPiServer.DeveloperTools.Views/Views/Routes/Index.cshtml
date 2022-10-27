@@ -1,20 +1,13 @@
-﻿@using System.Collections
-@using DeveloperTools.Models
-@using EPiServer.Shell
-@inherits System.Web.Mvc.WebViewPage<IEnumerable<DeveloperTools.Models.RouteModel>>
-
-@{
-    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
-}
+﻿@model IEnumerable<EPiServer.DeveloperTools.Features.Routes.RouteModel>
 
 <div class="epi-contentArea">
     <h1 class="EP-prefix">Routes</h1>
     <p>
-        Dumps all routes registered in the Application and you can find out which routes can handle a request.
+        Dumps all endpoints registered in the application.
     </p>
 </div>
 <div class="epi-formArea">
-    <div>
+    @*<div>
         @using (Html.BeginForm("Index", "Routes", new { }, FormMethod.Post))
         {
             @Html.AntiForgeryToken()
@@ -24,17 +17,18 @@
                 <input type="submit" value="Find Route" class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Search"/>
             </span>
         }
-    </div>
+    </div>*@
     <br/>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
         <thead>
         <tr>
             <th align="left">Order</th>
             <th align="left">Name</th>
-            <th align="left">Type</th>
             <th align="left">Url</th>
-            <th align="left">RouteHandler </th>
-            <th align="left">Defaults </th>
+            <th align="left">RouteHandler</th>
+            <th align="left">Methods</th>
+            <th align="left">Parameters</th>
+            <th align="left">Defaults</th>
         </tr>
         </thead>
         <tbody>
@@ -43,37 +37,19 @@
             <tr @(entry.IsSelected ? "style='background-color:LightGreen'" : string.Empty)>
                 <td>@entry.Order</td>
                 <td>@entry.Name</td>
-                <td>@entry.Type</td>
                 <td>@entry.Url</td>
                 <td>@entry.RouteHandler</td>
+                <td>@entry.Methods</td>
+                <td>@entry.Parameters</td>
                 <td>@entry.Defaults</td>
             </tr>
-            if (entry.IsSelected)
-            {
-                <tr style='background-color: LightGreen'>
-                    <td>@entry.Order</td>
-                    <td></td>
-                    <td>@entry.DataTokens</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr style='background-color: LightGreen'>
-                    <td>@entry.Order</td>
-                    <td></td>
-                    <td>@entry.Values</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            }
         }
         </tbody>
     </table>
 
 </div>
 
-@section Scripts {
+@section AdditionalScripts {
 <script>
     $(document).ready(function () {
         $('#theList').dataTable(

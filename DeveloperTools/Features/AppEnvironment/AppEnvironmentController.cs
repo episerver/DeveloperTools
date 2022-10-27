@@ -24,7 +24,10 @@ public class AppEnvironmentController : DeveloperToolsController
 
     public ActionResult Index()
     {
-        var model = new AppEnvironmentModel { Assemblies = GetLoadedAssemblies(), Misc = GetMiscValues(), ConnectionString = GetConnectionStrings() };
+        var model = new AppEnvironmentModel
+        {
+            Assemblies = GetLoadedAssemblies(), Misc = GetMiscValues(), ConnectionString = GetConnectionStrings()
+        };
 
         return View(model);
     }
