@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using DeveloperTools.Controllers;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.DeveloperTools.Infrastructure;
 using EPiServer.Shell.Modules;
 using Microsoft.AspNetCore.Http;

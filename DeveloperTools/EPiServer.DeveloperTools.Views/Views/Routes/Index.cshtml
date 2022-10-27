@@ -34,7 +34,7 @@
         <tbody>
         @foreach (var entry in Model)
         {
-            <tr @(entry.IsSelected ? "style='background-color:LightGreen'" : string.Empty)>
+            <tr>
                 <td>@entry.Order</td>
                 <td>@entry.Name</td>
                 <td>@entry.Url</td>

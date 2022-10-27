@@ -1,4 +1,5 @@
 ﻿using DeveloperTools.Models;
+using EPiServer.DeveloperTools.Features.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTools.Controllers

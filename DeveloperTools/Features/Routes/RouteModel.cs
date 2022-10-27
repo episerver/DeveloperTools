@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Routing;
-
 namespace EPiServer.DeveloperTools.Features.Routes;
 
 public class RouteModel
@@ -11,9 +9,4 @@ public class RouteModel
     public string RouteHandler { get; set; }
     public string Methods { get; set; }
     public string Parameters { get; set; }
-    public string Values { get; set; }
-    public string Constraints { get; set; }
-    public string RouteExistingFiles { get; set; }
-    public bool IsSelected { get; set; }
-    public RouteBase Route { get; set; }
 }

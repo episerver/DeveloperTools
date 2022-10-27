@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DeveloperTools.Controllers;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.Events.Clients;
 using EPiServer.Events.Clients.Internal;
 using EPiServer.Events.Providers.Internal;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DeveloperTools.Models;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
 using Microsoft.AspNetCore.Mvc;

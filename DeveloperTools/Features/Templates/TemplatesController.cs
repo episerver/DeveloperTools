@@ -1,6 +1,6 @@
 using System.Linq;
-using DeveloperTools.Controllers;
 using EPiServer.DataAbstraction;
+using EPiServer.DeveloperTools.Features.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPiServer.DeveloperTools.Features.Templates;

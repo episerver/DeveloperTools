@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using DeveloperTools.Models;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.Web;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using DeveloperTools.Controllers;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAbstraction.RuntimeModel;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.Security;
 using Microsoft.AspNetCore.Mvc;
 

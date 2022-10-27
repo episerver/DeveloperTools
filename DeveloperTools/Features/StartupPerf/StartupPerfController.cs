@@ -1,19 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using EPiServer.Cms.Shell.UI.Controllers.Internal;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.Framework.Initialization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPiServer.DeveloperTools.Features.StartupPerf;
 
-public class StartupPerfController : BaseController
+public class StartupPerfController : DeveloperToolsController
 {
     [HttpGet]
     public ActionResult Index()
     {
         var allTimers = TimeMeters.GetAllRegistered();
-
-        // flatten the list
         var result = new List<TimeMetersModel>();
         result.AddRange(ConvertToModel(allTimers));
 

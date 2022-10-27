@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using DeveloperTools.Models;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.Shell.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;

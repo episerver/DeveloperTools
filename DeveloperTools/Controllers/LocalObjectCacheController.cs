@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using DeveloperTools.Models;
 using EPiServer.Core;
+using EPiServer.DeveloperTools.Features.Common;
 using EPiServer.Framework.Cache;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
