@@ -105,10 +105,44 @@ public class RoutesController : DeveloperToolsController
         return model;
     }
 
-    private string GetEndpointParameters(RoutePattern pattern)
+    private string GetEndpointParameters(RoutePattern pattern) =>
+        string.Join(", ", pattern.Parameters.Select(FormatRoutePatternParameter));
+
+    private static string FormatRoutePatternParameter(RoutePatternParameterPart part)
     {
-        return string.Join(", ",
-                           pattern.Parameters.Select(_ => _.Name));
+        var builder = new StringBuilder();
+        builder.Append('{');
+
+        if (part.IsCatchAll)
+        {
+            builder.Append('*');
+            if (!part.EncodeSlashes)
+            {
+                builder.Append('*');
+            }
+        }
+
+        builder.Append(part.Name);
+
+        foreach (var constraint in part.ParameterPolicies)
+        {
+            builder.Append(':');
+            builder.Append(constraint.ParameterPolicy);
+        }
+
+        if (part.Default != null)
+        {
+            builder.Append('=');
+            builder.Append(part.Default);
+        }
+
+        if (part.IsOptional)
+        {
+            builder.Append('?');
+        }
+
+        builder.Append('}');
+        return builder.ToString();
     }
 
     private string GetEndpointMethods(IGrouping<string, Endpoint> endpointGroup) =>
