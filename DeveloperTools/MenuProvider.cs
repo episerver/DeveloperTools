@@ -37,7 +37,7 @@ public class MenuProvider : IMenuProvider
             CreateUrlMenuItem("Routes", "Routes", 110),
             CreateUrlMenuItem("View Locations", "ViewLocations", 120),
             //CreateUrlMenuItem("Module Dependencies", "ModuleDependencies", 130),
-            //CreateUrlMenuItem("Local Object Cache", "LocalObjectCache", 140)
+            CreateUrlMenuItem("Local Object Cache", "LocalObjectCache", 140)
         };
     }
 
@@ -46,7 +46,7 @@ public class MenuProvider : IMenuProvider
         var link = new UrlMenuItem(
             title,
             MenuPaths.Global + MenuPath + "/" + path,
-            Paths.ToResource(GetType(), path))
+            Paths.ToResource(GetType(), path) + "/")
         {
             AuthorizationPolicy = Constants.PolicyName,
             SortIndex = index,

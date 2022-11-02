@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using EPiServer.DeveloperTools.Features.Common;
+using EPiServer.DeveloperTools.Infrastructure;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -50,10 +51,10 @@ public class ViewLocationsController : DeveloperToolsController
                             {
                                 model.ExpandedLocations.Add(
                                     new ExpandedLocationItemModel(
-                                        GetProperty(entry, "AreaName"),
-                                        GetProperty(entry, "ControllerName"),
-                                        GetProperty(entry, "PageName"),
-                                        GetProperty(entry, "ViewName")));
+                                        entry.GetProperty("AreaName")?.ToString(),
+                                        entry.GetProperty("ControllerName")?.ToString(),
+                                        entry.GetProperty("PageName")?.ToString(),
+                                        entry.GetProperty("ViewName")?.ToString()));
                             }
                         }
                     }
@@ -62,17 +63,5 @@ public class ViewLocationsController : DeveloperToolsController
         }
 
         return View(model);
-    }
-
-    private static string GetProperty(object entry, string propertyName)
-    {
-        var viewNameFieldInfo = entry.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-        if (viewNameFieldInfo != null)
-        {
-            var propertyValue = viewNameFieldInfo.GetValue(entry) as string;
-            return !string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Empty;
-        }
-
-        return string.Empty;
     }
 }
