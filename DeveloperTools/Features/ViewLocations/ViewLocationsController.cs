@@ -30,10 +30,10 @@ public class ViewLocationsController : DeveloperToolsController
         var options = _razorOptions.Value;
         var model = new ViewEngineLocationsModel();
 
-        model.AreaViewLocationFormats.AddRange(options.AreaViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "engineName")));
-        model.AreaPageViewLocationFormats.AddRange(options.AreaPageViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "engineName")));
-        model.ViewLocations.AddRange(options.ViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "engineName")));
-        model.PageViewLocationFormats.AddRange(options.PageViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "engineName")));
+        model.AreaViewLocationFormats.AddRange(options.AreaViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "Razor")));
+        model.AreaPageViewLocationFormats.AddRange(options.AreaPageViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "Razor")));
+        model.ViewLocations.AddRange(options.ViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "Razor")));
+        model.PageViewLocationFormats.AddRange(options.PageViewLocationFormats.Select(f => new ViewEngineLocationItemModel(f, "Razor")));
 
         foreach (var engine in _viewEngine.ViewEngines)
         {

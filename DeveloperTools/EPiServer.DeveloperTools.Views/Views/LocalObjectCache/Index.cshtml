@@ -37,7 +37,9 @@
             </span>
         </div>
 
-        <table class="table table-condensed table-bordered table-condensed stripe">
+        <br/>
+
+        <table class="table table-condensed table-bordered table-condensed stripe" id="theList">
             <thead>
                 <tr>
                     <th><input type="checkbox" id="clearAll" name="clearAll" onClick="toggle(this)" value="true" /></th>
@@ -61,7 +63,6 @@
         <input type="hidden" id="os" name="os" value="@Model.ViewObjectSize.ToString()" />
     </form>
 </div>
-
 
 @section AdditionalScripts {
     <script language="JavaScript">

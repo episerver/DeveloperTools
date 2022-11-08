@@ -8,6 +8,7 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
         <thead>
         <tr>
+            <th align="left">Nr.</th>
             <th align="left">ContentModelType</th>
             <th align="left">Name</th>
             <th align="left">Category</th>
@@ -20,6 +21,9 @@
         </tr>
         </thead>
         <tbody>
+        @{
+            var index = 1;
+        }
         @foreach (var a in Model.Templates)
         {
             var i = 0;
@@ -27,6 +31,7 @@
             @foreach (var t in a.Value)
             {
                 <tr>
+                    <td>@index</td>
                     <td>@(i == 0 ? a.Key.ModelType.FullName : string.Empty)</td>
                     <td>@t.DisplayName (@t.Name)</td>
                     <td>@t.TemplateTypeCategory</td>
@@ -40,24 +45,9 @@
 
                 i++;
             }
+
+            index++;
         }
         </tbody>
     </table>
 </div>
-
-@section AdditionalScripts {
-<script>
-    $(document).ready(function () {
-        $('#theList').dataTable(
-            {
-                "aaSorting": [[1, "desc"]],
-                "bPaginate": false,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": false,
-                "bAutoWidth": true
-            });
-    });
-</script>
-}

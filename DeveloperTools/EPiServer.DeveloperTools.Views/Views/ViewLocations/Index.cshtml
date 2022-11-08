@@ -6,7 +6,7 @@
 </div>
 <div class="epi-formArea">
     <h2 class="EP-prefix">Area Views AreaNames</h2>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theViewLocations">
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
         <thead>
         <tr>
             <th align="left">View AreaName</th>
@@ -25,7 +25,7 @@
     </table>
     <br/>
     <h2 class="EP-prefix">Area Page Views AreaNames</h2>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theViewLocations">
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
         <thead>
         <tr>
             <th align="left">View AreaName</th>
@@ -44,7 +44,7 @@
     </table>
     <br/>
     <h2 class="EP-prefix">View AreaNames</h2>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theViewLocations">
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
         <thead>
             <tr>
                 <th align="left">View AreaName</th>
@@ -63,7 +63,7 @@
     </table>
     <br />
     <h2 class="EP-prefix">View AreaNames</h2>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theViewLocations">
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
         <thead>
         <tr>
             <th align="left">Page Views AreaName</th>
@@ -82,7 +82,7 @@
     </table>
     <br />
     <h2 class="EP-prefix">Cached View Locations</h2>
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theViewLocations">
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
         <thead>
         <tr>
             <th align="left">Area Name</th>
@@ -106,29 +106,13 @@
 </div>
 
 @section AdditionalScripts {
-<script>
-    $(document).ready(function () {
-        $('#theViewAreaNames').dataTable(
-            {
-                "aaSorting": [[0, "desc"]],
-                "bPaginate": false,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": false,
-                "bAutoWidth": true
+    <script>
+        $(document).ready(function () {
+            $('.dataTable').DataTable({
+                "paging": false,
+                "info": false,
+                fixedHeader: true
             });
-
-        $('#thePartialViewAreaNames').dataTable(
-            {
-                "aaSorting": [[0, "desc"]],
-                "bPaginate": false,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": false,
-                "bAutoWidth": true
-            });
-    });
-</script>
+        });
+    </script>
 }

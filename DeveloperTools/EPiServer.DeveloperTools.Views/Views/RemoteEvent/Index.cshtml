@@ -70,3 +70,16 @@
         }
     </div>
 </div>
+
+@section AdditionalScripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.dataTable').DataTable({
+                "paging": false,
+                "info": false,
+                fixedHeader: true
+            });
+        });
+    </script>
+}

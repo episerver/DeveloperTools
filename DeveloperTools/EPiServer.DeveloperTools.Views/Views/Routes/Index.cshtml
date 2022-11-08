@@ -46,22 +46,4 @@
         }
         </tbody>
     </table>
-
 </div>
-
-@section AdditionalScripts {
-<script>
-    $(document).ready(function () {
-        $('#theList').dataTable(
-            {
-                "aaSorting": [[0, "asc"]],
-                "bPaginate": false,
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": false,
-                "bAutoWidth": true
-            });
-    });
-</script>
-}
