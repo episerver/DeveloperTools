@@ -44,10 +44,6 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EPiServer.DeveloperTools.Views\Views\StartupPerf\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <PostBuildEvent>powershell.exe -noexit -file "$(ProjectDir)copy-to-sandbox.ps1"</PostBuildEvent>
   </PropertyGroup>

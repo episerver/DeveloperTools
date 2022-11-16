@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using DeveloperTools.Models;
+using EPiServer.DeveloperTools.Features.ModuleDependencies;
 using Xunit;
 
 namespace DeveloperTools.Tests;

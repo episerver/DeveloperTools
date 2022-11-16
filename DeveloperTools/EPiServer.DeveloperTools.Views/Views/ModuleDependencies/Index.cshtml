@@ -1,32 +1,7 @@
 @using Microsoft.AspNetCore.Html
-@using System.Collections
-@using DeveloperTools.Models
-@using EPiServer.Shell
 @using Newtonsoft.Json
 @using Newtonsoft.Json.Serialization
-@inherits System.Web.Mvc.WebViewPage<DeveloperTools.Models.ModuleDependencyViewModel>
-
-@{
-    ViewBag.SkipDojo = true;
-    Layout = Paths.ToResource("EPiServer.DeveloperTools", "Views/Shared/DevToolsMaster.cshtml");
-}
-
-@section Styles {
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css" integrity="sha256-tTIVWrgsLDcekkoaiqePYP86joMAiyp4KqEswPMmTfQ=" crossorigin="anonymous" />
-<style type="text/css">
-    #graphContainer {
-        margin: 0 auto;
-        display: block;
-        width: calc(100vw - 100px);
-        height: calc(100vh - 200px);
-    }
-
-    #modulesnetwork {
-        width: 100%;
-        height: 100%;
-    }
-</style>
-}
+@model EPiServer.DeveloperTools.Features.ModuleDependencies.ModuleDependencyViewModel
 
 <div class="epi-contentArea">
     <h1 class="EP-prefix">Module Dependencies</h1>
@@ -61,11 +36,28 @@
     </div>
 </div>
 
-@section Scripts {
+@section AdditionalStyles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css" integrity="sha256-tTIVWrgsLDcekkoaiqePYP86joMAiyp4KqEswPMmTfQ=" crossorigin="anonymous" />
+    <style type="text/css">
+        #graphContainer {
+            margin: 0 auto;
+            display: block;
+            width: calc(100vw - 100px);
+            height: calc(100vh - 200px);
+        }
+
+        #modulesnetwork {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+}
+
+@section AdditionalScripts {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js" integrity="sha256-JuQeAGbk9rG/EoRMixuy5X8syzICcvB0dj3KindZkY0=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    var nodes = HtmlString.Create(JsonConvert.SerializeObject(Model.Nodes, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
-        edges = HtmlString.Create(JsonConvert.SerializeObject(Model.Links, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() })),
+    var nodes = @(new HtmlString(JsonConvert.SerializeObject(Model.Nodes, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }))),
+        edges = @(new HtmlString(JsonConvert.SerializeObject(Model.Links, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }))),
         network,
         allNodes,
         highlightActive = false;
@@ -215,3 +207,4 @@
     redrawAll();
 </script>
 }
+

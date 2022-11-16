@@ -36,7 +36,7 @@ public class MenuProvider : IMenuProvider
             CreateUrlMenuItem("Remote Events", "RemoteEvent", 100),
             CreateUrlMenuItem("Routes", "Routes", 110),
             CreateUrlMenuItem("View Locations", "ViewLocations", 120),
-            //CreateUrlMenuItem("Module Dependencies", "ModuleDependencies", 130),
+            CreateUrlMenuItem("Module Dependencies", "ModuleDependencies", 130),
             CreateUrlMenuItem("Local Object Cache", "LocalObjectCache", 140)
         };
     }
