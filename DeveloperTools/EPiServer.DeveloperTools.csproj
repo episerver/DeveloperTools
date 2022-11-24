@@ -13,7 +13,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <PackageId>EPiServer.DeveloperTools</PackageId>
-    <Title>EPiServer Developer Tools (EXPERIMENTAL)</Title>
+    <Title>Optimizely Developer Tools (EXPERIMENTAL)</Title>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>EPiServer</Authors>
     <Description>EXPERIMENTAL! Allows to run various support tools on the site. Currently not officially supported by EPiServer Support Services. Use at your own risk!</Description>
@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\images\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
