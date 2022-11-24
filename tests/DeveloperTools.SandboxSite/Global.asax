@@ -1,1 +1,0 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Language="C#" Inherits="DeveloperTools.SandboxSite.EPiServerApplication" %>

@@ -1,5 +1,0 @@
-@model EditorialBlock
-
-<div class="clearfix" @Html.EditAttributes(x => x.MainBody)>
-    @Html.DisplayFor(x => Model.MainBody)
-</div>

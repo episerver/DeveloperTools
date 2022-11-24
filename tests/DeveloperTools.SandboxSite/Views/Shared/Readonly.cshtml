@@ -1,3 +1,0 @@
-@model IPageViewModel<SitePageData>
-
-<div class="container"><div class="row"><div class="alert text-center" role="alert">@Html.Translate("/Readonly/Message")</div></div></div>

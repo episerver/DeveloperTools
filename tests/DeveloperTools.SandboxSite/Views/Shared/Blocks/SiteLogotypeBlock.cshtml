@@ -1,2 +1,0 @@
-@model SiteLogotypeBlock
-<img src="@Url.ContentUrl(Model.Url)"/>
