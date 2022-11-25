@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C682E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPiServer.DeveloperTools", "DeveloperTools\EPiServer.DeveloperTools.csproj", "{CC833335-20F0-4559-8160-EE6BC0EF9112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPiServer.DeveloperTools", "EPiServer.DeveloperTools\EPiServer.DeveloperTools.csproj", "{CC833335-20F0-4559-8160-EE6BC0EF9112}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20EA47CF-F94E-455C-B82B-928FAEB8EF41}"
 	ProjectSection(SolutionItems) = preProject

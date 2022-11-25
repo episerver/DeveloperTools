@@ -6,9 +6,10 @@ Download latest build on [NuGet](https://nuget.optimizely.com/package/?id=EPiSer
 Experimental project to build small tools useful for developers. Install as an add-on in Optimizely CMS 12 (or later).
 When installed you must be part of the Administrators group to use the tool, a new menu "Developer" should appear in the top menu.
 
-DISCLAIMER: Remember, use at your own risk - this is not a supported product!
+# DISCLAIMER
+Remember, use at your own risk - this is not a supported product!
 
-Current features:
+## Current Features
 
 * View contents of the Dependency Injection container 
 * View Content Type sync state between Code and DB
@@ -19,6 +20,24 @@ Current features:
 * View remote event statistics, provider and servers
 * View all registered view engines
 * View local object cache content (with option to remove items)
+
+## Getting Started
+
+To get started with Optimizely developer tools - all you need to do is to add it to your project and use it :)
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddOptimizelyDeveloperTools();
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    ...
+    app.UseOptimizelyDeveloperTools();
+}
+```
 
 ## How Risky it is to install on production?
 You can read more in depth analysis of toolset and it's side-effects [here](https://blog.tech-fellow.net/2019/02/14/how-risky-are-episerver-developertools-on-production-environment/).
