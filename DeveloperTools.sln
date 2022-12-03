@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29424.173
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32912.340
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C682E10-C007-4377-9E2D-467B9189B8C3}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C682E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperTools", "DeveloperTools\DeveloperTools.csproj", "{CC833335-20F0-4559-8160-EE6BC0EF9112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPiServer.DeveloperTools", "EPiServer.DeveloperTools\EPiServer.DeveloperTools.csproj", "{CC833335-20F0-4559-8160-EE6BC0EF9112}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20EA47CF-F94E-455C-B82B-928FAEB8EF41}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,11 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperTools.Tests", "tests\DeveloperTools.Tests\DeveloperTools.Tests.csproj", "{C5E53838-AD6F-4482-B3C0-2ECC25007D42}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperTools.SandboxSite", "Tests\DeveloperTools.SandboxSite\DeveloperTools.SandboxSite.csproj", "{FB425711-A454-4807-972A-6A43D1867E0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeveloperTools.Tests", "tests\DeveloperTools.Tests\DeveloperTools.Tests.csproj", "{C5E53838-AD6F-4482-B3C0-2ECC25007D42}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D10CB333-5340-4E93-B7BC-15E3AB1B3335}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeveloperTools.AlloySandbox", "tests\DeveloperTools.AlloySandbox\DeveloperTools.AlloySandbox.csproj", "{2B583AB0-C3CD-4B8B-9524-68CFA1456603}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,17 +39,17 @@ Global
 		{C5E53838-AD6F-4482-B3C0-2ECC25007D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5E53838-AD6F-4482-B3C0-2ECC25007D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5E53838-AD6F-4482-B3C0-2ECC25007D42}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB425711-A454-4807-972A-6A43D1867E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB425711-A454-4807-972A-6A43D1867E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB425711-A454-4807-972A-6A43D1867E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB425711-A454-4807-972A-6A43D1867E0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B583AB0-C3CD-4B8B-9524-68CFA1456603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B583AB0-C3CD-4B8B-9524-68CFA1456603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B583AB0-C3CD-4B8B-9524-68CFA1456603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B583AB0-C3CD-4B8B-9524-68CFA1456603}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C5E53838-AD6F-4482-B3C0-2ECC25007D42} = {D10CB333-5340-4E93-B7BC-15E3AB1B3335}
-		{FB425711-A454-4807-972A-6A43D1867E0A} = {D10CB333-5340-4E93-B7BC-15E3AB1B3335}
+		{2B583AB0-C3CD-4B8B-9524-68CFA1456603} = {D10CB333-5340-4E93-B7BC-15E3AB1B3335}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A45183A0-ADC9-4F14-9709-09BFEDC8263F}

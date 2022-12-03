@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EPiServer.DeveloperTools.Features.Routes.RouteModel>
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Routes</h1>
+    <p>
+        Dumps all endpoints registered in the application.
+    </p>
+</div>
+<div class="epi-formArea">
+    @*<div>
+        @using (Html.BeginForm("Index", "Routes", new { }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <span>@Html.Label("Url"):</span> <span>@Html.TextBox("url", "http://", new { style="width:80%" })</span>
+
+            <span class="epi-cmsButton">
+                <input type="submit" value="Find Route" class="epi-cmsButton-text epi-cmsButton-tools epi-cmsButton-Search"/>
+            </span>
+        }
+    </div>*@
+    <br/>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+        <thead>
+        <tr>
+            <th align="left">Order</th>
+            <th align="left">Name</th>
+            <th align="left">Url</th>
+            <th align="left">RouteHandler</th>
+            <th align="left">Methods</th>
+            <th align="left">Parameters</th>
+            <th align="left">Defaults</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr>
+                <td>@entry.Order</td>
+                <td>@entry.Name</td>
+                <td>@entry.Url</td>
+                <td>@entry.RouteHandler</td>
+                <td>@entry.Methods</td>
+                <td>@entry.Parameters</td>
+                <td>@entry.Defaults</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

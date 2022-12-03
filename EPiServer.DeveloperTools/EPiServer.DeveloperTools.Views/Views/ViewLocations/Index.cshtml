@@ -1,0 +1,118 @@
+﻿@model EPiServer.DeveloperTools.Features.ViewLocations.ViewEngineLocationsModel
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">View Engine AreaNames</h1>
+    <p>Show a list of all view areaNames where Mvc would look for templates.</p>
+</div>
+<div class="epi-formArea">
+    <h2 class="EP-prefix">Area Views AreaNames</h2>
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
+        <thead>
+        <tr>
+            <th align="left">View AreaName</th>
+            <th align="left">Engine</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var l in Model.AreaViewLocationFormats)
+        {
+            <tr>
+                <td>@l.Location</td>
+                <td>@l.EngineName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br/>
+    <h2 class="EP-prefix">Area Page Views AreaNames</h2>
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
+        <thead>
+        <tr>
+            <th align="left">View AreaName</th>
+            <th align="left">Engine</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var l in Model.AreaPageViewLocationFormats)
+        {
+            <tr>
+                <td>@l.Location</td>
+                <td>@l.EngineName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br/>
+    <h2 class="EP-prefix">View AreaNames</h2>
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
+        <thead>
+            <tr>
+                <th align="left">View AreaName</th>
+                <th align="left">Engine</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var l in Model.ViewLocations)
+        {
+            <tr>
+                <td>@l.Location</td>
+                <td>@l.EngineName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br />
+    <h2 class="EP-prefix">View AreaNames</h2>
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
+        <thead>
+        <tr>
+            <th align="left">Page Views AreaName</th>
+            <th align="left">Engine</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var l in Model.PageViewLocationFormats)
+        {
+            <tr>
+                <td>@l.Location</td>
+                <td>@l.EngineName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br />
+    <h2 class="EP-prefix">Cached View Locations</h2>
+    <table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="theViewLocations">
+        <thead>
+        <tr>
+            <th align="left">Area Name</th>
+            <th align="left">Controller Name</th>
+            <th align="left">Page Name</th>
+            <th align="left">View Name</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var l in Model.ExpandedLocations)
+        {
+            <tr>
+                <td>@l.AreaName</td>
+                <td>@l.ControllerName</td>
+                <td>@l.PageName</td>
+                <td>@l.ViewName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@section AdditionalScripts {
+    <script>
+        $(document).ready(function () {
+            $('.dataTable').DataTable({
+                "paging": false,
+                "info": false,
+                fixedHeader: true
+            });
+        });
+    </script>
+}

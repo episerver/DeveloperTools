@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <Version>4.0.0</Version>
+    <PackageVersion>4.0.0</PackageVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.0.0.0</FileVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <PackageId>EPiServer.DeveloperTools</PackageId>
+    <Title>Optimizely Developer Tools (EXPERIMENTAL)</Title>
+    <PackageIcon>icon.png</PackageIcon>
+    <Authors>EPiServer</Authors>
+    <Description>EXPERIMENTAL! Allows to run various support tools on the site. Currently not officially supported by EPiServer Support Services. Use at your own risk!</Description>
+    <PackageTags>Optimizely Episerver SQL Dependency Injection DeveloperTools Diagnostics Debugging</PackageTags>
+    <PackageProjectUrl>https://github.com/episerver/DeveloperTools</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/episerver/DeveloperTools</RepositoryUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Initial release for CMS v12</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPiServer.CMS.Core" Version="[12.8.0, 13.0.0)" />
+    <PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.13.0, 13.0.0)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\images\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Remove="module\module.config" />
+    <None Include="pack.proj" />
+  </ItemGroup>
+
+
+  <Import Project="pack.proj" Condition="Exists('pack.proj')" />
+
+  <ItemGroup>
+    <None Update="copy-to-sandbox.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="module\ClientResources\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PostBuildEvent>powershell.exe -noexit -file "$(ProjectDir)copy-to-sandbox.ps1"</PostBuildEvent>
+  </PropertyGroup>
+
+</Project>

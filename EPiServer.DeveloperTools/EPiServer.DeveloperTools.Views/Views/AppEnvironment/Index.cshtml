@@ -1,0 +1,67 @@
+﻿@using System.Collections
+@model EPiServer.DeveloperTools.Features.AppEnvironment.AppEnvironmentModel
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Loaded Assemblies</h1>
+    <p>
+        Dumps all loaded assemblies in the current AppDomain
+    </p>
+</div>
+<div class="epi-formArea">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="theList">
+        <thead>
+        <tr>
+            <th align="left">Name</th>
+            <th align="left">AssemblyVersion</th>
+            <th align="left">FileVersion</th>
+            <th>AreaName</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var entry in Model.Assemblies)
+        {
+            <tr>
+                <td>@entry.Name</td>
+                <td>@entry.AssemblyVersion</td>
+                <td>@entry.FileVersion</td>
+                <td>@entry.Location</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br/>
+    <h2 class="EP-prefix">Environment Variables</h2>
+    @{ var variables = Environment.GetEnvironmentVariables(); }
+    <pre><table cellpadding="0" cellspacing="0" border="0" class="display">
+    @foreach (DictionaryEntry entry in variables)
+    {
+        <tr>
+            <td>@entry.Key</td>
+            <td>@entry.Value</td>
+        </tr>
+    }
+    </table></pre>
+
+    <br/>
+    <h2 class="EP-prefix">Connection Strings</h2>
+    <pre><table cellpadding="0" cellspacing="0" border="0" class="display">
+    @foreach (var entry in Model.ConnectionString)
+    {
+        <tr>
+            <td>@entry.Key</td>
+            <td>@entry.Value</td>
+        </tr>
+    }
+    </table></pre>
+
+    <h2 class="EP-prefix">Misc</h2>
+    <pre><table cellpadding="0" cellspacing="0" border="0" class="display">
+    @foreach (var entry in Model.Misc)
+    {
+        <tr>
+            <td>@entry.Key</td>
+            <td>@entry.Value</td>
+        </tr>
+    }
+    </table></pre>
+</div>
