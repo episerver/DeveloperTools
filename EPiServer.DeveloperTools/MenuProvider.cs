@@ -35,7 +35,8 @@ public class MenuProvider : IMenuProvider
             CreateUrlMenuItem("View Locations", "ViewLocations", 120),
             CreateUrlMenuItem("Module Dependencies", "ModuleDependencies", 130),
             CreateUrlMenuItem("Local Object Cache", "LocalObjectCache", 140),
-            CreateUrlMenuItem("Claims And Roles", "ClaimsRoles", 150)
+            CreateUrlMenuItem("Claims And Roles", "ClaimsRoles", 150),
+            CreateUrlMenuItem("AppSettings", "AppSettings", 160)
         };
     }
 
