@@ -1,36 +1,25 @@
 using EPiServer.DeveloperTools.Features.Common;
-using EPiServer.Licensing.Services;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 
 namespace EPiServer.DeveloperTools.Features.AppSettings
 {
     public class AppSettingsController : DeveloperToolsController
     {
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IConfiguration _configuration;
 
-        public AppSettingsController(IWebHostEnvironment webHostEnvironment)
+        public AppSettingsController(IConfiguration configuration)
         {
-                _webHostEnvironment = webHostEnvironment;
+            _configuration = configuration;
         }
         public IActionResult Index()
         {
-            string webRootPath = _webHostEnvironment.ContentRootPath;
-            string file = "appsettings.json";
-            string[] str = null;
 
-            string path = "";
-            path = Path.Combine(webRootPath, file);
+            var root = (IConfigurationRoot)_configuration;
+            var model = new AppSettingsModel { FinalValues = root.GetDebugView() };
 
-            if (System.IO.File.Exists(path))
-            {
-                str = System.IO.File.ReadAllLines(path);
-            }
-
-            return View(str.ToList());
+            return View(model);
         }
     }
 }

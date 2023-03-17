@@ -1,26 +1,21 @@
-﻿@using System.Collections
-@model List<string>
+﻿@using System.IO
+@model EPiServer.DeveloperTools.Features.AppSettings.AppSettingsModel
 
 <div class="epi-contentArea">
-    <h1 class="EP-prefix">AppSettings</h1>
+    <h1 class="EP-prefix">Final AppSettings Values</h1>
     <p>
-        Displays the transformed active AppSettings.json file
+        Displays the transformed appSettings values after the appSettings.{environment}.config has been applied
     </p>
 </div>
 <div class="epi-formArea">
 
     <h2 class="EP-prefix">AppSettings.json</h2>
-    @if (Model != null && Model.Any())
+
+    @if (!string.IsNullOrEmpty(Model.FinalValues))
     {
-        if (Model.Any() && Model != null)
-        {
-            <pre>
-                    @foreach (var line in Model)
-                    {
-                        @($"{line}\n") 
-                    }
-                </pre>
-        }
+        <pre>
+            @Html.Raw(Model.FinalValues)
+        </pre>
     }
 
 </div>
