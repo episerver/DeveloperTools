@@ -1,4 +1,8 @@
 # CHANELOG
+
+## [4.0.0]
+- CMS12 compatible
+
 ## [3.5.0]
 - Starting from v3.5 EPiServer DeveloperTools package is distributed as expanded (no zip file) add-on.
 Add-on is not zipped due to issue with Razor ViewEngine and web.config file (more details here - https://world.episerver.com/forum/developer-forum/Developer-to-developer/Thread-Container/2019/4/issue-with-razor-views-while-developing-custom-add-on/#204171).
