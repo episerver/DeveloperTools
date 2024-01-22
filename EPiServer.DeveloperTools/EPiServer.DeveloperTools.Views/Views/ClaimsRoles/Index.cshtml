@@ -1,0 +1,31 @@
+﻿@using System.Collections
+@model EPiServer.DeveloperTools.Features.ClaimsRoles.ClaimsRolesModel
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Claims/Roles</h1>
+    <p>
+        Displays all claims/roles for the current user
+    </p>
+</div>
+<div class="epi-formArea">
+
+    <h2 class="EP-prefix">Roles</h2>
+    <table cellpadding="5" cellspacing="0" border="0" class="display">
+        <thead>
+        <tr>
+            <th align="left">Claim</th>
+            <th align="left">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var claim in Model.Roles)
+        {
+            <tr>
+                <td>@claim.Type</td>
+                <td>@claim.Value </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,21 @@
+﻿@using System.IO
+@model EPiServer.DeveloperTools.Features.AppSettings.AppSettingsModel
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Final AppSettings Values</h1>
+    <p>
+        Displays the transformed appSettings values after the appSettings.{environment}.config has been applied
+    </p>
+</div>
+<div class="epi-formArea">
+
+    <h2 class="EP-prefix">AppSettings.json</h2>
+
+    @if (!string.IsNullOrEmpty(Model.FinalValues))
+    {
+        <pre>
+            @Html.Raw(Model.FinalValues)
+        </pre>
+    }
+
+</div>
