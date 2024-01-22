@@ -40,7 +40,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 ```
 
 ## How Risky it is to install on production?
-You can read more in depth analysis of toolset and it's side-effects [here](https://blog.tech-fellow.net/2019/02/14/how-risky-are-episerver-developertools-on-production-environment/).
+You can read more in depth analysis of toolset and it's side-effects [here](https://tech-fellow.eu/2019/02/14/how-risky-are-episerver-developertools-on-production-environment/).
 
 ## Contributing?
 
